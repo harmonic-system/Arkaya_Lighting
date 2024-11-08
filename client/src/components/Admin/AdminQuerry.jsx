@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import { MdDelete } from 'react-icons/md';
 import { Button } from '../../styles/Button';
-import { useAdminContext } from '../../context/Admin-context';
 import { useAuthContext } from '../../context/auth-context';
+import { useAdminContext } from '../../context/admin-context';
 
 const AdminQuerry = () => {
 

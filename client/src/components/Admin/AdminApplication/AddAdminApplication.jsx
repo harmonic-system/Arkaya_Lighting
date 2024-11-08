@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Button } from '../../../styles/Button'
 import { useNavigate } from 'react-router-dom'
-import { useAdminContext } from '../../../context/Admin-context'
+import { useAdminContext } from '../../../context/admin-context'
 import ActionLoading from '../../Loading/ActionLoading'
 
 const AddAdminApplication = () => {

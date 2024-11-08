@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { FaEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import { Button } from '../../../styles/Button';
-import { useAdminContext } from '../../../context/Admin-context';
+import { useAdminContext } from '../../../context/admin-context';
 
 const AdminProducts = () => {
 

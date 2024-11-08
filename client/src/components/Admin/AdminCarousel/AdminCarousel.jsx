@@ -5,7 +5,7 @@ import { FaEdit } from 'react-icons/fa';
 import { useProductContext } from '../../../context/product-context';
 import { Link } from 'react-router-dom';
 import { Button } from '../../../styles/Button';
-import { useAdminContext } from '../../../context/Admin-context';
+import { useAdminContext } from '../../../context/admin-context';
 
 const AdminCarousel = () => {
 

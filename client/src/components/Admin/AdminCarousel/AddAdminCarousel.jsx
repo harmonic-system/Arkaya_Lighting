@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Button } from '../../../styles/Button';
-import { useAdminContext } from '../../../context/Admin-context';
+import { useAdminContext } from '../../../context/admin-context';
 import { useNavigate } from 'react-router-dom';
 import ActionLoading from '../../Loading/ActionLoading';
 

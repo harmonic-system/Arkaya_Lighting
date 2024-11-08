@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useAdminContext } from '../../../context/Admin-context';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button } from '../../../styles/Button';
 import { useAuthContext } from '../../../context/auth-context';
 import LoadingPage from '../../Loading/Loading';
 import ActionLoading from '../../Loading/ActionLoading';
+import { useAdminContext } from '../../../context/admin-context';
 
 const EditAdminProduct = () => {
   const { isLoading, singleProduct, getSingalProduct, updateProduct } = useAdminContext();
