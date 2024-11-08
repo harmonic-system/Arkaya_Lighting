@@ -1,5 +1,5 @@
 const Application = require("../models/application-models")
-const HomeCarousel = require("../models/HomeCarousel-models")
+const HomeCarousel = require("../models/homeCarousel-models")
 const Product = require("../models/product-models")
 
 const getapplication = async (_, res) => {

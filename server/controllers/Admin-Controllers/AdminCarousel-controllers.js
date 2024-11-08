@@ -1,4 +1,4 @@
-const HomeCarousel = require("../../models/HomeCarousel-models");
+const HomeCarousel = require("../../models/homeCarousel-models");
 const cloudinary = require("../../utils/cloudinary")
 
 const addHomeCarousel = async (req, res) => {
