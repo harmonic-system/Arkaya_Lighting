@@ -11,7 +11,7 @@ const EditAdminProduct = () => {
   const { isLoading, singleProduct, getSingalProduct, updateProduct } = useAdminContext();
   const navigate = useNavigate()
   const { token } = useAuthContext();
-  const { id } = useParams();
+  const { id } = useParams();  
 
   const [productData, setProductData] = useState({
     productfile: null,
@@ -65,29 +65,29 @@ const EditAdminProduct = () => {
         price: singleProduct?.price,
         productCategory: singleProduct?.productCategory,
         featured: singleProduct?.featured,
-        des: singleProduct?.des,
-        moduleSize: singleProduct?.moduleSize,
-        pixelPitch: singleProduct?.pixelPitch,
-        pixelDensity: singleProduct?.pixelDensity,
-        configuration: singleProduct?.configuration,
-        mode: singleProduct?.mode,
-        resolution: singleProduct?.resolution,
-        driveType: singleProduct?.driveType,
-        refFreq: singleProduct?.refFreq,
-        scanMode: singleProduct?.scanMode,
-        portType: singleProduct?.portType,
-        brightness: singleProduct?.brightness,
-        renFix: singleProduct?.renFix,
-        spec1: singleProduct?.spec1,
-        spec2: singleProduct?.spec2,
-        spec3: singleProduct?.spec3,
-        spec4: singleProduct?.spec4,
-        spec5: singleProduct?.spec5,
-        spec6: singleProduct?.spec6,
-        spec7: singleProduct?.spec7,
-        spec8: singleProduct?.spec8,
-        spec9: singleProduct?.spec9,
-        spec10: singleProduct?.spec10
+        des: singleProduct?.description?.des,
+        moduleSize: singleProduct?.description?.moduleSize,
+        pixelPitch: singleProduct?.description?.pixelPitch,
+        pixelDensity: singleProduct?.description?.pixelDensity,
+        configuration: singleProduct?.description?.configuration,
+        mode: singleProduct?.description?.mode,
+        resolution: singleProduct?.description?.resolution,
+        driveType: singleProduct?.description?.driveType,
+        refFreq: singleProduct?.description?.refFreq,
+        scanMode: singleProduct?.description?.scanMode,
+        portType: singleProduct?.description?.portType,
+        brightness: singleProduct?.description?.brightness,
+        renFix: singleProduct?.description?.renFix,
+        spec1: singleProduct?.description?.spec1,
+        spec2: singleProduct?.description?.spec2,
+        spec3: singleProduct?.description?.spec3,
+        spec4: singleProduct?.description?.spec4,
+        spec5: singleProduct?.description?.spec5,
+        spec6: singleProduct?.description?.spec6,
+        spec7: singleProduct?.description?.spec7,
+        spec8: singleProduct?.description?.spec8,
+        spec9: singleProduct?.description?.spec9,
+        spec10: singleProduct?.description?.spec10
       });
     }
   }, [singleProduct]);
