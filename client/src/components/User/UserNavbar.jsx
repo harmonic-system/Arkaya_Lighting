@@ -13,9 +13,9 @@ const UserNavbar = () => {
             <Link to="/user/profile" >
               <Button className='user-nav-buttons'>Profile</Button>
             </Link>
-            <Link to="/user/orders">
+            {/* <Link to="/user/orders">
               <Button className='user-nav-buttons'>Order</Button>
-            </Link>
+            </Link> */}
             <Link to="/user/change-password" >
               <Button className='user-nav-buttons'>Change Password</Button>
             </Link>

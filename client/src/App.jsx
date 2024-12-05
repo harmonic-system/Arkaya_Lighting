@@ -140,7 +140,7 @@ function App() {
       />
       <ThemeProvider theme={theme}>
         <BrowserRouter>
-          <GlobalStyle />
+          <GlobalStyle isAdmin={user?.isAdmin} />
           <Helmet>
             <title>Arkaya Lighting</title>
             <meta name="description" content="This is my awesome website where you can find cool products and resources." />

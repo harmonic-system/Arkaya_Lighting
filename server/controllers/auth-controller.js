@@ -89,19 +89,19 @@ const loginController = async (req, res) => {
             wishlist = new WishList({ userId: userExists._id, items: [] });
             await wishlist.save();
         }
-        
+
         return res.status(200).json({ success: true, message: "Login SuccessFul", token: userLoggedIn.generateToken() })
 
     } catch (error) {
         console.log(error);
-        
+
         return res.status(400).json({ success: false, message: error })
     }
 }
 
 const userController = async (req, res) => {
-    const user = req.user
     try {
+        const user = req.user
         return res.status(200).json({ data: user })
     } catch (error) {
         return res.status(500).json({ message: error.message })
