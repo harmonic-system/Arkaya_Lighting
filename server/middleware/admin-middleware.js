@@ -1,29 +1,3 @@
-// const adminMiddleware = async (req, res, next) => {
-
-//   try {
-//     const isAdmin = req.user.isAdmin
-
-//     if (!isAdmin) {
-//       return res.status(403).json({ message: "Access Denied" })
-//     }
-//     next()
-
-//   } catch (error) {
-//     return res.status(403).json({ message: "Access Denied" })
-//   }
-
-// }
-
-// module.exports = adminMiddleware
-
-
-
-
-
-
-
-
-
 const adminMiddleware = async (req, res, next) => {
   try {
     const { isAdmin, role } = req.user; // Extracting isAdmin and role from req.user
@@ -52,7 +26,7 @@ const adminMiddleware = async (req, res, next) => {
     // Allow full access to Admin
     next(); // Proceed if user is authorized
   } catch (error) {
-    console.error("Error in adminMiddleware:", error);
+    // console.error("Error in adminMiddleware:", error);
     return res.status(403).json({ message: "Access Denied: Middleware error" });
   }
 };

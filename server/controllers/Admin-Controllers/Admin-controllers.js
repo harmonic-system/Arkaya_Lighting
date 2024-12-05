@@ -44,7 +44,7 @@ const makeAdmin = async (req, res) => {
       data: updatedUser
     });
   } catch (error) {
-    console.error("Error updating user role:", error);
+    // console.error("Error updating user role:", error);
     return res.status(500).json({
       message: "An error occurred while updating the user's role"
     });

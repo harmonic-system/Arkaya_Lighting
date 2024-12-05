@@ -6,7 +6,7 @@ const nodemailer = require("nodemailer");
 const contactPageController = async (req, res) => {
   try {
     const { name, email, phone, organization, message } = req.body
-    console.log(name, email, phone, organization, message);
+    // console.log(name, email, phone, organization, message);
 
 
     const contactSend = await new Contact({ name: name.toLowerCase(), email: email.toLowerCase(), phone, organization, message })

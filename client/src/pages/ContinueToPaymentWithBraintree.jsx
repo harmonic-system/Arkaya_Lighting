@@ -30,8 +30,8 @@ const ContinueToPayment = () => {
         fetchClientToken();
     }, []);
 
-    console.log(clientToken);
-    console.log(paymentMethod);
+    // console.log(clientToken);
+    // console.log(paymentMethod);
 
     // Validate UPI ID
     const validateUpiId = (upiId) => {

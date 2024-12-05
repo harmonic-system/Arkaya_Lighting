@@ -21,7 +21,7 @@ const PaymentPage = () => {
         // Check if the user is logged in
         if (!token) {
             toast.error('Please login to continue.');
-            console.log('Payment failed: User not logged in.');
+            // console.log('Payment failed: User not logged in.');
             return;
         }
 

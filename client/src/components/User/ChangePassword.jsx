@@ -46,10 +46,7 @@ const ChangePassword = () => {
         if (!newPassword || !oldPassword) {
             toast.error("All fields are required.");
             return;
-        }
-
-        console.log(oldPassword, newPassword);
-        
+        }        
 
         try {
             const response = await axios.post(`${server}/api/v1/auth/change-password`,

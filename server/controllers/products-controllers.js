@@ -53,7 +53,7 @@ const getsingleproducts = async (req, res) => {
     return res.status(200).json({ data: singleProduct });
 
   } catch (error) {
-    console.error(`Error fetching product: ${error.message}`);
+    // console.error(`Error fetching product: ${error.message}`);
     // If any error occurs, return a 500 status code with a detailed error message
     return res.status(500).json({ message: 'Error fetching product', error: error.message });
   }

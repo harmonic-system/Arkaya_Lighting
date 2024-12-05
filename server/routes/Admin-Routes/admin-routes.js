@@ -5,7 +5,6 @@ const { getAllUsers, makeAdmin, deleteUser, getAllContacts, deleteContact, getAl
 const { addHomeCarousel, getSingalHomeCarousel, updateHomeCarousel, deleteHomeCarousel } = require("../../controllers/Admin-Controllers/AdminCarousel-controllers")
 const { addApplication, getSingleApplication, updateApplication, deleteApplication } = require("../../controllers/Admin-Controllers/AdminApplication-controllers")
 const { addSingleProduct, getSingleProduct, updateSingalProduct, deleteSingalProduct } = require("../../controllers/Admin-Controllers/AdminProductList-controller")
-// const { addSingleProduct1, getSingleProduct1, updateSingalProduct1, deleteSingalProduct1 } = require("../../controllers/Admin-Controllers/AdminProducts-controllers")
 
 const router = express.Router()
 
@@ -41,11 +40,6 @@ router.route("/addsingalProduct").post(authMiddleware, adminMiddleware, addSingl
 router.route("/getsingalProduct/:id").get(authMiddleware, adminMiddleware, getSingleProduct)
 router.route("/updatesingalProduct/:id").put(authMiddleware, adminMiddleware, updateSingalProduct)
 router.route("/deletesingalProduct/:id").delete(authMiddleware, adminMiddleware, deleteSingalProduct)
-
-// router.route("/addsingalProduct").post(authMiddleware, adminMiddleware, addSingleProduct1)
-// router.route("/getsingalProduct/:id").get(authMiddleware, adminMiddleware, getSingleProduct1)
-// router.route("/updatesingalProduct/:id").put(authMiddleware, adminMiddleware, updateSingalProduct1)
-// router.route("/deletesingalProduct/:id").delete(authMiddleware, adminMiddleware, deleteSingalProduct1)
 
 
 module.exports = router
