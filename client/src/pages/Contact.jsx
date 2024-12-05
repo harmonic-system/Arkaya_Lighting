@@ -74,7 +74,7 @@ const Contact = () => {
               <p className="text-justify">sales@arkayalighting.com</p>
             </div>
             <div className="contact-box">
-              <a href="tel:+912255889966">
+              <a href="tel:+919873241041">
                 <IoCall style={{ fontSize: "2rem", color: "#0074E1" }} />
               </a>
               <h3>Call Us</h3>

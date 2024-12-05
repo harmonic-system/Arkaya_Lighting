@@ -111,7 +111,7 @@ const Hero = () => {
                                         <FaEnvelope />
                                     </div>
                                     <div className="hero__contact__text">
-                                        <span><a href="tel:+919654612012">+91 9654612012</a></span>
+                                        <span><a href="tel:+919873241041">+91 9873241041</a></span>
                                         <span><a href="mailto:sales@arkayalighting.com">sales@arkayalighting.com</a></span>
                                     </div>
                                 </div>
