@@ -29,15 +29,6 @@ const AdminNavbar = () => {
           <Link to="/admin/newsletter" className="btn btn-primary" role="button">
             <Button>NewsLetter</Button>
           </Link>
-          <Link to="/admin/category" className="btn btn-primary" role="button">
-            <Button>Main Category</Button>
-          </Link>
-          <Link to="/admin/newsletter" className="btn btn-primary" role="button">
-            <Button>Category</Button>
-          </Link>
-          <Link to="/admin/newsletter" className="btn btn-primary" role="button">
-            <Button>Sub Category</Button>
-          </Link>
 
           <ProductLists isOpen={isOpen} onClose={() => setIsOpen(false)} />
         </div>
