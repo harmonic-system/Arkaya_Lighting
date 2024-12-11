@@ -1,0 +1,121 @@
+/* The popup overlay to dim the background */
+.popup-overlay {
+  width: 100vw;
+  height: 90vh;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* The popup box itself */
+.popup-content {
+  background-color: #f6f8fa;
+  padding: 30px;
+  border-radius: 10px;
+  width: max(30vw, 300px);
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  animation: popup-animation 0.3s ease-out;
+}
+
+.login-title {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 5rem;
+}
+
+.login-title h1 {
+  font-size: max(2vw, 18px);
+}
+
+.login-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  gap: 2rem;
+}
+
+.login-form input {
+  width: 100% !important;
+  border-radius: 10px;
+  outline: none;
+}
+
+.password-container {
+  width: 100%;
+  position: relative;
+}
+
+.password-eye {
+  position: absolute;
+  top: 35%;
+  right: 3rem;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.forget-pass {
+  cursor: pointer;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.forget-pass a {
+  display: block;
+  color: #000;
+  font-size: 1.5rem;
+  text-align: right;
+}
+
+.form-button {
+  width: 100%;
+}
+
+.policy-checkbox {
+  width: 100%;
+  padding: 0 20px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 10px;
+}
+
+.policy-checkbox input[type="checkbox"] {
+  width: 20px !important;
+}
+
+.policy-checkbox p {
+  font-size: 1rem;
+}
+
+.login-form p span {
+  color: #ffc221;
+}
+
+/* The button to close the popup */
+.close-popup-btn {
+  padding: 10px 20px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: max(0.75vw, 10px);
+}
+
+/* Popup animation to make it look smoother */
+@keyframes popup-animation {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

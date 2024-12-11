@@ -1,0 +1,217 @@
+[
+    {
+        "title": "Lighting Fixtures",
+        "childrens": [
+            {
+                "title": "Architecture",
+                "childrens": [
+                    {
+                        "title": "Flood Lights",
+                        "category": "floodlights",
+                        "path": "/admin/products"
+                    },
+                    {
+                        "title": "UnderWater Lights",
+                        "category": "underwaterlights",
+                        "path": "/admin/products"
+                    },
+                    {
+                        "title": "Underground Lights",
+                        "category": "undergroundlights",
+                        "path": "/admin/products"
+                    },
+                    {
+                        "title": "Media Pixels",
+                        "category": "mediapixels",
+                        "path": "/admin/products"
+                    },
+                    {
+                        "title": "Tree Hanging Lights",
+                        "category": "treehangings",
+                        "path": "/admin/products"
+                    },
+                    {
+                        "title": "Wall Washers Lights",
+                        "category": "wallwashers",
+                        "path": "/admin/products"
+                    }
+                ]
+            },
+            {
+                "title": "Entertainments",
+                "childrens": [
+                    {
+                        "title": "Moving Head Series Lamp",
+                        "category": "mhslamps",
+                        "path": "/admin/products"
+                    },
+                    {
+                        "title": "Moving Head Series Led",
+                        "category": "mhsleds",
+                        "path": "/admin/products"
+                    },
+                    {
+                        "title": "Static Lights",
+                        "category": "staticleds",
+                        "path": "/admin/products"
+                    },
+                    {
+                        "title": "Effects Lights",
+                        "category": "effectlights",
+                        "path": "/admin/products"
+                    }
+                ]
+            },
+            {
+                "title": "Led Pixels",
+                "childrens": [
+                    {
+                        "title": "Led Strips",
+                        "category": "strips",
+                        "path": "/admin/products"
+                    },
+                    {
+                        "title": "Dot Pixels",
+                        "category": "dotpixels",
+                        "path": "/admin/products"
+                    },
+                    {
+                        "title": "Led Matrix",
+                        "category": "ledmatrixes",
+                        "path": "/admin/products"
+                    }
+                ]
+            },
+            {
+                "title": "Decorative",
+                "childrens": [
+                    {
+                        "title": "Chandeliers",
+                        "category": "chandeliers",
+                        "path": "/admin/products"
+                    }
+                ]
+            },
+            {
+                "title": "TheaterStudioTelevision",
+                "childrens": [
+                    {
+                        "title": "Theater Lights",
+                        "category": "theaters",
+                        "path": "/admin/products"
+                    },
+                    {
+                        "title": "Studio Lights",
+                        "category": "studios",
+                        "path": "/admin/products"
+                    },
+                    {
+                        "title": "Television Lights",
+                        "category": "televisions",
+                        "path": "/admin/products"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Video Displays",
+        "childrens": [
+            {
+                "title": "Indoor Series",
+                "category": "indoors",
+                "path": "/admin/products"
+            },
+            {
+                "title": "Outdoor Series",
+                "category": "outdoors",
+                "path": "/admin/products"
+            }
+        ]
+    },
+    {
+        "title": "Controllers Distribution & Interfaces",
+        "childrens": [
+            {
+                "title": "Led Controllers",
+                "category": "ledcontrollers",
+                "path": "/admin/products"
+            },
+            {
+                "title": "Dmx Controllers",
+                "category": "dmxcontrollers",
+                "path": "/admin/products"
+            },
+            {
+                "title": "Signal Distributions & Power Supplies",
+                "childrens": [
+                    {
+                        "title": "Signal Distribution",
+                        "category": "signaldistributions",
+                        "path": "/admin/products"
+                    },
+                    {
+                        "title": "Power Supplies",
+                        "category": "powersupplies",
+                        "path": "/admin/products"
+                    }
+                ]
+            },
+            {
+                "title": "Decorders & Amplifiers",
+                "category": "decorderandamplifiers",
+                "path": "/admin/products"
+            },
+            {
+                "title": "Processors",
+                "category": "processors",
+                "path": "/admin/products"
+            }
+        ]
+    },
+    {
+        "title": "Rigging",
+        "childrens": [
+            {
+                "title": "Trusses",
+                "category": "trusses",
+                "path": "/admin/products"
+            },
+            {
+                "title": "Clamps",
+                "category": "clamps",
+                "path": "/admin/products"
+            },
+            {
+                "title": "Alluminium Profile",
+                "category": "alluminiumprofiles",
+                "path": "/admin/products"
+            },
+            {
+                "title": "Silicon Profile",
+                "category": "siliconprofiles",
+                "path": "/admin/products"
+            },
+            {
+                "title": "Stage Lighting",
+                "category": "stagelightinges",
+                "path": "/admin/products"
+            },
+            {
+                "title": "Studio Lighting",
+                "category": "studiolightinges",
+                "path": "/admin/products"
+            }
+        ]
+    },
+    {
+        "title": "Spaers & Accessories",
+        "childrens": [
+            {
+                "title": "Connectors",
+                "category": "connectors",
+                "path": "/admin/products"
+            }
+        ]
+    }
+]
