@@ -11,42 +11,42 @@ const Brandpatner = () => {
                     </div>
                     <div className="grid grid-tem-view">
                         <div className="contact-box">
-                            <img src="./images/patner/patner.png" />
+                            <img src="./images/patner/patner.png" alt="Brand Patner Image" />
                             <h3>Address</h3>
                             <p className="text-justify" >B-22 Patpar Ganj, Mayur Vihar Phase-1, New Delhi</p>
                         </div>
                         <div className="contact-box">
-                            <img src="./images/patner/patner.png" />
+                            <img src="./images/patner/patner.png" alt="Brand Patner Image" />
                             <h3>Address</h3>
                             <p className="text-justify" >B-22 Patpar Ganj, Mayur Vihar Phase-1, New Delhi</p>
                         </div>
                         <div className="contact-box">
-                            <img src="./images/patner/patner.png" />
+                            <img src="./images/patner/patner.png" alt="Brand Patner Image" />
                             <h3>Address</h3>
                             <p className="text-justify" >B-22 Patpar Ganj, Mayur Vihar Phase-1, New Delhi</p>
                         </div>
                         <div className="contact-box">
-                            <img src="./images/patner/patner.png" />
+                            <img src="./images/patner/patner.png" alt="Brand Patner Image" />
                             <h3>Address</h3>
                             <p className="text-justify" >B-22 Patpar Ganj, Mayur Vihar Phase-1, New Delhi</p>
                         </div>
                         <div className="contact-box">
-                            <img src="./images/patner/patner.png" />
+                            <img src="./images/patner/patner.png" alt="Brand Patner Image" />
                             <h3>Address</h3>
                             <p className="text-justify" >B-22 Patpar Ganj, Mayur Vihar Phase-1, New Delhi</p>
                         </div>
                         <div className="contact-box">
-                            <img src="./images/patner/patner.png" />
+                            <img src="./images/patner/patner.png" alt="Brand Patner Image" />
                             <h3>Address</h3>
                             <p className="text-justify" >B-22 Patpar Ganj, Mayur Vihar Phase-1, New Delhi</p>
                         </div>
                         <div className="contact-box">
-                            <img src="./images/patner/patner.png" />
+                            <img src="./images/patner/patner.png" alt="Brand Patner Image" />
                             <h3>Address</h3>
                             <p className="text-justify" >B-22 Patpar Ganj, Mayur Vihar Phase-1, New Delhi</p>
                         </div>
                         <div className="contact-box">
-                            <img src="./images/patner/patner.png" />
+                            <img src="./images/patner/patner.png" alt="Brand Patner Image" />
                             <h3>Address</h3>
                             <p className="text-justify" >B-22 Patpar Ganj, Mayur Vihar Phase-1, New Delhi</p>
                         </div>

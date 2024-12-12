@@ -47,7 +47,7 @@ const AdminApplication = () => {
             {application?.map((application) => (
               <tr key={application?._id}>
                 <td>{count++}</td>
-                <td className="description"><img src={application?.applicationfile?.url} alt="" style={{ height: "6rem" }} /></td>
+                <td className="description"><img src={application?.applicationfile?.url} alt={`${application.heading}-image`} style={{ height: "6rem" }} /></td>
                 <td>{application.heading}</td>
                 <td>{application.about}</td>
                 <td>

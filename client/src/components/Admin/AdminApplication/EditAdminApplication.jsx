@@ -91,7 +91,7 @@ const EditAdminApplication = () => {
                         />
 
                         <div className="container img-container">
-                            <img src={applicationData.applicationfile} alt="Product" />
+                            <img src={applicationData.applicationfile} alt={`${applicationData.heading}-image`} />
                         </div>
                         <input
                             type="text"

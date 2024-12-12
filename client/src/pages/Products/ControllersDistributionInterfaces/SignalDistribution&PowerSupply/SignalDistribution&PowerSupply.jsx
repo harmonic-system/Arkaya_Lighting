@@ -16,13 +16,13 @@ const SignalDistributionAndPowerSupply = () => {
                         <div className="grid grid-three-column">
                             <Link to="/products" onClick={() => setCategoryinlocalStorage("signaldistributions")}>
                                 <div className="products-image-box">
-                                    <img src="images/products/signaldistributionandpowersupply/signaldistribution.png" />
+                                    <img src="images/products/signaldistributionandpowersupply/signaldistribution.png" alt="signaldistributioncategoryimage" />
                                     <h3>Signal Distribution</h3>
                                 </div>
                             </Link>
                             <Link to="/products" onClick={() => setCategoryinlocalStorage("powersupplies")}>
                                 <div className="products-image-box">
-                                    <img src="images/products/signaldistributionandpowersupply/powersupply.png" />
+                                    <img src="images/products/signaldistributionandpowersupply/powersupply.png" alt="powersupplycategoryimage" />
                                     <h3>Power Supply</h3>
                                 </div>
                             </Link>

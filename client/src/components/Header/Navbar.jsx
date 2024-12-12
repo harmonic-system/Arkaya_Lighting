@@ -49,7 +49,7 @@ const Navbar = () => {
               <Link to="/" onClick={closeMenu}>
                 <img
                   src={getLogoPath()}
-                  alt="Arkaya Lighting"
+                  alt="Arkaya Lighting Logo"
                   onError={(e) => handleImageError(e.target)}
                   style={{ width: '170px', height: '70px', display: 'block' }}
                 />
@@ -71,7 +71,7 @@ const Navbar = () => {
                 <CgClose />
               </label>
               <li>
-                <Link to="/arkaya" onClick={closeMenu}>
+                <Link to="/" onClick={closeMenu}>
                   HOME
                 </Link>
               </li>

@@ -132,7 +132,7 @@ const AddAdminProduct = () => {
                   <div className="image-thumbnail">
                     <img
                       src={productData.productfile}
-                      alt="Product"
+                      alt={`${productData.productname}-image`}
                       className="thumbnail-image"
                     />
                     <MdDelete

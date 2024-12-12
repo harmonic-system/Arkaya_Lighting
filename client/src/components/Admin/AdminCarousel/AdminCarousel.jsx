@@ -48,7 +48,7 @@ const AdminCarousel = () => {
             {caraousel?.map((carousel) => (
               <tr key={carousel?._id}>
                 <td>{count++}</td>
-                <td className="description"><img src={carousel?.file?.url} alt="" style={{ height: "6rem" }} /></td>
+                <td className="description"><img src={carousel?.file?.url} alt={`${carousel.heading}-image`} style={{ height: "6rem" }} /></td>
                 <td>{carousel.heading}</td>
                 <td>{carousel.description}</td>
                 <td>

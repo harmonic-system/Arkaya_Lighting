@@ -18,13 +18,12 @@ const Application = () => {
               application.map((application) => {
                 return <div className="card" key={application._id}>
                   <figure>
-                    <img src={application.applicationfile.url} alt="Application 1" />
+                    <img src={application.applicationfile.url} alt={`${application.heading}-image`} />
                     <figcaption className="caption"><b>{application.heading}</b></figcaption>
                   </figure>
 
                   <div className="card-data">
                     <div className="card-data-flex">
-                      <h3>{name}</h3>
                       <p>{application.about}</p>
                     </div>
                   </div>

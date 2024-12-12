@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-const MyImage = ({ imgs }) => {
+const MyImage = ({ imgs,productname }) => {
 
   return (
     <>
       <Wrapper>
         <img
           src={imgs}
-          alt=""
+          alt={`${productname}-Image`}
           className="box-image--style"
         />
       </Wrapper>

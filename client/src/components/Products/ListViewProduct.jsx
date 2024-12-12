@@ -160,7 +160,7 @@ figure {
 
     .description-box.row-layout {
       flex-direction: row;
-      align-items: center; /* Ensures alignment for row layout */
+      align-items: flex-start; /* Ensures alignment for row layout */
     }
 
     .description-box-element {

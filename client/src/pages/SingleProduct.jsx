@@ -58,12 +58,32 @@ const SingleProduct = () => {
     <>
       <Helmet>
         <title>{singleProduct?.productname ? `${singleProduct.productname} - Arkaya Lighting || Category - ${singleProduct.productCategory}` : 'Arkaya Lighting'}</title>
-        <meta name="description" content={`Learn more about ${singleProduct?.productname || 'this product'}, view detailed specifications.`} />
-        <meta property="og:image" content={singleProduct?.productfile?.url || ''} />
-        <meta property="og:title" content={singleProduct?.productname || 'Arkaya Lighting'} />
-        <meta property="og:description" content={`Learn more about ${singleProduct?.productname || 'this product'}, view detailed specifications.`} />
-      </Helmet>
 
+        <meta
+          name="description"
+          content={`Discover ${singleProduct?.productname || 'our product'}, with detailed specifications and features to suit your needs.`}
+        />
+
+        <meta
+          name="keywords"
+          content={`${singleProduct?.productname || 'lighting product'}, ${singleProduct?.productCategory || 'lighting solutions'}, energy-efficient lighting, premium lighting, lighting features, specifications, smart lighting, LED lighting`}
+        />
+
+        <meta
+          property="og:image"
+          content={singleProduct?.productfile?.url || ''}
+        />
+
+        <meta
+          property="og:title"
+          content={singleProduct?.productname || 'Arkaya Lighting'}
+        />
+
+        <meta
+          property="og:description"
+          content={`Discover ${singleProduct?.productname || 'our product'}, with detailed specifications and features to suit your needs.`}
+        />
+      </Helmet>
 
       <Wrapper>
         <PageNavigation title={singleProduct?.productname} />
@@ -71,7 +91,7 @@ const SingleProduct = () => {
           <div className="grid grid-two-column">
             {/* product Images  */}
             <div className="product_images">
-              <MyImage imgs={singleProduct?.productfile?.url} />
+              <MyImage imgs={singleProduct?.productfile?.url} productname={singleProduct?.productname} />
             </div>
 
             {/* product dAta  */}
@@ -215,7 +235,7 @@ const Wrapper = styled.section`
 
     .description-box.row-layout {
       flex-direction: row;
-      align-items: center; /* Ensures alignment for row layout */
+      align-items: flex-start; /* Ensures alignment for row layout */
     }
 
     .description-box-element {

@@ -70,9 +70,21 @@ const GridView = () => {
       </div>
       {/* Pagination Controls */}
       <div className="container pagination">
-        <Button onClick={() => handlePageChange(currentPage - 1)} className={currentPage <= 1 ? 'disabled-button' : ''} disabled={currentPage <= 1}>Previous</Button>
-        <p>{currentPage}/{totalPages}</p>
-        <Button onClick={() => handlePageChange(currentPage + 1)} className={currentPage === totalPages ? 'disabled-button' : ''} disabled={currentPage === totalPages}>Next</Button>
+        <Button
+          onClick={() => handlePageChange(currentPage - 1)}
+          className={currentPage <= 1 ? 'disabled-button' : ''}
+          disabled={currentPage <= 1}>
+          Prev
+        </Button>
+        <span className="pagination-info">
+          Page <strong>{currentPage}</strong> of <strong>{totalPages}</strong>
+        </span>
+        <Button
+          onClick={() => handlePageChange(currentPage + 1)}
+          className={currentPage === totalPages ? 'disabled-button' : ''}
+          disabled={currentPage === totalPages}>
+          Next
+        </Button>
       </div>
     </Wrapper>
   );
@@ -181,8 +193,11 @@ const Wrapper = styled.section`
     gap: 1rem;
     margin-top: 2rem;
     align-items: center;
-  }
 
+    .pagination-info {
+      font-size: 1rem;
+    }
+  }
 `;
 
 

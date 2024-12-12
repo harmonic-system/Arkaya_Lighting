@@ -91,7 +91,7 @@ const EditAdminCarousel = () => {
             />
             
             <div className="container img-container">
-              <img src={carouselData.file} alt="Product" />
+              <img src={carouselData.file} alt={`${carouselData.heading}-image`} />
             </div>
 
             <input

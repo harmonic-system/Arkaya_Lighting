@@ -142,9 +142,15 @@ function App() {
         <BrowserRouter>
           <GlobalStyle isAdmin={user?.isAdmin} />
           <Helmet>
-            <title>Arkaya Lighting</title>
-            <meta name="description" content="This is awesome website where you can find cool products and resources." />
-            <meta name="keywords" content="website, products, services, resources" />
+            <title>Arkaya Lighting - Innovative & Custom Lighting Solutions for Any Space</title>
+            <meta
+              name="description"
+              content="Explore Arkaya Lighting's customizable, energy-efficient lighting solutions. Discover premium products designed to enhance any space, from homes to offices."
+            />
+            <meta
+              name="keywords"
+              content="Arkaya Lighting, custom lighting solutions, energy-efficient lighting, LED lights, smart home lighting, modern lighting designs, premium lighting, home lighting, office lighting, sustainable lighting"
+            />
           </Helmet>
           <Header />
           <Routes>
@@ -152,17 +158,15 @@ function App() {
             <Route path="/" element={
               <>
                 <Helmet>
-                  <title>Home - Arkaya Lighting: Customizable Lighting Solutions for Every Space</title>
-                  <meta name="description" content="Welcome to our homepage. Find everything you need here." />
-                </Helmet>
-                <Home />
-              </>
-            } />
-            <Route path="/arkaya" element={
-              <>
-                <Helmet>
-                  <title>Home - Arkaya Lighting: Customizable Lighting Solutions for Every Space</title>
-                  <meta name="description" content="Welcome to our homepage. Find everything you need here." />
+                  <title>Home - Arkaya Lighting: Transform Your Space with Custom Lighting</title>
+                  <meta
+                    name="description"
+                    content="Explore Arkaya Lighting's custom solutions for homes and businesses. Discover stylish, energy-efficient lighting products designed to elevate any space."
+                  />
+                  <meta
+                    name="keywords"
+                    content="home lighting solutions, commercial lighting, LED lighting, smart lighting, modern lighting, energy-efficient lighting, sustainable lighting, premium lighting, lighting for spaces"
+                  />
                 </Helmet>
                 <Home />
               </>
@@ -170,8 +174,15 @@ function App() {
             <Route path="/brandsPatner" element={
               <>
                 <Helmet>
-                  <title>Brand Partners - Arkaya Lighting</title>
-                  <meta name="description" content="Discover our brand partners and collaborations." />
+                  <title>Brand Partners - Arkaya Lighting: Collaborations & Trusted Brands</title>
+                  <meta
+                    name="description"
+                    content="Discover Arkaya Lighting's trusted brand partners and collaborations, bringing innovative and premium lighting solutions to the market."
+                  />
+                  <meta
+                    name="keywords"
+                    content="Arkaya Lighting partners, trusted lighting brands, lighting collaborations, innovative lighting solutions, lighting industry partnerships, sustainable lighting, leading lighting brands, lighting business collaborations"
+                  />
                 </Helmet>
                 <Brandpatner />
               </>
@@ -179,8 +190,15 @@ function App() {
             <Route path="/application" element={
               <>
                 <Helmet>
-                  <title>Application - Arkaya Lighting</title>
-                  <meta name="description" content="Learn more about how to apply for our services." />
+                  <title>Application - Arkaya Lighting: Streamline Your Service Requests</title>
+                  <meta
+                    name="description"
+                    content="Easily apply for Arkaya Lighting services. Discover how to request customized lighting solutions and energy-efficient products for your needs."
+                  />
+                  <meta
+                    name="keywords"
+                    content="Arkaya Lighting application, lighting service request, customized lighting solutions, energy-efficient lighting, service application process, lighting product application, lighting installation request"
+                  />
                 </Helmet>
                 <Application />
               </>
@@ -188,8 +206,15 @@ function App() {
             <Route path="/discover" element={
               <>
                 <Helmet>
-                  <title>Discover Us - Arkaya Lighting</title>
-                  <meta name="description" content="Learn about who we are and what we do." />
+                  <title>Discover Us - Arkaya Lighting: Who We Are</title>
+                  <meta
+                    name="description"
+                    content="Learn about Arkaya Lighting's vision and mission. Explore our commitment to sustainability, innovation, and providing high-quality lighting solutions."
+                  />
+                  <meta
+                    name="keywords"
+                    content="about Arkaya Lighting, lighting innovation, sustainable lighting, company mission, lighting solutions, green lighting technology, lighting brand values"
+                  />
                 </Helmet>
                 <DiscoverUs />
               </>
@@ -197,8 +222,15 @@ function App() {
             <Route path="/software" element={
               <>
                 <Helmet>
-                  <title>Software Resources - Arkaya Lighting</title>
-                  <meta name="description" content="Find all our software resources here." />
+                  <title>Software - Arkaya Lighting: Free Tools & Resources</title>
+                  <meta
+                    name="description"
+                    content="Access free lighting design software and tools by Arkaya Lighting. Enhance your projects with innovative, professional-grade resources."
+                  />
+                  <meta
+                    name="keywords"
+                    content="lighting software, free tools, Arkaya Lighting, lighting design, download lighting resources, professional lighting tools, lighting CAD software"
+                  />
                 </Helmet>
                 <Software />
               </>
@@ -206,9 +238,15 @@ function App() {
             <Route path="/howtobuy" element={
               <>
                 <Helmet>
-                  <title>How To Buy - Arkaya Lighting</title>
-                  <meta name="description" content="Learn how to buy our products online with ease." />
-                  <meta name="keywords" content="buy, purchase, products, online shopping" />
+                  <title>How to Buy - Arkaya Lighting: Smooth Online Shopping</title>
+                  <meta
+                    name="description"
+                    content="Learn how to purchase Arkaya Lighting products with ease. Enjoy a smooth online shopping experience and get great deals on premium lighting solutions."
+                  />
+                  <meta
+                    name="keywords"
+                    content="how to buy lighting, Arkaya Lighting products, online shopping, premium lighting, buy lighting online, lighting purchase guide, affordable lighting"
+                  />
                 </Helmet>
                 <HowToBuy />
               </>
@@ -216,9 +254,15 @@ function App() {
             <Route path="/datasheet" element={
               <>
                 <Helmet>
-                  <title>Data Sheets - Arkaya Lighting</title>
-                  <meta name="description" content="Find product data sheets for all of our products." />
-                  <meta name="keywords" content="data sheets, product specs, technical sheets" />
+                  <title>Data Sheets - Arkaya Lighting: Product Specifications</title>
+                  <meta
+                    name="description"
+                    content="Explore detailed datasheets for Arkaya Lighting products. Access specifications, features, and technical information to make informed choices."
+                  />
+                  <meta
+                    name="keywords"
+                    content="product datasheets, Arkaya Lighting specs, lighting product details, technical sheets, lighting specifications, product features, lighting solutions"
+                  />
                 </Helmet>
                 <DataSheet />
               </>
@@ -226,9 +270,15 @@ function App() {
             <Route path="/solutionsupport" element={
               <>
                 <Helmet>
-                  <title>Solution Support - Arkaya Lighting</title>
-                  <meta name="description" content="Get solution support for our products and services." />
-                  <meta name="keywords" content="support, solution, help, customer service" />
+                  <title>Solution Support - Arkaya Lighting: Product Assistance</title>
+                  <meta
+                    name="description"
+                    content="Get expert solution support for Arkaya Lighting products. Find troubleshooting tips, guides, and answers to common product and software issues."
+                  />
+                  <meta
+                    name="keywords"
+                    content="Arkaya Lighting support, lighting troubleshooting, product solutions, software assistance, technical support, product help, lighting issues resolution"
+                  />
                 </Helmet>
                 <SolutionSupport />
               </>
@@ -236,9 +286,15 @@ function App() {
             <Route path="/contact" element={
               <>
                 <Helmet>
-                  <title>Contact Us - Arkaya Lighting</title>
-                  <meta name="description" content="Contact us for any queries or support." />
-                  <meta name="keywords" content="contact, support, customer service" />
+                  <title>Solution Support - Arkaya Lighting: Product Assistance & Troubleshooting</title>
+                  <meta
+                    name="description"
+                    content="Get support for Arkaya Lighting products and software. Find solutions, troubleshooting tips, and expert guidance to resolve your issues efficiently."
+                  />
+                  <meta
+                    name="keywords"
+                    content="Arkaya Lighting support, product solution support, troubleshooting lighting products, software solutions, product assistance, customer service Arkaya Lighting, lighting product help, common lighting issues, lighting software support, technical product support, Arkaya Lighting troubleshooting tips"
+                  />
                 </Helmet>
                 <Contact />
               </>
@@ -246,9 +302,15 @@ function App() {
             <Route path="/architecture" element={
               <>
                 <Helmet>
-                  <title>Architecture Lighting Fixtures</title>
-                  <meta name="description" content="Explore our temporary architecture lighting fixtures for events and more." />
-                  <meta name="keywords" content="temporary lighting, architecture lighting, event lighting" />
+                  <title>Architecture Lighting Fixtures - Arkaya Lighting</title>
+                  <meta
+                    name="description"
+                    content="Discover Arkaya Lighting's architecture lighting fixtures, ideal for events, exhibitions, and architectural displays."
+                  />
+                  <meta
+                    name="keywords"
+                    content="architecture lighting fixtures, lighting for events, event lighting solutions, exhibition lighting, lighting for architecture, custom lighting for displays"
+                  />
                 </Helmet>
                 <TempArchitecture />
               </>
@@ -256,9 +318,15 @@ function App() {
             <Route path="/entertainment" element={
               <>
                 <Helmet>
-                  <title>Entertainment Lighting Fixtures</title>
-                  <meta name="description" content="Explore our entertainment lighting fixtures for productions and events." />
-                  <meta name="keywords" content="entertainment lighting, stage lighting, production lighting" />
+                  <title>Entertainment Lighting Fixtures - Arkaya Lighting</title>
+                  <meta
+                    name="description"
+                    content="Discover Arkaya Lighting's entertainment lighting fixtures, perfect for productions, events, and stage setups. Illuminate your performances with style."
+                  />
+                  <meta
+                    name="keywords"
+                    content="entertainment lighting, stage lighting, production lighting, event lighting solutions, lighting for productions, performance lighting, stage setup lighting, custom event lighting"
+                  />
                 </Helmet>
                 <Entertainment />
               </>
@@ -266,9 +334,15 @@ function App() {
             <Route path="/ledpixels" element={
               <>
                 <Helmet>
-                  <title>LED Pixels - Arkaya Lighting</title>
-                  <meta name="description" content="Find high-quality LED pixels for your lighting projects." />
-                  <meta name="keywords" content="LED pixels, lighting pixels, LED display" />
+                  <title>LED Pixels - High-Quality Lighting for Every Project</title>
+                  <meta
+                    name="description"
+                    content="Explore premium LED pixels from Arkaya Lighting, perfect for your lighting projects, displays, and installations."
+                  />
+                  <meta
+                    name="keywords"
+                    content="LED pixels, lighting pixels, LED display, LED lighting for events, pixel lighting solutions, custom LED displays, high-quality LED lights, LED installations"
+                  />
                 </Helmet>
                 <LEDPixels />
               </>
@@ -276,9 +350,15 @@ function App() {
             <Route path="/decorative" element={
               <>
                 <Helmet>
-                  <title>Decorative Lighting Fixtures</title>
-                  <meta name="description" content="Browse decorative lighting solutions for your space." />
-                  <meta name="keywords" content="decorative lighting, interior lighting, lighting design" />
+                  <title>Decorative Lighting Fixtures - Arkaya Lighting</title>
+                  <meta
+                    name="description"
+                    content="Browse Arkaya Lighting’s decorative lighting solutions, designed to enhance your space with stylish and functional lighting fixtures."
+                  />
+                  <meta
+                    name="keywords"
+                    content="decorative lighting, interior lighting, lighting design, stylish lighting, lighting for home decor, custom decorative lights, modern lighting solutions, functional lighting fixtures"
+                  />
                 </Helmet>
                 <Decorative />
               </>
@@ -286,9 +366,15 @@ function App() {
             <Route path="/theaterstudiotelevision" element={
               <>
                 <Helmet>
-                  <title>Theater, Studio & Television Lighting</title>
-                  <meta name="description" content="Explore lighting solutions for theaters, studios, and television." />
-                  <meta name="keywords" content="theater lighting, studio lighting, television lighting" />
+                  <title>Theater, Studio & Television Lighting - Arkaya Lighting</title>
+                  <meta
+                    name="description"
+                    content="Discover Arkaya Lighting’s specialized lighting solutions for theaters, studios, and television productions to create the perfect ambiance."
+                  />
+                  <meta
+                    name="keywords"
+                    content="theater lighting, studio lighting, television lighting, stage lighting, lighting for studios, production lighting, lighting for TV sets, professional lighting solutions"
+                  />
                 </Helmet>
                 <TheaterStudioTelevision />
               </>
@@ -296,9 +382,15 @@ function App() {
             <Route path="/signaldistributionandpowersupply" element={
               <>
                 <Helmet>
-                  <title>Signal Distribution & Power Supply</title>
-                  <meta name="description" content="Get the best signal distribution and power supply solutions for your equipment." />
-                  <meta name="keywords" content="signal distribution, power supply, signal equipment" />
+                  <title>Signal Distribution & Power Supply - Arkaya Lighting</title>
+                  <meta
+                    name="description"
+                    content="Explore reliable signal distribution and power supply solutions for your equipment, ensuring optimal performance and efficiency."
+                  />
+                  <meta
+                    name="keywords"
+                    content="signal distribution, power supply solutions, equipment power, signal transmission, reliable power supply, electrical distribution, power solutions, professional signal equipment"
+                  />
                 </Helmet>
                 <SignalDistributionAndPowerSupply />
               </>
@@ -308,8 +400,14 @@ function App() {
               <>
                 <Helmet>
                   <title>Search Products - Arkaya Lighting</title>
-                  <meta name="description" content="Search for products from our wide range of available products." />
-                  <meta name="keywords" content="search, products, find, shop" />
+                  <meta
+                    name="description"
+                    content="Easily search and find products from our extensive lighting collection, tailored to your needs and preferences."
+                  />
+                  <meta
+                    name="keywords"
+                    content="search products, find lighting products, lighting solutions, shop lighting, product search, lighting store, find LED lights, premium lighting products"
+                  />
                 </Helmet>
                 <SearchProduct />
               </>
@@ -319,8 +417,14 @@ function App() {
               <>
                 <Helmet>
                   <title>Products - Arkaya Lighting</title>
-                  <meta name="description" content="Explore our wide variety of products to suit your needs." />
-                  <meta name="keywords" content="products, shop, lighting fixtures, accessories" />
+                  <meta
+                    name="description"
+                    content="Browse through a wide range of premium lighting products and accessories designed to meet all your lighting needs."
+                  />
+                  <meta
+                    name="keywords"
+                    content="lighting products, premium lighting fixtures, lighting accessories, shop lighting, decorative lights, LED lights, lighting solutions, home lighting"
+                  />
                 </Helmet>
                 <Product />
               </>
@@ -342,8 +446,14 @@ function App() {
               <>
                 <Helmet>
                   <title>Shipping & Returns - Arkaya Lighting</title>
-                  <meta name="description" content="Learn about our shipping policies and returns process." />
-                  <meta name="keywords" content="shipping, returns, policy" />
+                  <meta
+                    name="description"
+                    content="Discover Arkaya Lighting's clear and simple shipping and return policies, ensuring a hassle-free shopping experience."
+                  />
+                  <meta
+                    name="keywords"
+                    content="shipping policy, returns policy, return process, delivery information, easy returns, shipping guidelines, lighting store shipping, return conditions"
+                  />
                 </Helmet>
                 <ShippingAndReturns />
               </>
@@ -352,8 +462,14 @@ function App() {
               <>
                 <Helmet>
                   <title>Privacy Policy - Arkaya Lighting</title>
-                  <meta name="description" content="Read our privacy policy to understand how we handle your personal data." />
-                  <meta name="keywords" content="privacy, policy, data protection" />
+                  <meta
+                    name="description"
+                    content="Read Arkaya Lighting's privacy policy to learn how we protect your personal data and ensure confidentiality."
+                  />
+                  <meta
+                    name="keywords"
+                    content="privacy policy, data protection, personal information security, user privacy, secure data handling, Arkaya Lighting privacy"
+                  />
                 </Helmet>
                 <PrivacyPolicy />
               </>
@@ -362,8 +478,14 @@ function App() {
               <>
                 <Helmet>
                   <title>Terms & Conditions - Arkaya Lighting</title>
-                  <meta name="description" content="Review our terms and conditions before using our website and services." />
-                  <meta name="keywords" content="terms, conditions, agreement" />
+                  <meta
+                    name="description"
+                    content="Read Arkaya Lighting's terms and conditions to understand our website usage policies and user agreements."
+                  />
+                  <meta
+                    name="keywords"
+                    content="terms and conditions, user agreement, website policies, usage terms, Arkaya Lighting terms, legal agreement"
+                  />
                 </Helmet>
                 <Term_Condition />
               </>
@@ -383,8 +505,14 @@ function App() {
               <>
                 <Helmet>
                   <title>Sign Up - Arkaya Lighting</title>
-                  <meta name="description" content="Sign up to create an account and enjoy the full features of our website." />
-                  <meta name="keywords" content="sign up, register, account creation" />
+                  <meta
+                    name="description"
+                    content="Create an account on Arkaya Lighting to access exclusive features, promotions, and updates on our lighting solutions."
+                  />
+                  <meta
+                    name="keywords"
+                    content="sign up, register, account creation, join Arkaya Lighting, lighting account, create account, register for lighting services"
+                  />
                 </Helmet>
                 <SignUp />
               </>
@@ -410,15 +538,7 @@ function App() {
                 <UserLayout />
               </UserWrapper>
             }>
-              <Route path="profile" element={
-                <>
-                  <Helmet>
-                    <title>User Profile - Arkaya Lighting</title>
-                    <meta name="description" content="Manage your profile and settings." />
-                  </Helmet>
-                  <UserProfile />
-                </>
-              } />
+              <Route path="profile" element={<UserProfile />} />
               <Route path="orders" element={<Order />} />
               <Route path="change-password" element={<ChangePassword />} />
               <Route path="delete-account" element={<DeleteAccount />} />
@@ -454,7 +574,15 @@ function App() {
             <Route path="*" element={
               <>
                 <Helmet>
-                  <title>404 - Page Not Found - ArkayaLighting</title>
+                  <title>404 - Page Not Found - Arkaya Lighting</title>
+                  <meta
+                    name="description"
+                    content="Oops! The page you are looking for doesn't exist. Return to the homepage or explore our lighting solutions."
+                  />
+                  <meta
+                    name="keywords"
+                    content="404 error, page not found, Arkaya Lighting, lighting solutions, page error, website navigation"
+                  />
                   <meta name="robots" content="noindex" />
                 </Helmet>
                 <ErrorPage />
@@ -471,5 +599,3 @@ function App() {
 }
 
 export default App;
-
-

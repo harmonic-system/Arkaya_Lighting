@@ -166,7 +166,7 @@ const EditAdminProduct = ({ productId, closeModal }) => {
                         <div className="image-thumbnail">
                           <img
                             src={productData.productfile}
-                            alt="Product"
+                            alt={`${productData.productname}-image`}
                             className="thumbnail-image"
                           />
                           <MdDelete

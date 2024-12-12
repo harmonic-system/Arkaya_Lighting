@@ -10,47 +10,53 @@ const HowToBuy = () => {
       <div className="container">
         <h1 className="title">How to Buy</h1>
         <p className="subtitle">
-          Follow these simple steps to get the best deals and customized products tailored just for you!
+          Follow these steps to easily purchase your desired products and enjoy our tailored services.
         </p>
 
         <div className="steps">
           <div className="step">
-            {/* <span className="step-number">1</span> */}
             <p className="step-text">
-              **Browse** our wide range of products and find what suits your needs.
+              **Select Your Order**: Browse through our wide range of products and choose the ones you want to buy.
             </p>
           </div>
           <div className="step">
-            {/* <span className="step-number">2</span> */}
             <p className="step-text">
-              **Add to Cart** the items you love and want to purchase.
+              **Add to Cart**: Add the selected products to your cart for a seamless checkout experience.
             </p>
           </div>
           <div className="step">
-            {/* <span className="step-number">3</span> */}
             <p className="step-text">
-              **Contact Us** directly on WhatsApp for the best price and tailored customization options.
+              **Click on Contact Us**: This will take you directly to our WhatsApp chat.
             </p>
           </div>
           <div className="step">
-            {/* <span className="step-number">4</span> */}
             <p className="step-text">
-              **Finalize Your Order** with our team for a seamless purchase experience.
+              **Chat with Our Agents**: Discuss your order for the best price, delivery process, and any customizations.
+            </p>
+          </div>
+          <div className="step">
+            <p className="step-text">
+              **Customization Based on Your Requirements**: Our experts will customize the products according to your needs, provide the best price, and inform you about the delivery time and process.
+            </p>
+          </div>
+          <div className="step">
+            <p className="step-text">
+              **Confirm Your Order**: Finalize your order, and our experts will provide the delivery time and details.
             </p>
           </div>
         </div>
 
         <p className="contact-note">
-          Reach out to us via WhatsApp for any queries or personalized solutions. We're here to help!
+          We value your trust and are here to make your shopping experience delightful. Feel free to reach out for any assistance!
+        </p>
+
+        <p className="love-note">
+          Thank you for choosing us. We truly appreciate your support and look forward to serving you with love and care! ❤
         </p>
 
         <div className="button-group">
-          <button className="btn" onClick={() => navigate("/")}>
-            Go to Home
-          </button>
-          <button className="btn btn-back" onClick={() => navigate(-1)}>
-            Back
-          </button>
+          <button className="btn" onClick={() => navigate("/")}>Go to Home</button>
+          <button className="btn btn-back" onClick={() => navigate(-1)}>Back</button>
         </div>
       </div>
     </HowToBuyWrapper>
@@ -101,19 +107,6 @@ const HowToBuyWrapper = styled.div`
     margin: 10px 0;
   }
 
-  .step-number {
-    background: #ff9800;
-    color: #fff;
-    font-size: 1.2rem;
-    font-weight: bold;
-    width: 35px;
-    height: 35px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-  }
-
   .step-text {
     font-size: 1.2rem;
     color: #444;
@@ -125,6 +118,13 @@ const HowToBuyWrapper = styled.div`
     color: #f44336;
     font-weight: bold;
     margin-bottom: 20px;
+  }
+
+  .love-note {
+    font-size: 1.2rem;
+    color: #4caf50;
+    font-weight: bold;
+    margin-bottom: 30px;
   }
 
   .button-group {
@@ -156,4 +156,4 @@ const HowToBuyWrapper = styled.div`
   .btn-back:hover {
     background-color: #388e3c;
   }
-`
+`;
