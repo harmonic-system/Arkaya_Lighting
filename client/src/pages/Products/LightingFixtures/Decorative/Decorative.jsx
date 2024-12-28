@@ -8,13 +8,15 @@ const Decorative = () => {
     <>
       <Wrapper>
         <div className="products-image">
-          <div className="title">
-            <h1>Our <strong className="black">Decorative Lighting</strong> Products</h1>
-            <span>Beautiful and functional lighting to add elegance to any space</span>
+          <div className="container">
+            <div className="title">
+              <h1>Our <strong className="black">Decorative Lighting</strong> Products</h1>
+              <span>Beautiful and functional lighting to add elegance to any space</span>
+            </div>
           </div>
           <div className="container">
             <div className="grid grid-three-column">
-              <Link to="/products" onClick={() => setCategoryinlocalStorage("chandeliers")}>
+              <Link to="/products" onClick={() => setCategoryinlocalStorage("Chandeliers")}>
                 <div className="products-image-box">
                   <img src="images/products/decorative/chandeliers.PNG" alt="chandelierscategory-image" />
                   <h3>Chandeliers</h3>
@@ -57,12 +59,14 @@ span{
   text-align: center;
   height: 300px;
   border-radius: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .products-image .products-image-box img {
   height: 80%;
   border-radius: 20px;
   width: 80%;
+  transition: transform 0.3s ease;
 }
 
 .products-image .products-image-box h3 {
@@ -73,11 +77,20 @@ span{
   padding: 20px 0px;
 }
 
-@media (max-width: 768px) {
-.products-image .products-image-box img {
-  height: 80%;
-  border-radius: 20px;
-  // width: auto;
+.products-image .products-image-box:hover {
+  transform: scale(1.05);
+  box-shadow: #00000070 0px 0px 19px 0px;
 }
+
+@media (max-width: 768px) {
+  .grid-three-column {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 525px) {
+  .grid-three-column {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 `

@@ -351,12 +351,6 @@ const Cart = () => {
       .join("\n") // Join product details with line breaks
       .concat("\nI would like to discuss customization options and the best prices for these products. Could you please assist me?\n");
 
-    // .map(
-    //   (item, index) =>
-    //     `*Item ${index + 1}:*\nName: ${item.name}\nSKU: ${item.sku}\nImage: ${item.productImage}\n`
-    // )
-    // .join("\n");
-
     // WhatsApp base URL
     const baseUrl = `https://wa.me/919873241041` + `?text=${encodeURIComponent(message)}`;
 

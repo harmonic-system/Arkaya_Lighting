@@ -1,45 +1,128 @@
+// import styled from "styled-components";
+// import { BsFillGridFill, BsList } from "react-icons/bs";
+// import { useCategoryContext } from "../../context/category-context";
+
+// const SearchSort = () => {
+//   const { searchProducts, grid_view, setGridView, setListView } = useCategoryContext()
+
+
+//   return (
+//     <Wrapper className="sort-section">
+//       {/* 1st column  */}
+//       <div className="sorting-list--grid">
+//         <button
+//           className={grid_view ? "active sort-btn" : "sort-btn"}
+//           onClick={setGridView}>
+//           <BsFillGridFill className="icon" />
+//         </button>
+
+//         <button
+//           className={!grid_view ? "active sort-btn" : " sort-btn"}
+//           onClick={setListView}>
+//           <BsList className="icon" />
+//         </button>
+//       </div>
+
+//       {/* 2nd column  */}
+//       <div className="product-data">
+//         <p>{`${searchProducts?.length} Product Available`}</p>
+//       </div>
+//     </Wrapper>
+//   );
+// };
+
+// export default SearchSort;
+
+// const Wrapper = styled.section`
+//   margin-top: 5rem;
+//   display: flex;
+  
+//   .sorting-list--grid,
+//   .product-data {
+//     flex: 1;
+//   }
+
+//   .sorting-list--grid {
+//     text-align: start;
+//     display: flex;
+//     gap: 10px;
+
+//     .sort-btn {
+//       padding: 0.8rem 1rem;
+//       border: none;
+//       display: flex;
+//       justify-content: center;
+//       align-items: center;
+//       cursor: pointer;
+//     }
+
+//     .icon {
+//       font-size: 1.6rem;
+//     }
+
+//     .active {
+//       background-color: ${({ theme }) => theme.colors.black};
+//       color: #fff;
+//     }
+//   }
+
+//   .product-data {
+//     font-weight: bold;
+//     text-align: center;
+//     justify-content:start;
+//   }
+
+//   @media (max-width: 425px) {
+//     .sorting-list--grid,
+//     .product-data {
+//       flex: 1;
+//       margin: 0 5px;
+//     }
+
+//     .product-data p {
+//       font-size: 1.2rem;
+//     }
+
+//     .sort-btn svg {
+//       font-size: 1.2rem !important;
+//     }
+
+//     .sort-selection--style {
+//       width: 10rem;
+//     }
+//   }
+// `;
+
 import styled from "styled-components";
 import { BsFillGridFill, BsList } from "react-icons/bs";
 import { useCategoryContext } from "../../context/category-context";
 
 const SearchSort = () => {
-  const { searchProducts, grid_view, setGridView, setListView } = useCategoryContext()
-
+  const { searchProducts, grid_view, setGridView, setListView } = useCategoryContext();
 
   return (
     <Wrapper className="sort-section">
-      {/* 1st column  */}
+      {/* 1st column: Sorting buttons */}
       <div className="sorting-list--grid">
         <button
           className={grid_view ? "active sort-btn" : "sort-btn"}
-          onClick={setGridView}>
+          onClick={setGridView}
+        >
           <BsFillGridFill className="icon" />
         </button>
 
         <button
-          className={!grid_view ? "active sort-btn" : " sort-btn"}
-          onClick={setListView}>
+          className={!grid_view ? "active sort-btn" : "sort-btn"}
+          onClick={setListView}
+        >
           <BsList className="icon" />
         </button>
       </div>
 
-      {/* 2nd column  */}
+      {/* 2nd column: Product count */}
       <div className="product-data">
-        <p>{`${searchProducts?.length} Product Available`}</p>
+        <p>{`${searchProducts?.length} Product${searchProducts?.length !== 1 ? "s" : ""} Available`}</p>
       </div>
-
-      {/* 3rd column  */}
-      {/* <div className="filter-search">
-        <form onSubmit={(e) => e.preventDefault()}>
-          <input
-            type="text"
-            name="text"
-            placeholder="Search"
-            value={text}
-            onChange={updateFilterValue}
-          />
-        </form>
-      </div> */}
     </Wrapper>
   );
 };
@@ -47,20 +130,20 @@ const SearchSort = () => {
 export default SearchSort;
 
 const Wrapper = styled.section`
-  // display: flex;
-  // justify-content: space-evenly;
-  // align-items: center;
   margin-top: 5rem;
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 1rem; 
 
   .sorting-list--grid,
-  .product-data,
-  .filter-search {
+  .product-data {
     flex: 1;
+    display: flex;
+    justify-content: flex-start !important;
+    align-items: center;
   }
 
-  .sorting-list--grid{
-    text-align: start;
-    display: flex;
+  .sorting-list--grid {
     gap: 10px;
 
     .sort-btn {
@@ -70,63 +153,70 @@ const Wrapper = styled.section`
       justify-content: center;
       align-items: center;
       cursor: pointer;
+      background-color: ${({ theme }) => theme.colors.bg};
+      border-radius: 0.5rem;
+      transition: background-color 0.3s ease, color 0.3s ease;
+
+      &:hover {
+        background-color: ${({ theme }) => theme.colors.black};
+        color: #fff;
+      }
     }
 
     .icon {
       font-size: 1.6rem;
     }
+
     .active {
       background-color: ${({ theme }) => theme.colors.black};
       color: #fff;
     }
   }
 
-  .filter-search{
-    text-align: end;
-  }
-
   .product-data {
-    font-weight: bold;
+    justify-content: center;
     text-align: center;
+
+    p {
+      font-weight: bold;
+      font-size: 1.4rem;
+    }
   }
 
-  .filter-search input {
-    width: 100%; /* Adjust this as needed */
-    max-width: 200px;
-    padding: 0.6rem 1rem;
-    border-radius: 1rem;
-    transition: all 500ms ease;
-  }
+  @media (max-width: 768px) {
+    flex-direction: column; /* Stacks items vertically */
+    align-items: center;
 
-  .filter-search input:hover {
-    transform: scale(1.04);
+    .sorting-list--grid {
+      justify-content: center;
+    }
+
+    .product-data {
+      text-align: center;
+      justify-content: center;
+
+      p {
+        font-size: 1.2rem;
+      }
+    }
   }
 
   @media (max-width: 425px) {
-    .sorting-list--grid,
-    .product-data,
-    .filter-search {
-      flex: 1;
-      margin: 0 5px; /* Adjust spacing if needed */
+    gap: 0.5rem;
+
+    .sorting-list--grid {
+      .sort-btn {
+        padding: 0.6rem 0.8rem;
+      }
+
+      .icon {
+        font-size: 1.4rem;
+      }
     }
 
-    .product-data p{
-      font-size: 1.2rem; /* Adjust font size for smaller screens */
-    }
-
-    .sort-btn svg {
-      font-size: 1.2rem !important;
-    }
-
-    .sort-selection--style {
-      width: 10rem;
-    }
-
-    .filter-search input {
-      max-width: 100%; /* Ensure input doesn't overflow */
-      padding: 0.5rem; /* Adjust padding for smaller screens */
+    .product-data p {
+      font-size: 1rem;
     }
   }
 `;
-
 

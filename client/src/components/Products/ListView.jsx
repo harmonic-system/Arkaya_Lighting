@@ -72,8 +72,18 @@ const ListView = () => {
   );
 };
 
+export default ListView;
+
 const Wrapper = styled.section`
   padding: 9rem 0;
+
+  @media (max-width: 1024px) {
+    padding: 6rem 0;
+  }
+
+  @media (max-width: 420px) {
+    padding: 3rem 0;
+  }
 
   .container {
     max-width: 120rem;
@@ -82,7 +92,7 @@ const Wrapper = styled.section`
   .grid {
     gap: 3.2rem;
   }
-  
+
   .pagination {
     display: flex;
     justify-content: space-between;
@@ -96,4 +106,3 @@ const Wrapper = styled.section`
   }
 `;
 
-export default ListView;

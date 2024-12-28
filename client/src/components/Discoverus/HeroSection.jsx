@@ -2,8 +2,7 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "../../styles/Button";
 
-// const HeroSection = () => {
-  const HeroSection = () => {
+const HeroSection = () => {
 
   return (
     <Wrapper>
@@ -35,56 +34,89 @@ import { Button } from "../../styles/Button";
   );
 };
 
+export default HeroSection;
+
 const Wrapper = styled.section`
-  padding: 12rem 0;
+  padding: 10rem 2rem;
 
-  img {
-    min-width: 10rem;
-    height: 10rem;
-  }
-
+  /* Hero Section Text Content */
   .hero-section-data {
-    p {
-      margin: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .intro-data {
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: ${({ theme }) => theme.colors.helper};
+      margin-bottom: 1rem;
     }
 
     h1 {
-      text-transform: capitalize;
-      font-weight: bold;
+      font-size: 4rem;
+      font-weight: 700;
+      color: ${({ theme }) => theme.colors.primary};
+      margin-bottom: 2rem;
     }
 
-    .intro-data {
-      margin-bottom: 0;
+    p {
+      font-size: 1.6rem;
+      line-height: 1.8;
+      color: ${({ theme }) => theme.colors.text};
+      margin-bottom: 3rem;
+      text-align: justify;
+    }
+
+    a {
+      text-decoration: none;
     }
   }
 
+  /* Hero Section Image */
   .hero-section-image {
-    width: 100%;
-    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  .img-style {
-    width: 100%;
-    height: auto;
+
+    figure {
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+
+      img {
+        width: 100%;
+        height: auto;
+        border-radius: 1rem;
+        transition: transform 0.3s ease;
+
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
+    }
   }
 
-  @media (max-width: ${({ theme }) => theme.media.mobile}) {
-    .grid {
-      gap: 10rem;
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    padding: 5rem 2rem;
+
+    .hero-section-data {
+      h1 {
+        font-size: 3rem;
+      }
+
+      p {
+        font-size: 1.4rem;
+      }
     }
 
-    figure::after {
-      content: "";
-      width: 50%;
-      height: 100%;
-      left: 0;
-      top: 10%;
-      /* bottom: 10%; */
-      background-color: rgba(81, 56, 238, 0.4);
+    .hero-section-image {
+      figure {
+        img {
+          max-width: 300px;
+        }
+      }
     }
   }
 `;
 
-export default HeroSection;

@@ -7,6 +7,8 @@ const newsLetterSchema = new Schema({
     lowercase: true,
     unique: true,
   }
+}, {
+  timestamps: true, // Automatically adds createdAt and updatedAt fields
 })
 
 const NewsLetter = new model("NewsLetter", newsLetterSchema)

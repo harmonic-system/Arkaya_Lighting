@@ -64,172 +64,182 @@ const Sort = () => {
 export default Sort;
 
 const Wrapper = styled.section`
-display: flex;
-flex-direction: column;
-gap:2rem;
-
-.first-column {
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  margin-top: 5rem;
+  flex-direction: column;
+  gap: 2rem;
+  background: linear-gradient(180deg, #fff, #eaeaea);
+  padding: 0 15px;
+  border-radius: 0 0 15px 15px;
 
-  .sorting-list--grid,
-  .product-data,
-  .filter-search {
-    flex: 1;
-  }
-
-  .sorting-list--grid{
-    text-align: start;
+  .first-column {
     display: flex;
-    gap: 10px;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 5rem;
 
-    .sort-btn {
-      padding: 0.8rem 1rem;
-      border: none;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-    }
-
-    .icon {
-      font-size: 1.6rem;
-    }
-    .active {
-      background-color: ${({ theme }) => theme.colors.black};
-      color: #fff;
-    }
-  }
-
-  .filter-search{
-    text-align: end;
-  }
-
-  .product-data {
-    font-weight: bold;
-    text-align: center;
-  }
-
-  .filter-search input {
-    width: 100%; /* Adjust this as needed */
-    max-width: 200px;
-    padding: 0.6rem 1rem;
-    border-radius: 5px;
-    transition: all 500ms ease;
-  }
-
-  .filter-search input:hover {
-    transform: scale(1.04);
-  }
-
-  @media (max-width: 425px) {
     .sorting-list--grid,
     .product-data,
     .filter-search {
       flex: 1;
-      margin: 0 5px; /* Adjust spacing if needed */
     }
 
-    .product-data p{
-      font-size: 1.2rem; /* Adjust font size for smaller screens */
+    .sorting-list--grid {
+      gap: 10px;
+      display:flex;
+
+      .sort-btn {
+        padding: 0.8rem 1rem;
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        background-color: ${({ theme }) => theme.colors.bg};
+        border-radius: 0.5rem;
+        transition: background-color 0.3s ease, color 0.3s ease;
+
+        &:hover {
+          background-color: ${({ theme }) => theme.colors.black};
+          color: #fff;
+        }
+      }
+
+      .icon {
+        font-size: 1.6rem;
+      }
+
+      .active {
+        background-color: ${({ theme }) => theme.colors.black};
+        color: #fff;
+      }
     }
 
-    .sort-btn svg {
-      font-size: 1.2rem !important;
+    .filter-search {
+      text-align: end;
     }
 
-    .sort-selection--style {
-      width: 10rem;
+    .product-data {
+      font-weight: bold;
+      text-align: center;
     }
 
     .filter-search input {
-      max-width: 100%; /* Ensure input doesn't overflow */
-      padding: 0.5rem; /* Adjust padding for smaller screens */
+      width: 100%;
+      max-width: 200px;
+      padding: 0.6rem 1rem;
+      border-radius: 5px;
+      transition: all 500ms ease;
+    }
+
+    .filter-search input:hover {
+      transform: scale(1.04);
+    }
+
+    @media (max-width: 425px) {
+      .sorting-list--grid,
+      .product-data,
+      .filter-search {
+        flex: 1;
+        margin: 0 5px;
+      }
+
+      .product-data p {
+        font-size: 1.2rem;
+      }
+
+      .sort-btn svg {
+        font-size: 1.2rem !important;
+      }
+
+      .sort-selection--style {
+        width: 10rem;
+      }
+
+      .filter-search input {
+        max-width: 100%;
+        padding: 0.5rem;
+      }
     }
   }
-}
 
-.second-column {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  padding: 10px 20px;
-  gap: 20px;
-}
-
-.second-column select {
-  width: 100%;
-  padding: 8px 12px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  font-size: 1.2rem;
-  font-weight: bold;
-  background-color: #fff;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  outline: none; /* Remove outline on focus */
-}
-
-.second-column select:focus {
-  border-color: #fcc221; /* Highlight border color when selected */
-}
-
-.second-column option {
-  padding: 10px; /* Custom padding for the options */
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #333; /* Text color for the options */
-  background-color: #fff; /* Option background color */
-  transition: background-color 0.3s ease; /* Smooth background transition */
-}
-
-.second-column option:hover {
-  background-color: #f0f0f0; /* Highlight option when hovered */
-}
-
-/* Button Styles */
-Button {
-  padding: 10px 20px;
-  font-size: 1rem;
-  font-weight: bold;
-  border: 1px solid #fcc221;
-  background-color: transparent;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  color: #333; /* Default text color */
-}
-
-Button:hover {
-  background-color: #fcc221;
-  border: 1px solid #fcc221;
-  color: #fff;
-}
-
-/* Media Queries for Responsiveness */
-@media (max-width: 425px) {
   .second-column {
-    flex-direction: column; /* Stack the elements vertically on smaller screens */
-    align-items: flex-start; /* Align items to the left */
-    gap: 15px; /* Reduced gap for smaller screens */
-  }
-
-  .second-column Button {
-    width: 100%; /* Full width button */
-  }
-
-  .second-column .option {
-    width: 100%; /* Full width select box */
-    font-size: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 10px 20px;
+    gap: 20px;
   }
 
   .second-column select {
-    font-size: 1.2rem; /* Adjust font size for smaller screens */
-    padding: 10px 14px; /* Adjust padding for better UI on mobile */
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    outline: none;
   }
-}
-`;
 
+  .second-column select:focus {
+    border-color: #fcc221;
+  }
+
+  .second-column option {
+    padding: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    background-color: #fff;
+    transition: background-color 0.3s ease;
+  }
+
+  .second-column option:hover {
+    background-color: #f0f0f0;
+  }
+
+  /* Button Styles */
+  Button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: 1px solid #fcc221;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #333;
+  }
+
+  Button:hover {
+    background-color: #fcc221;
+    border: 1px solid #fcc221;
+    color: #fff;
+  }
+
+  /* Media Queries for Responsiveness */
+  @media (max-width: 425px) {
+    .second-column {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+
+    .second-column Button {
+      width: 100%;
+    }
+
+    .second-column .option {
+      width: 100%;
+      font-size: 1.2rem;
+    }
+
+    .second-column select {
+      font-size: 1.2rem;
+      padding: 10px 14px;
+    }
+  }
+`;
 

@@ -2,22 +2,27 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
 const LoadingPage = () => {
-    return (
-        <LoaderWrapper>
-            <Spinner>
-                <Dot $delay="0s" />
-                <Dot $delay="0.2s" />
-                <Dot $delay="0.4s" />
-            </Spinner>
-            <LoadingText>Loading, please wait...</LoadingText>
-        </LoaderWrapper>
-    );
+  return (
+    <LoaderWrapper>
+      <Spinner>
+        <Dot $delay="0s" />
+        <Dot $delay="0.2s" />
+        <Dot $delay="0.4s" />
+      </Spinner>
+      <LoadingText>Loading, please wait...</LoadingText>
+    </LoaderWrapper>
+  );
 };
 
 export default LoadingPage;
 
 // Wrapper for the whole page
 const LoaderWrapper = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,6 +30,7 @@ const LoaderWrapper = styled.div`
   height: 100vh;
   background: linear-gradient(135deg, #f3f4f6, #e9ecef);
   color: #333;
+  z-index: 10;
 `;
 
 // Dot animation keyframes

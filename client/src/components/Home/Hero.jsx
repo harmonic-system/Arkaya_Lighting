@@ -84,7 +84,7 @@ const Hero = () => {
                     <div className="hero__categories">
                         <div className="hero__categories__all" onClick={toggleCategories}>
                             <FaBars />
-                            <span>All Categories</span>
+                            <span>Categories</span>
                         </div>
                         {showCategories && (
                             <ul className="hero__categories__list">
@@ -144,6 +144,7 @@ margin-bottom: 5rem;
 .hero__categories {
     background-color: #ffffff;
     border: 1px solid #ebebeb;
+    border-radius: 5px;
     padding: 15px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     flex: 1; /* This allows the div to grow */
@@ -153,14 +154,13 @@ margin-bottom: 5rem;
 
 .hero__categories__all {
     background-color: #ffc221;
-    /* background-color: #7fad39; */
+    border-radius: 5px;
     padding: 10px 25px;
     cursor: pointer;
     color: #ffffff;
     display: flex;
     align-items: center;
     gap: 2rem;
-    // position: relative;
 }
 
 .hero__categories__all svg{
@@ -229,6 +229,7 @@ margin-bottom: 5rem;
     display: flex;
     width: 70%;
     border: 1px solid #ebebeb;
+    border-radius: 5px;
     padding: 5px;
     background-color: #ffffff;
 }
@@ -238,6 +239,7 @@ margin-bottom: 5rem;
     border: none;
     padding: 10px;
     font-size: 12px;
+    border-radius: 5px;
 }
 
 .hero__search__form input::placeholder {

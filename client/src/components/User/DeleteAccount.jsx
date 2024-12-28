@@ -11,6 +11,7 @@ const DeleteAccount = () => {
   const navigate = useNavigate()
 
   const [confirmationInput, setConfirmationInput] = useState("");
+  const [password, setPassword] = useState("")
 
   const handleDeleteAccount = async (e) => {
     e.preventDefault();
@@ -26,9 +27,9 @@ const DeleteAccount = () => {
       toast.loading("Please Wait...")
       const response = await axios.delete(`${server}/api/v1/auth/delete-account`,
         {
+          data: { password },
           headers: {
             'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
           }
         });
       const { message } = response.data
@@ -53,6 +54,15 @@ const DeleteAccount = () => {
           </p>
           <form onSubmit={handleDeleteAccount} className="form">
             <div className="form-group">
+              <label htmlFor="passwordInput">Please Enter Your Password:</label>
+              <input
+                type="password"
+                id="passwordInput"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Password"
+                className="input"
+              />
               <label htmlFor="confirmationInput">Type 'DELETE' to confirm:</label>
               <input
                 type="text"
@@ -123,6 +133,7 @@ const DeleteAccountWrapper = styled.section`
   margin-bottom: 5px;
   font-weight: bold;
   cursor: text;
+  margin-bottom: 10px;
 }
 
 /* Input styling */
@@ -135,6 +146,7 @@ const DeleteAccountWrapper = styled.section`
   background-color: rgba(255, 255, 255, 0.2);
   color: #fff;
   outline: none;
+  margin-bottom: 20px;
   transition: all 0.3s ease;
 }
 

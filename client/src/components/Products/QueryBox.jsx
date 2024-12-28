@@ -82,13 +82,12 @@ const QueryBox = ({ productId, productName, sku }) => {
     return (
         <>
             <QueryBoxWrapper>
-                <Button
+                <button
                     type="button"
-                    className="delete-btn"
                     onClick={() => openModal(productId, productName, sku)}
                 >
                     Send Enquiry
-                </Button>
+                </button>
                 {isModalOpen && (
                     <div className={`modal ${isModalOpen ? 'show' : ''}`}>
 
@@ -177,20 +176,7 @@ const QueryBox = ({ productId, productName, sku }) => {
 export default QueryBox
 
 const QueryBoxWrapper = styled.section`
-
-.delete-btn {
-  padding: 0.5rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #ffc221;
-}
-
-.delete-btn:hover {
-  color: #ffdd73;
-}
-
-/* Modal */
+/* Modal Styles */
 .modal {
     display: none;
     position: fixed;
@@ -204,105 +190,137 @@ const QueryBoxWrapper = styled.section`
     z-index: 1000;
 }
 
-/* Display modal when 'show' class is added */
+/* Show Modal */
 .modal.show {
     display: flex;
 }
 
+/* Modal Content */
 .modal-content {
     background: #fff;
     padding: 2rem;
     border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     text-align: center;
+    width: 90%;
+    max-width: 700px;
+    animation: fadeIn 0.3s ease-in-out;
 }
 
+/* Header */
 .model-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom:2rem;
+    margin-bottom: 2rem;
     border-bottom: 1px solid #ddd;
-}
 
-.modal h2 {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-}
+    h2 {
+        font-size: 2rem;
+        font-weight: bold;
+        color: ${({ theme }) => theme.colors.primary};
+    }
 
-.modal-close {
-    padding: 0.75rem 1.25rem;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-    border: none;
-}
-
-.modal-close {
-    background: #ccc;
-    color: #333;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-close:hover {
-    background: #bbb;
-}
-
-.contact-inputs {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-
-        input {
-            border-radius: 1rem
-        }
-
-        textarea {
-            border-radius: 1rem;
-            resize: none;
-        }
-
-        Button {
-            width: 100%;
-            cursor: pointer;
-            transition: all 0.2s;
+    .modal-close {
+        background: #ccc;
+        color: #333;
+        padding: 0.75rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
 
         &:hover {
-            background-color: ${({ theme }) => theme.colors.white};
-            border: 1px solid ${({ theme }) => theme.colors.btn};
-            color: ${({ theme }) => theme.colors.btn};
-            transform: scale(0.9);
+            background: #bbb;
         }
     }
 }
 
+/* Form Styles */
+.contact-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    input,
+    textarea {
+        border-radius: 1rem;
+        font-size: 1.4rem;
+        transition: border-color 0.3s ease;
+
+        &:focus {
+            border-color: ${({ theme }) => theme.colors.primary};
+        }
+    }
+
+    textarea {
+        resize: none;
+        height: 120px;
+    }
+
+    ::placeholder {
+        font-size: 1.3rem;
+        color: #aaa;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 90%;
+        padding: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    input,
+    textarea {
+        font-size: 1.2rem;
+    }
+
+    Button {
+        font-size: 1.4rem;
+    }
+}
+
 @media (min-width: 425px) {
-  .modal-content {
-    width: 300px;
-  }
+    .modal-content {
+        width: 300px;
+    }
 }
 
 @media (min-width: 768px) {
-  .modal-content {
-    width: 600px;
-  }
+    .modal-content {
+        width: 600px;
+    }
 }
 
 @media (min-width: 1440px) {
-  .modal-content {
-    width: 700px;
-  }
+    .modal-content {
+        width: 700px;
+    }
 }
 
 @media (min-width: 2600px) {
-  .modal-content {
-    width: 700px;
-  }
+    .modal-content {
+        width: 700px;
+    }
 }
 
-
-
-
-`
+/* Keyframe Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+`;

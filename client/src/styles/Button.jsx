@@ -5,7 +5,7 @@ export const Button = styled.button`
   max-width: auto;
   background-color: #ffc221;
   color: rgb(255 255 255);
-  padding: 1.4rem 2.4rem;
+  padding: 1rem 2rem;
   border: none;
   border-radius:1rem;
   text-transform: uppercase;
@@ -30,8 +30,3 @@ export const Button = styled.button`
     font-size: 1.8rem;
   }
 `;
-
-
-// background-color: #0098F5;
-  // background-color: #0074e1;
-  // background-color: rgb(98 84 243);

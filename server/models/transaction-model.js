@@ -1,8 +1,8 @@
-const mongoose = require("mongoose");
+const { Schema, model } = require("mongoose")
 
-const transactionSchema = new mongoose.Schema({
+const transactionSchema = new Schema({
     userId: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Auth', // Reference to the Auth model
     },
     orderId: {
@@ -36,7 +36,7 @@ const transactionSchema = new mongoose.Schema({
         },
     ],
     address: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Auth', // Reference to the Auth model
     },
     amount: {
@@ -52,7 +52,7 @@ const transactionSchema = new mongoose.Schema({
 }
 );
 
-const Transaction = mongoose.model("Transaction", transactionSchema)
+const Transaction = model("Transaction", transactionSchema)
 
 module.exports = Transaction;
 

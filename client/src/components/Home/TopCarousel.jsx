@@ -28,7 +28,7 @@ const TopCarousel = () => {
             <img src={item?.file?.url} alt={`Slide ${index + 1}`} />
             <Overlay>
               <SlideContent>
-                <h5 className="carousel-title">Slide {item?.heading}</h5>
+                <h5 className="carousel-title">{item?.heading}</h5>
                 <p className="carousel-description">{item?.description}</p>
               </SlideContent>
             </Overlay>

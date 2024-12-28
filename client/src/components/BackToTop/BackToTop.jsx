@@ -59,7 +59,7 @@ const BackToTopWrapper = styled.section`
   opacity: 1;
   right: 15px;
   bottom: 15px;
-  z-index: 99999;
+  z-index: 15;
   background-color: #ffc221;
   width: 40px;
   height: 40px;

@@ -1,271 +1,367 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
-import { FaEdit } from 'react-icons/fa';
+import { FaEye } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import { useProductContext } from '../../../context/product-context';
-import { Link } from 'react-router-dom';
 import { Button } from '../../../styles/Button';
 import { useAdminContext } from '../../../context/admin-context';
+import AddAdminApplicationButton from './AddAdminApplicationButton';
+import AdminFullViewApplicationDetails from './AdminFullViewApplicationDetails';
 
 const AdminApplication = () => {
   const { application } = useProductContext()
   const { deleteApplication } = useAdminContext()
 
-  let count = 1
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isViewModalOpen, setIsViewModalOpen] = useState(false);
   const [applicationId, setApplicationId] = useState(null);
 
-  const openModal = (Id) => {
+  const openDeleteModal = (Id) => {
     setApplicationId(Id);
-    setIsModalOpen(true);
+    setIsDeleteModalOpen(true);
   };
 
-  const closeModal = () => {
+  const closeDeleteModal = () => {
     setApplicationId(null);
-    setIsModalOpen(false);
+    setIsDeleteModalOpen(false);
+  };
+
+  const openEditModal = (Id) => {
+    setApplicationId(Id);
+    setIsViewModalOpen(true);
+  };
+
+  const closeEditModal = () => {
+    setApplicationId(null);
+    setIsViewModalOpen(false);
+  };
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 9;
+  const totalPages = Math.ceil((application?.length || 0) / itemsPerPage);
+
+  const currentItems = application?.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  const handlePageChange = (page) => {
+    if (page > 0 && page <= totalPages) {
+      setCurrentPage(page);
+    }
   };
 
   return (
-    <AdminApplicationWrapper>
-      <div className="admin-container">
-        <div className="add-product-container">
-          <Link className="add-product-btn" to="/admin/addapplication"><Button>Add Application</Button></Link>
-        </div>
-        <table className="admin-table">
-          <thead>
-            <tr>
-              <th>Sr. No</th>
-              <th>Image</th>
-              <th>Heading</th>
-              <th>About</th>
-              <th>Edit</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {application?.map((application) => (
-              <tr key={application?._id}>
-                <td>{count++}</td>
-                <td className="description"><img src={application?.applicationfile?.url} alt={`${application.heading}-image`} style={{ height: "6rem" }} /></td>
-                <td>{application.heading}</td>
-                <td>{application.about}</td>
-                <td>
-                  <Link to={`/admin/editapplication/${application?._id}`} className="edit-btn">
-                    <FaEdit />
-                  </Link>
-                </td>
-                <td>
-                  <button
-                    type="button"
-                    className="delete-btn"
-                    onClick={() => openModal(application?._id)}
-                  >
-                    <MdDelete />
-                  </button>
-                </td>
-              </tr>
+    <>
+      <AddAdminApplicationButton />
+      <AdminApplicationWrapper>
+        <div className="admin-container">
+          <div className="product-list">
+            {currentItems.map((application) => (
+              <div className="product-item" key={application?._id}>
+                <img
+                  src={application?.applicationfile?.url}
+                  alt={`${application.heading}-image`}
+                />
+                <div className="product-details">
+                  <p>
+                    {application?.heading?.length < 20
+                      ? application?.heading
+                      : `${application?.heading?.slice(0, 10)}...`}
+                  </p>
+                  <div className="product-buttons">
+                    {/* View Button */}
+                    <button
+                      type="button"
+                      className="view-btn"
+                      onClick={() => openEditModal(application._id)}
+                    >
+                      <FaEye /> View
+                    </button>
+
+                    {/* Delete Button */}
+                    <button
+                      type="button"
+                      className="delete-btn"
+                      onClick={() => openDeleteModal(application._id)}
+                    >
+                      <MdDelete /> Delete
+                    </button>
+                  </div>
+                </div>
+              </div>
             ))}
-          </tbody>
-        </table>
-        {isModalOpen && (
-          <div className={`modal ${isModalOpen ? 'show' : ''}`}>
-            <div className="modal-content">
-              <h2>Confirm Deletion</h2>
-              <p>Are you sure you want to delete this Application?</p>
-              <div className="modal-actions">
-                <Button className="modal-close" onClick={closeModal}>
-                  Close
-                </Button>
-                <Button
-                  className="modal-delete"
-                  onClick={() => {
-                    deleteApplication(applicationId);
-                    closeModal();
-                  }}
-                >
-                  Delete
-                </Button>
+          </div>
+
+          {/* Pagination Controls */}
+          {totalPages > 1 && (
+            <div className="pagination">
+              <Button
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage <= 1}
+              >
+                Prev
+              </Button>
+              <span className="pagination-info">
+                Page <strong>{currentPage}</strong> of{' '}
+                <strong>{totalPages}</strong>
+              </span>
+              <Button
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+              >
+                Next
+              </Button>
+            </div>
+          )}
+        </div >
+
+        {/* Full View Product Details Modal */}
+        {
+          isViewModalOpen && (
+            <AdminFullViewApplicationDetails
+              applicationId={applicationId}
+              closeModal={closeEditModal}
+            />
+          )
+        }
+
+        {/* Delete Confirmation Modal */}
+        {
+          isDeleteModalOpen && (
+            <div className="delete-modal-overlay" onClick={closeDeleteModal}>
+              <div
+                className="delete-modal-content"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <h2>Confirm Deletion</h2>
+                <p>Are you sure you want to delete this Application?</p>
+                <div className="delete-modal-actions">
+                  <Button className="modal-close" onClick={closeDeleteModal}>
+                    Close
+                  </Button>
+                  <Button
+                    className="modal-delete"
+                    onClick={() => {
+                      deleteApplication(applicationId);
+                      closeDeleteModal();
+                    }}
+                  >
+                    Delete
+                  </Button>
+                </div>
               </div>
             </div>
-          </div>
-        )}
-      </div>
-    </AdminApplicationWrapper >
+          )
+        }
+      </AdminApplicationWrapper >
+    </>
   )
 }
 
 export default AdminApplication
 
 const AdminApplicationWrapper = styled.section`
-/* Container */
-.admin-container {
-  margin: 2rem 0;
-  width: 100%;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: 2px solid #ffc221;
-}
-
-/* Title */
-.admin-title {
-  font-weight: bold;
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
-
-/* Add Product Button */
-.add-product-container {
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-  margin: 1rem 2rem;
-}
-
-.add-product-btn {
-  margin: 1rem 2rem;
-}
-
-/* Table */
-.admin-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 2rem;
-}
-
-.admin-table tr{
-  margin-bottom: 1rem;
-}
-
-.admin-table tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-.admin-table tr:nth-child(odd) {
-  background-color: #f7f7f7;
-}
-
-.admin-table th, .admin-table td {
-  border: 1px solid #ccc;
-  padding: 0.75rem;
-  text-align: left;
-  font-size: 1.5rem;
-}
-
-.admin-table td svg{
-  font-size: 1.8rem;
-}
-
-.admin-table th {
-  background-color: #f4f4f4;
-  font-weight: bold;
-}
-
-.description {
-  color: #333;
-  font-size: 1.2rem;
-}
-
-/* Nested Table */
-.nested-table {
-  border: none;
-  width: 100%;
-}
-
-.nested-row {
-  display: flex;
-  flex-direction: column;
-  border: none;
-}
-
-@media screen and (max-width: 992px) {
- .admin-table tr{
-   display: flex;
-   flex-direction: column;
+  /* Admin Products Container */
+  .admin-container {
+    margin: 2rem 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
-}
 
-/* Edit and Delete Buttons */
-.edit-btn, .delete-btn {
-  padding: 0.5rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #ffc221;
-}
+  /* Product List */
+  .product-list {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+  }
 
-.edit-btn:hover, .delete-btn:hover {
-  color: #ffdd73;
-}
+  .product-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
 
-/* Modal */
-.modal {
-    display: none;
+  .product-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Product Image */
+  .product-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: contain;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+  }
+
+  /* Product Details */
+  .product-details {
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  .product-details p {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+  }
+
+  /* Product Buttons */
+  .product-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+
+    .view-btn,
+    .delete-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.5rem 1rem;
+      font-size: 1.1rem; /* Increased button font size */
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .view-btn {
+      background: #007bff;
+      color: #fff;
+    }
+
+    .delete-btn {
+      background: #dc3545;
+      color: #fff;
+    }
+
+    .view-btn:hover {
+      background: #0056b3;
+    }
+
+    .delete-btn:hover {
+      background: #c82333;
+    }
+  }
+
+  /* View Button */
+  .view-btn {
+    background-color: #007bff;
+  }
+
+  .view-btn:hover {
+    background-color: #0056b3;
+  }
+
+  /* Delete Button */
+  .delete-btn {
+    background-color: #dc3545;
+  }
+
+  .delete-btn:hover {
+    background-color: #c82333;
+  }
+
+  /* Pagination Controls */
+  .pagination {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 2rem;
+    align-items: center;
+
+    .pagination-info {
+      font-size: 1rem;
+    }
+  }
+
+  /* Modal Overlay */
+  .delete-modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-/* Display modal when 'show' class is added */
-.modal.show {
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
     display: flex;
-}
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
 
-.modal-content {
+  /* Modal Content */
+  .delete-modal-content {
     background: #fff;
     padding: 2rem;
     border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 500px;
+    max-width: 90%;
     text-align: center;
-}
+  }
 
-.modal h2 {
-    font-size: 2rem;
+  /* Modal Title */
+  .delete-modal-content h2 {
+    font-size: 1.8rem;
     font-weight: bold;
     margin-bottom: 1rem;
-}
+  }
 
-.modal p {
-    font-size: 1.5rem;
+  /* Modal Body */
+  .delete-modal-content p {
+    font-size: 1.2rem;
     margin-bottom: 1.5rem;
-}
+  }
 
-.modal-actions {
+  /* Modal Actions (Buttons) */
+  .delete-modal-actions {
     display: flex;
-    justify-content: space-around;
-}
+    justify-content: center;
+    gap: 1rem;
+  }
 
-.modal-close, .modal-delete {
+  /* Modal Buttons */
+  .modal-close,
+  .modal-delete {
     padding: 0.75rem 1.25rem;
     border-radius: 5px;
     font-weight: bold;
     cursor: pointer;
     border: none;
-}
+  }
 
-.modal-close {
+  /* Close Button */
+  .modal-close {
     background: #ccc;
     color: #333;
-}
+    transition: background 0.3s ease;
+  }
 
-.modal-delete {
-    background: #ffc221;
-    color: #fff;
-}
-
-.modal-close:hover {
+  .modal-close:hover {
     background: #bbb;
-}
+  }
 
-.modal-delete:hover {
-    background: #ffdd73;
-}
-`
+  /* Delete Button */
+  .modal-delete {
+    background: #dc3545;
+    color: #fff;
+    transition: background 0.3s ease;
+  }
+
+  .modal-delete:hover {
+    background: #c82333;
+  }
+`;

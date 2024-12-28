@@ -184,16 +184,18 @@ const forgotPassword = async (req, res) => {
 
         // Send email
         const transporter = nodemailer.createTransport({
-            service: 'Gmail',
+            host: 'smtp.hostinger.com',
+            port: 465,
+            secure: true,
             auth: {
-                user: "arkayalighting@gmail.com",
-                pass: "qztiixbfbwqrskja"
+                user: "no-reply@arkayalighting.com",
+                pass: "no-replyArkaya@1008",
             },
         });
 
         const resetLink = `${process.env.FRONTEND_URL}/user/reset-password/${token}`;
         const mailOptions = {
-            from: "arkayalighting@gmail.com",
+            from: "no-reply@arkayalighting.com",
             to: email,
             subject: 'Password Reset Request',
             text: `Click the link to reset your password: ${resetLink}`,
@@ -234,12 +236,18 @@ const resetPassword = async (req, res) => {
 };
 
 const deleteAccount = async (req, res) => {
+    const {password} = req.body;    
     try {
         // Get the user from the request (attached by authMiddleware)
         const user = await Auth.findById(req.user._id)
-        // Check if the user exists
         if (!user) {
             return res.status(404).json({ message: "User not found" });
+        }
+
+        const isPasswordCorrect = await bcrypt.compare(password, user.password)
+
+        if (!isPasswordCorrect) {
+            return res.status(400).json({ success: false, message: "Invalid Credentials" })
         }
 
         // Step 1: Save user data to the DeletedAccount model
@@ -267,18 +275,28 @@ const deleteAccount = async (req, res) => {
 
         // Send email
         const transporter = nodemailer.createTransport({
-            service: 'Gmail',
+            host: 'smtp.hostinger.com',
+            port: 465,
+            secure: true,
             auth: {
-                user: "arkayalighting@gmail.com",
-                pass: "qztiixbfbwqrskja"
+                user: "no-reply@arkayalighting.com",
+                pass: "no-replyArkaya@1008",
             },
-        });
+        });;
 
         const mailOptions = {
-            from: "arkayalighting@gmail.com",
+            from: "no-reply@arkayalighting.com",
             to: user.email,
             subject: 'Account Deletion Confirmation',
             text: `Dear ${user.name},\n\nWe are sorry to see you go. Your account has been successfully deleted along with all associated data. If this was a mistake or you wish to rejoin, feel free to contact us.\n\nBest regards,\nArkayaLighting`,
+            html: `
+                    <p>Dear ${user.name},</p>
+                    <p>We are sorry to see you go. Your account has been successfully deleted along with all associated data.</p>
+                    <p>If this was a mistake or you wish to rejoin, feel free to contact us at
+                    <a href="mailto:contact@arkayalighting.com">contact@arkayalighting.com</a>.</p>
+                    <p>Best regards,</p>
+                    <p>ArkayaLighting</p>
+                `,
         };
 
         // Send the email

@@ -52,19 +52,25 @@ const TestimonialCarousel = () => {
           <span>Transforming spaces with exceptional lighting solutions</span>
         </div>
         <div className="carousel-container">
+          {/* Left button */}
           <button className="carousel-button left" onClick={goToPrevSlide}>
             &#10094;
           </button>
 
           <div className="carousel-slide">
             <div className="testimonial-card">
-              <img className="testimonial-image" src={testimonials[currentIndex].image} alt={testimonials[currentIndex].name} />
-              <p className="testimonial-quote">{`"${testimonials[currentIndex].quote}"`}</p>
-              <h5 className="testimonial-name">{testimonials[currentIndex].name}</h5>
-              <p className="testimonial-designation">{testimonials[currentIndex].date}</p>
+              <div className="testimonial-content">
+                <img className="testimonial-image" src={testimonials[currentIndex].image} alt={testimonials[currentIndex].name} />
+                <div className="testimonial-text">
+                  <p className="testimonial-quote">{`"${testimonials[currentIndex].quote}"`}</p>
+                  <h5 className="testimonial-name">{testimonials[currentIndex].name}</h5>
+                  <p className="testimonial-designation">{testimonials[currentIndex].date}</p>
+                </div>
+              </div>
             </div>
           </div>
 
+          {/* Right button */}
           <button className="carousel-button right" onClick={goToNextSlide}>
             &#10095;
           </button>
@@ -74,9 +80,8 @@ const TestimonialCarousel = () => {
               <span
                 key={index}
                 className={`carousel-indicator ${index === currentIndex ? 'active' : ''}`}
-                onClick={() => setCurrentIndex(index)}>
-
-              </span>
+                onClick={() => setCurrentIndex(index)}
+              />
             ))}
           </div>
         </div>
@@ -87,109 +92,228 @@ const TestimonialCarousel = () => {
 
 export default TestimonialCarousel;
 
-
 const TestimonialWrapper = styled.section`
-background-color: #f9f9f9;
-padding: 50px 0;
-.carousel-container {
-  position: relative;
-  width: 100%;
-  margin: 0 auto;
-  padding: 50px 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  background-color: #f3f4f6;
+  padding: 80px 0;
+  .container {
+    width: 100%;
+    margin: 0 auto;
+  }
 
-.carousel-slide {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  transition: transform 0.5s ease-in-out;
-}
+  .carousel-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    // padding: 40px 0;
+    max-width: 1200px;
+  }
 
-.testimonial-card {
-  text-align: center;
-  background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
-}
+  .carousel-slide {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    transition: transform 0.5s ease-in-out;
+  }
 
-.testimonial-image {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 15px;
-}
+  /* Ensure the testimonial card is always the same size */
+  .testimonial-card {
+    width: 100%;
+    height: 300px; /* Fixed height for consistent sizing */
+    max-width: 800px; /* Set a max width */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    background: linear-gradient(145deg, #ffffff, #f4f6f9);
+    border-radius: 15px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+  }
 
-.testimonial-quote {
-  font-style: italic;
-  font-size: 1.1rem;
-  color: #666;
-  margin-bottom: 15px;
-}
+  .testimonial-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  }
 
-.testimonial-name {
-  font-size: 1.2rem;
-  margin-bottom: 5px;
-  color: #333;
-}
+  .testimonial-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
 
-.testimonial-designation {
-  font-size: 1rem;
-  color: #777;
-}
+  .testimonial-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 30px;
+    border: 4px solid #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
 
-/* Carousel Buttons */
-.carousel-button {
-  position: absolute;
-  top: 50%;
-  background: rgba(0, 0, 0, 0.3);
-  color: white;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  z-index: 1;
-  transform: translateY(-50%);
-  font-size: 24px;
-}
+  .testimonial-text {
+    flex: 1;
+    max-width: 500px;
+  }
 
-.carousel-button.left {
-  left: 10px;
-}
+  .testimonial-quote {
+    font-style: italic;
+    font-size: 1.3rem;
+    color: #444;
+    margin-bottom: 25px;
+    line-height: 1.6;
+    font-family: 'Georgia', serif;
+  }
 
-.carousel-button.right {
-  right: 10px;
-}
+  .testimonial-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+    font-family: 'Roboto', sans-serif;
+  }
 
-.carousel-button:hover {
-  background-color: rgba(0, 0, 0, 0.5);
-}
+  .testimonial-designation {
+    font-size: 1.1rem;
+    color: #777;
+    font-family: 'Roboto', sans-serif;
+  }
 
-/* Carousel Indicators */
-.carousel-indicators {
-position: absolute;
-bottom:0;
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
+  /* Carousel Buttons (positioned outside the card) */
+  .carousel-button {
+    position: absolute;
+    top: 50%;
+    background: rgba(0, 0, 0, 0.1);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1;
+    transform: translateY(-50%);
+    font-size: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.3s;
+  }
 
-.carousel-indicator {
-  height: 10px;
-  width: 10px;
-  margin: 0 5px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  cursor: pointer;
-}
+  .carousel-button.left {
+    left: 10px;
+  }
 
-.carousel-indicator.active {
-  background-color: #717171;
-}
+  .carousel-button.right {
+    right: 10px;
+  }
 
-`
+  .carousel-button:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  /* Carousel Indicators */
+  .carousel-indicators {
+    position: absolute;
+    bottom: 15px;
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+  }
+
+  .carousel-indicator {
+    height: 10px;
+    width: 10px;
+    margin: 0 7px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .carousel-indicator.active {
+    background-color: #717171;
+  }
+
+  /* Media Queries */
+  @media (max-width: 1024px) {
+    .testimonial-card {
+      height:200px;
+      padding: 20px;
+    }
+
+    .testimonial-quote {
+      font-size: 1.2rem;
+    }
+
+    .testimonial-name {
+      font-size: 1.3rem;
+    }
+
+    .testimonial-designation {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .testimonial-card {
+      padding: 15px;
+    }
+
+    .testimonial-image {
+      width: 100px;
+      height: 100px;
+      margin-right: 20px;
+    }
+
+    .testimonial-quote {
+      font-size: 1rem;
+    }
+
+    .testimonial-name {
+      font-size: 1.2rem;
+    }
+
+    .testimonial-designation {
+      font-size: 0.9rem;
+    }
+
+    .carousel-button {
+      font-size: 15px;
+    }
+
+    .carousel-indicator {
+      height: 6px;
+      width: 6px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .testimonial-card {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .testimonial-image {
+      margin-right: 0;
+      margin-bottom: 20px;
+      width: 80px;
+      height: 80px;
+    }
+
+    .testimonial-text {
+      text-align: center;
+    }
+
+    .carousel-button {
+      font-size: 10px;
+    }
+  }
+`;
+
+
+
+

@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Button } from '../../../styles/Button';
 import { useAdminContext } from '../../../context/admin-context';
 import { useAuthContext } from '../../../context/auth-context';
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { IoClose } from "react-icons/io5";
-import ActionLoading from '../../Loading/ActionLoading';
 import toast from 'react-hot-toast';
+import LoadingPage from '../../Loading/Loading';
+import { useNavigate, useParams } from 'react-router-dom';
+import items from "../../../JSONData/ProductCategory.json"
+import { Button } from '../../../styles/Button';
 
-const EditAdminProduct = ({ productId, closeModal }) => {
+const EditAdminProduct = () => {
 
   const { token } = useAuthContext();
   const { isLoading, singleProduct, getSingalProduct, updateProduct } = useAdminContext();
+  const { id } = useParams()
+  const navigate = useNavigate()
 
   const [openAddField, setOpenAddField] = useState(false);
   const [fieldName, setFieldName] = useState("");
@@ -22,7 +26,7 @@ const EditAdminProduct = ({ productId, closeModal }) => {
     productfile: null,
     imgpublicid: "",
     productname: "",
-    model:"",
+    model: "",
     sku: "",
     IndoorOutdoor: "",
     price: "",
@@ -33,10 +37,10 @@ const EditAdminProduct = ({ productId, closeModal }) => {
   });
 
   useEffect(() => {
-    if (token && productId) {
-      getSingalProduct(productId);
+    if (token && id) {
+      getSingalProduct(id);
     }
-  }, [token, productId]);
+  }, [token, id]);
 
   useEffect(() => {
     if (singleProduct) {
@@ -50,7 +54,7 @@ const EditAdminProduct = ({ productId, closeModal }) => {
         price: singleProduct?.price,
         productCategory: singleProduct?.productCategory,
         featured: singleProduct?.featured,
-        des: singleProduct?.des,
+        des: { description: "", ...singleProduct?.des },
         keywords: singleProduct?.keywords,
       });
     }
@@ -91,7 +95,7 @@ const EditAdminProduct = ({ productId, closeModal }) => {
   const handleAddField = () => {
     setProductData((prev) => ({
       ...prev,
-      des: { ...prev.des, [fieldName]: "" },
+      des: { description: prev.des.description || "", [fieldName]: "" },
     }));
     setFieldName("");
     setOpenAddField(false);
@@ -122,256 +126,236 @@ const EditAdminProduct = ({ productId, closeModal }) => {
   };
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!productData.des.description || productData.des.description.trim() === "") {
+      toast.error("Give Some Description of the Product");
+      return;
+    }
+
     try {
-      e.preventDefault();
-      await updateProduct(productId, productData)
-      closeModal()
+      await updateProduct(id, productData)
+      navigate("/admin/products")
     } catch (error) {
       console.error(error)
     }
   };
 
+  if (isLoading) {
+    return <LoadingPage />
+  }
+
   return (
     <>
       <AdminFormWrapper>
-        <div className="modal">
-          <div className="modal-content">
-            <Button type="button" className="top-close-btn" onClick={closeModal} style={{ position: "absolute", top: "5rem", right: "5rem" }} >
-              <IoClose />
-            </Button>
-            <section className="container upload-product-section">
-              <div className="header-bar">
-                <h2>Update Product</h2>
-              </div>
-              <div className="contact-form">
-                <form className="contact-inputs" onSubmit={handleSubmit}>
+        <section className="container upload-product-section">
+          <div className="header-bar">
+            <h2>Update Product</h2>
+          </div>
+          <div className="contact-form">
+            <form className="contact-inputs" onSubmit={handleSubmit}>
 
-                  {/* Image Upload */}
-                  <div className="form-group">
-                    <label htmlFor="productImage" className="upload-label">
-                      <div className="upload-content">
-                        <FaCloudUploadAlt size={35} />
-                        <p>Upload Image</p>
-                      </div>
-                      <input
-                        id="productImage"
-                        type="file"
-                        className="hidden"
-                        accept="image/*"
-                        onChange={handleFileChange}
-                      />
-                    </label>
-                    <div className="uploaded-images">
-                      {productData.productfile && ( // Ensure productfile exists before rendering
-                        <div className="image-thumbnail">
-                          <img
-                            src={productData.productfile}
-                            alt={`${productData.productname}-image`}
-                            className="thumbnail-image"
-                          />
-                          <MdDelete
-                            className="delete-icon"
-                            onClick={handleDeleteImage}
-                          />
-                        </div>
-                      )}
-                    </div>
+              {/* Image Upload */}
+              <div className="form-group">
+                <label htmlFor="productImage" className="upload-label">
+                  <div className="upload-content">
+                    <FaCloudUploadAlt size={35} />
+                    <p>Upload Image</p>
                   </div>
-
                   <input
-                    type="text"
-                    onChange={handleChange}
-                    value={productData.productname}
-                    name="productname"
-                    placeholder="Product Name"
-                    autoComplete="off"
-                    required
+                    id="productImage"
+                    type="file"
+                    className="hidden"
+                    accept="image/*"
+                    onChange={handleFileChange}
                   />
-                  <input
-                    type="text"
-                    onChange={handleChange}
-                    value={productData.model}
-                    name="model"
-                    placeholder="Model Number"
-                    autoComplete="off"
-                  // required
-                  />
-                  <input
-                    type="text"
-                    onChange={handleChange}
-                    value={productData.sku}
-                    name="sku"
-                    placeholder="SKU Number"
-                    autoComplete="off"
-                  // required
-                  />
-
-                  <select
-                    onChange={handleChange}
-                    value={productData.IndoorOutdoor}
-                    name="IndoorOutdoor"
-                  // required
-                  >
-                    <option value="" disabled>Click Here To Select Indoor/Outdoor</option>
-                    <option className='select--option' value="Indoor">Indoor</option>
-                    <option className='select--option' value="Outdoor">Outdoor</option>
-                  </select>
-
-                  <input
-                    type="text"
-                    onChange={handleChange}
-                    value={productData.price}
-                    name="price"
-                    placeholder="Product Price"
-                    autoComplete="off"
-                  />
-
-                  <select
-                    onChange={handleChange}
-                    value={productData.productCategory}
-                    name="productCategory"
-                    required
-                  >
-                    <option value="" disabled>Click Here To Select Product Category</option>
-                    <option className='select--option' value="floodlights">Flood Lights</option>
-                    <option className='select--option' value="undergroundlights">Underground Lights</option>
-                    <option className='select--option' value="underwaterlights">Underwater Lights</option>
-                    <option className='select--option' value="wallwashers">Wall Washers</option>
-                    <option className='select--option' value="treehangings">Tree Hangings Lights</option>
-                    <option className='select--option' value="mediapixels">Media Pixels</option>
-                    <option className='select--option' value="mhslamps">Moving Head Series Lamp</option>
-                    <option className='select--option' value="mhsleds">Moving Head Series Led</option>
-                    <option className='select--option' value="staticleds">Static Leds</option>
-                    <option className='select--option' value="effectlights">Effects Lights</option>
-                    <option className='select--option' value="strips">Strips</option>
-                    <option className='select--option' value="dotpixels">Dot Pixels</option>
-                    <option className='select--option' value="ledmatrixes">Led Matrix</option>
-                    <option className='select--option' value="chandeliers">Chandeliers</option>
-                    <option className='select--option' value="theaters">Theaters</option>
-                    <option className='select--option' value="studios">Studios</option>
-                    <option className='select--option' value="televisions">Televisions</option>
-                    <option className='select--option' value="indoors">Indoor</option>
-                    <option className='select--option' value="outdoors">Outdoor</option>
-                    <option className='select--option' value="ledcontrollers">LED Controllers</option>
-                    <option className='select--option' value="dmxcontrollers">DMX Controllers</option>
-                    <option className='select--option' value="signaldistributions">Signal Distribution</option>
-                    <option className='select--option' value="powersupplies">Power Supplies</option>
-                    <option className='select--option' value="decorderandamplifiers">Decorders And Amplifiers</option>
-                    <option className='select--option' value="processors">Processors</option>
-                    <option className='select--option' value="trusses">Trusses</option>
-                    <option className='select--option' value="clamps">Clamps</option>
-                    <option className='select--option' value="alluminiumprofiles">Alluminium Profile</option>
-                    <option className='select--option' value="siliconprofiles">Silicon Profile</option>
-                    <option className='select--option' value="stagelightinges">Stage Lighting</option>
-                    <option className='select--option' value="studiolightinges">Studio Lighting</option>
-                    <option className='select--option' value="connectors">Connectors</option>
-                  </select>
-
-                  <div className="feature-container">
-                    <label htmlFor="featureProduct">Featured Product</label>
-
-                    <input
-                      type="checkbox"
-                      id='featureProduct'
-                      onChange={handleChange}
-                      checked={productData.featured}
-                      name="featured"
-                      placeholder="Featured Product"
-                      autoComplete="off"
-                    />
-                  </div>
-
-                  {/* Add keywords */}
-                  <div className="keywords-section">
-                    <h3>Add Keywords</h3>
-                    <div className="add-keyword">
-                      <input
-                        type="text"
-                        value={newKeyword}
-                        placeholder="Enter keyword"
-                        onChange={(e) => setNewKeyword(e.target.value)}
-                      />
-                      <button
-                        type="button"
-                        className="add-keyword-button"
-                        onClick={handleAddKeyword}
-                      >
-                        Add Keyword
-                      </button>
-                    </div>
-                    <div className="keywords-list">
-                      {productData?.keywords?.map((keyword, index) => (
-                        <div key={index} className="keyword-item">
-                          <span>{keyword}</span>
-                          <MdDelete
-                            className="keyword-delete-icon"
-                            onClick={() => handleDeleteKeyword(index)}
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Add Fields */}
-                  {Object.keys(productData?.des || {}).map((key, index) => (
-                    <div key={index} className="form-group">
-                      <label className='description-key'>{key}</label>
-                      <input
-                        id={key}
-                        type="text"
-                        // placeholder={key}
-                        value={productData?.des[key]}
-                        onChange={(e) =>
-                          setProductData((prev) => ({
-                            ...prev,
-                            des: {
-                              ...prev.des,
-                              [key]: e.target.value,
-                            },
-                          }))
-                        }
+                </label>
+                <div className="uploaded-images">
+                  {productData.productfile && (
+                    <div className="image-thumbnail">
+                      <img
+                        src={productData.productfile}
+                        alt={`${productData.productname}-image`}
+                        className="thumbnail-image"
                       />
                       <MdDelete
-                        className="delete-field-icon"
-                        onClick={() => {
-                          setProductData((prev) => ({
-                            ...prev,
-                            des: Object.fromEntries(
-                              Object.entries(prev.des).filter(([k]) => k !== key)
-                            ),
-                          }));
-                        }}
+                        className="delete-icon"
+                        onClick={handleDeleteImage}
+                      />
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <input
+                type="text"
+                onChange={handleChange}
+                value={productData.productname}
+                name="productname"
+                placeholder="Product Name"
+                autoComplete="off"
+                required
+              />
+              <input
+                type="text"
+                onChange={handleChange}
+                value={productData.model}
+                name="model"
+                placeholder="Model Number"
+                autoComplete="off"
+              // required
+              />
+              <input
+                type="text"
+                onChange={handleChange}
+                value={productData.sku}
+                name="sku"
+                placeholder="SKU Number"
+                autoComplete="off"
+              // required
+              />
+
+              <select
+                onChange={handleChange}
+                value={productData.IndoorOutdoor}
+                name="IndoorOutdoor"
+              // required
+              >
+                <option value="" disabled>Click Here To Select Indoor/Outdoor</option>
+                <option className='select--option' value="Indoor">Indoor</option>
+                <option className='select--option' value="Outdoor">Outdoor</option>
+              </select>
+
+              <input
+                type="text"
+                onChange={handleChange}
+                value={productData.price}
+                name="price"
+                placeholder="Product Price"
+                autoComplete="off"
+              />
+
+              <select
+                onChange={handleChange}
+                value={productData.productCategory}
+                name="productCategory"
+                required
+              >
+                <option value="" disabled>Click Here To Select Product Category</option>
+                {
+                  items.map((item) => (
+                    <option key={item.productCategoryName} value={item.productCategoryName}>{item.productCategoryName}</option>
+                  ))
+                }
+              </select>
+
+              <div className="feature-container">
+                <label htmlFor="featureProduct">Featured Product</label>
+
+                <input
+                  type="checkbox"
+                  id='featureProduct'
+                  onChange={handleChange}
+                  checked={productData.featured}
+                  name="featured"
+                  placeholder="Featured Product"
+                  autoComplete="off"
+                />
+              </div>
+
+              {/* Add keywords */}
+              <div className="keywords-section">
+                <h3>Add Keywords</h3>
+                <div className="add-keyword">
+                  <input
+                    type="text"
+                    value={newKeyword}
+                    placeholder="Enter keyword"
+                    onChange={(e) => setNewKeyword(e.target.value)}
+                  />
+                  <button
+                    type="button"
+                    className="add-keyword-button"
+                    onClick={handleAddKeyword}
+                  >
+                    Add Keyword
+                  </button>
+                </div>
+                <div className="keywords-list">
+                  {productData?.keywords?.map((keyword, index) => (
+                    <div key={index} className="keyword-item">
+                      <span>{keyword}</span>
+                      <MdDelete
+                        className="keyword-delete-icon"
+                        onClick={() => handleDeleteKeyword(index)}
                       />
                     </div>
                   ))}
-
-                  {openAddField && (
-                    <div className="add-field-popup">
-                      <input
-                        type="text"
-                        placeholder="Enter field name"
-                        value={fieldName}
-                        onChange={(e) => setFieldName(e.target.value)}
-                      />
-                      <button type="button" className="add-button" onClick={handleAddField}>
-                        Add Field
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setOpenAddField(false)}
-                        className="cancel-button"
-                      >
-                        <IoClose />
-                      </button>
-                    </div>
-                  )}
-                  <button type="button" onClick={() => setOpenAddField(true)} className="add-field-button">Add Fields</button>
-                  <button type="submit" className="submit-button">{isLoading ? <ActionLoading /> : "Update"}</button>
-                </form>
+                </div>
               </div>
-            </section>
+
+              {/* Add Fields */}
+              {Object.keys(productData?.des || {}).map((key, index) => (
+                <div key={index} className="form-group">
+                  <label className='description-key'>{key}</label>
+                  <input
+                    id={key}
+                    type="text"
+                    // placeholder={key}
+                    value={productData?.des[key]}
+                    onChange={(e) =>
+                      setProductData((prev) => ({
+                        ...prev,
+                        des: {
+                          ...prev.des,
+                          [key]: e.target.value,
+                        },
+                      }))
+                    }
+                  />
+                  <MdDelete
+                    className="delete-field-icon"
+                    onClick={() => {
+                      if (key !== "description") {
+                        setProductData((prev) => ({
+                          ...prev,
+                          des: Object.fromEntries(
+                            Object.entries(prev.des).filter(([k]) => k !== key)
+                          ),
+                        }));
+                      } else {
+                        toast.error("Description field cannot be deleted.");
+                      }
+                    }}
+                  />
+                </div>
+              ))}
+
+              {openAddField && (
+                <div className="add-field-popup">
+                  <input
+                    type="text"
+                    placeholder="Enter field name"
+                    value={fieldName}
+                    onChange={(e) => setFieldName(e.target.value)}
+                  />
+                  <button type="button" className="add-button" onClick={handleAddField}>
+                    Add Field
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setOpenAddField(false)}
+                    className="cancel-button"
+                  >
+                    <IoClose />
+                  </button>
+                </div>
+              )}
+              <button type="button" onClick={() => setOpenAddField(true)} className="add-field-button">Add Fields</button>
+              <Button type="submit">Update</Button>
+            </form>
           </div>
-        </div>
+        </section>
       </AdminFormWrapper>
     </>
   )
@@ -381,56 +365,6 @@ export default EditAdminProduct
 
 
 const AdminFormWrapper = styled.div`
-
-.modal {
-  display: flex ! important;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: black;
-  justify-content: center;
-  align-items: center;
-  z-index: 3;    
-}
-
-.modal-content {
-  width: 100%;
-  height:100%;
-  border-radius: none ! important;
-  padding:5rem 0 !important;
-  margin: 0 auto;
-  overflow-y: scroll;
-}
-
-.modal-actions {
-  display: flex;
-  justify-content: space-between;
-  margin: 1.5rem 0;
-}
-
-.top-close-btn {
-  background: #ccc;
-  color: #333;
-  padding: 0.5rem 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  &:hover {
-      background: #bbb;
-  }
-}
-
-.close-btn {
-  background: #ccc;
-  color: #333;
-}
-
-.close-btn:hover {
-  background: #bbb;
-}
 
   .upload-product-section {
     padding: 20px;

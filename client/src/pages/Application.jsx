@@ -40,9 +40,22 @@ const Application = () => {
 export default Application
 
 const Wrapper = styled.section`
-padding: 9rem 0;
+  padding: 9rem 0;
 
-figure {
+  .card {
+    background-color: ${({ theme }) => theme.colors.bg};
+    border-radius: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Image Section */
+    figure {
     width: auto;
     display: flex;
     justify-content: center;
@@ -50,6 +63,7 @@ figure {
     position: relative;
     overflow: hidden;
     transition: all 0.5s linear;
+
     &::after {
       content: "";
       position: absolute;
@@ -61,12 +75,15 @@ figure {
       transition: all 0.2s linear;
       cursor: pointer;
     }
+
     &:hover::after {
       width: 100%;
     }
+
     &:hover img {
       transform: scale(1.4);
     }
+
     img {
       max-width: 90%;
       margin-top: 1.5rem;
@@ -76,25 +93,37 @@ figure {
     }
   }
 
-  .card {
-    background-color: ${({ theme }) => theme.colors.bg};
-    border-radius: 1rem;
-
+    /* Card Data Section */
     .card-data {
-      padding: 0 1rem;
-    }
+      padding: 1.5rem;
 
-    .card-data-flex {
-      margin: 2rem;
-    }
+      .card-data-flex {
+        margin-top: 1rem;
+      }
 
-    p {
-      color: black;
-      text-align: justify;
-    }
+      p {
+        color: ${({ theme }) => theme.colors.text};
+        font-size: 1.4rem;
+        line-height: 1.6;
+        text-align: justify;
+      }
 
-    h3 {
-      color: ${({ theme }) => theme.colors.text};
-      text-transform: capitalize;
+      h3 {
+        margin-top: 1rem;
+        font-size: 2rem;
+        color: ${({ theme }) => theme.colors.text};
+        text-transform: capitalize;
+        font-weight: 600;
+      }
     }
-`
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    padding: 5rem 0;
+
+    .card {
+      margin-bottom: 2rem;
+    }
+  }
+`;

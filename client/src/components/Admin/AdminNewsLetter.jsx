@@ -1,241 +1,183 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { MdDelete } from 'react-icons/md';
 import { Button } from '../../styles/Button';
 import { useAuthContext } from '../../context/auth-context';
 import { useAdminContext } from '../../context/admin-context';
 
-const AdminNewsLetter = () => {
+const AdminNewsletter = () => {
 
-  const { token } = useAuthContext()
+  const { token } = useAuthContext();
   const { getAllNewsLetters, deleteNewsLetter, allNewsletter } = useAdminContext();
 
   useEffect(() => {
     if (token) {
-      getAllNewsLetters()
+      getAllNewsLetters();
     }
-  }, [token])
-
-  let count = 1
+  }, [token]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [newsletterId, setNewsLetterId] = useState(null);
+  const [selectedNewsletter, setSelectedNewsletter] = useState(null);
 
-  const openModal = (Id) => {
-    setNewsLetterId(Id);
+  const openModal = (newsletter) => {
+    setSelectedNewsletter(newsletter);
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
-    setNewsLetterId(null);
+    setSelectedNewsletter(null);
     setIsModalOpen(false);
   };
 
   return (
     <AdminNewsletterWrapper>
-      <div className="admin-container">
-        <table className="admin-table">
-          <thead>
-            <tr>
-              <th>Sr. No</th>
-              <th>Email</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {allNewsletter?.map((newsletter) => (
-              <tr key={newsletter?._id}>
-                <td>{count++}</td>
-                <td className="description">{newsletter?.newsletteremail}</td>
-                <td>
-                  <button
-                    type="button"
-                    className="delete-btn"
-                    onClick={() => openModal(newsletter?._id)}
-                  >
-                    <MdDelete />
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        {isModalOpen && (
-          <div className={`modal ${isModalOpen ? 'show' : ''}`}>
-            <div className="modal-content">
-              <h2>Confirm Deletion</h2>
-              <p>Are you sure you want to delete this NewsLetter?</p>
-              <div className="modal-actions">
-                <Button className="modal-close" onClick={closeModal}>
-                  Close
-                </Button>
-                <Button
-                  className="modal-delete"
-                  onClick={() => {
-                    deleteNewsLetter(newsletterId);
-                    closeModal();
-                  }}
-                >
-                  Delete
-                </Button>
-              </div>
+      <h1 className="admin-title">Newsletter Subscribers</h1>
+      <div className="grid grid-tem-view">
+        {allNewsletter?.map((newsletter) => (
+          <div key={newsletter?._id} className="card">
+            <h2>{newsletter?.newsletteremail}</h2>
+            <div className="card-actions">
+              <button
+                onClick={() => openModal(newsletter)}
+                className="delete-btn"
+              >
+                <MdDelete /> Delete
+              </button>
             </div>
           </div>
-        )}
+        ))}
       </div>
-    </AdminNewsletterWrapper >
-  )
-}
 
-export default AdminNewsLetter
+      {/* Delete Modal */}
+      {isModalOpen && selectedNewsletter && (
+        <ModalWrapper>
+          <div className="modal-content">
+            <h2>Confirm Deletion</h2>
+            <p>Are you sure you want to delete this subscriber?</p>
+            <p><strong>Email:</strong> {selectedNewsletter.newsletteremail}</p>
+            <div className="modal-actions">
+              <Button className="modal-close" onClick={closeModal}>
+                Cancel
+              </Button>
+              <Button
+                className="modal-delete"
+                onClick={() => {
+                  deleteNewsLetter(selectedNewsletter._id);
+                  closeModal();
+                }}
+              >
+                Delete
+              </Button>
+            </div>
+          </div>
+        </ModalWrapper>
+      )}
+    </AdminNewsletterWrapper>
+  );
+};
 
+export default AdminNewsletter;
+
+// Styled Components
 const AdminNewsletterWrapper = styled.section`
-/* Container */
-.admin-container {
-  margin: 2rem 0;
-  width: 100%;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: 2px solid #ffc221;
-}
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
 
-/* Title */
-.admin-title {
-  font-weight: bold;
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
-
-/* Add Product Button */
-.add-product-container {
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-  margin: 1rem 2rem;
-}
-
-.add-product-btn {
-  margin: 1rem 2rem;
-}
-
-/* Table */
-.admin-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 2rem;
-}
-
-.admin-table tr{
-  margin-bottom: 1rem;
-}
-
-.admin-table tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-.admin-table tr:nth-child(odd) {
-  background-color: #f7f7f7;
-}
-
-.admin-table th, .admin-table td {
-  border: 1px solid #ccc;
-  padding: 0.75rem;
-  text-align: left;
-  font-size: 1.5rem;
-}
-
-.admin-table td svg{
-  font-size: 1.8rem;
-}
-
-.admin-table th {
-  background-color: #f4f4f4;
-  font-weight: bold;
-}
-
-.description {
-  color: #333;
-  font-size: 1.2rem;
-}
-
-/* Nested Table */
-.nested-table {
-  border: none;
-  width: 100%;
-}
-
-.nested-row {
-  display: flex;
-  flex-direction: column;
-  border: none;
-}
-
-@media screen and (max-width: 992px) {
- .admin-table tr{
-   display: flex;
-   flex-direction: column;
+  .admin-title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    background-color: #f6f8fa;
+    padding: 2rem;
   }
-}
 
-/* Edit and Delete Buttons */
-.edit-btn, .delete-btn {
-  padding: 0.5rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #ffc221;
-}
+  .card {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease;
+  }
 
-.edit-btn:hover, .delete-btn:hover {
-  color: #ffdd73;
-}
+  .card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
 
-/* Modal */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-/* Display modal when 'show' class is added */
-.modal.show {
+  .card-actions {
     display: flex;
-}
+    justify-content: flex-end;
+  }
 
-.modal-content {
+  .delete-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background: #dc3545;
+    color: #fff;
+    transition: 0.3s;
+  }
+
+  .delete-btn:hover {
+    background: #c82333;
+  }
+`;
+
+// Modal Styles
+const ModalWrapper = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+
+  .modal-content {
     background: #fff;
     padding: 2rem;
     border-radius: 8px;
     text-align: center;
-}
+    width: 90%;
+    max-width: 500px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
 
-.modal h2 {
-    font-size: 2rem;
+  .modal h2 {
+    font-size: 1.8rem;
     font-weight: bold;
     margin-bottom: 1rem;
-}
+  }
 
-.modal p {
-    font-size: 1.5rem;
+  .modal p {
+    font-size: 1rem;
     margin-bottom: 1.5rem;
-}
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.6;
+  }
 
-.modal-actions {
+  .modal-actions {
     display: flex;
-    justify-content: space-around;
-}
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
 
-.modal-close, .modal-delete {
+  .modal-close, .modal-delete {
     padding: 0.75rem 1.25rem;
     border-radius: 5px;
     font-weight: bold;
@@ -244,20 +186,20 @@ const AdminNewsletterWrapper = styled.section`
 }
 
 .modal-close {
-    background: #ccc;
+    background: #6c757d;
     color: #333;
 }
 
 .modal-delete {
-    background: #ffc221;
+    background: #dc3545;
     color: #fff;
 }
 
 .modal-close:hover {
-    background: #bbb;
+    background: #5a6268;
 }
 
 .modal-delete:hover {
-    background: #ffdd73;
+    background: #c82333;
 }
-`
+`;

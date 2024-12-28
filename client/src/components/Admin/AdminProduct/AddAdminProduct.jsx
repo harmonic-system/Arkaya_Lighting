@@ -5,14 +5,15 @@ import { IoClose } from "react-icons/io5";
 import styled from "styled-components";
 import toast from "react-hot-toast";
 import { useAdminContext } from "../../../context/admin-context";
+import items from "../../../JSONData/ProductCategory.json"
 import { useNavigate } from "react-router-dom";
-import ActionLoading from "../../Loading/ActionLoading";
+import LoadingPage from "../../Loading/Loading";
 
 const AddAdminProduct = () => {
   const [productData, setProductData] = useState({
     productfile: null,
     productname: "",
-    model:"",
+    model: "",
     sku: "",
     IndoorOutdoor: "",
     price: "",
@@ -95,12 +96,22 @@ const AddAdminProduct = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    if (!productData.des.description.trim()) {
+      toast.error("Description is required");
+      return;
+    }
+
     try {
       await addProduct(productData)
       navigate("/admin/products")
     } catch (error) {
       console.error(error)
     }
+  }
+
+  if (isLoading) {
+    return <LoadingPage />
   }
 
   return (
@@ -128,7 +139,7 @@ const AddAdminProduct = () => {
                 />
               </label>
               <div className="uploaded-images">
-                {productData.productfile && ( // Ensure productfile exists before rendering
+                {productData.productfile && (
                   <div className="image-thumbnail">
                     <img
                       src={productData.productfile}
@@ -199,38 +210,11 @@ const AddAdminProduct = () => {
               required
             >
               <option value="" disabled>Click Here To Select Product Category</option>
-              <option className='select--option' value="floodlights">Flood Lights</option>
-              <option className='select--option' value="undergroundlights">Underground Lights</option>
-              <option className='select--option' value="underwaterlights">Underwater Lights</option>
-              <option className='select--option' value="wallwashers">Wall Washers</option>
-              <option className='select--option' value="treehangings">Tree Hangings Lights</option>
-              <option className='select--option' value="mediapixels">Media Pixels</option>
-              <option className='select--option' value="mhslamps">Moving Head Series Lamp</option>
-              <option className='select--option' value="mhsleds">Moving Head Series Led</option>
-              <option className='select--option' value="staticleds">Static Leds</option>
-              <option className='select--option' value="effectlights">Effects Lights</option>
-              <option className='select--option' value="strips">Strips</option>
-              <option className='select--option' value="dotpixels">Dot Pixels</option>
-              <option className='select--option' value="ledmatrixes">Led Matrix</option>
-              <option className='select--option' value="chandeliers">Chandeliers</option>
-              <option className='select--option' value="theaters">Theaters</option>
-              <option className='select--option' value="studios">Studios</option>
-              <option className='select--option' value="televisions">Televisions</option>
-              <option className='select--option' value="indoors">Indoor</option>
-              <option className='select--option' value="outdoors">Outdoor</option>
-              <option className='select--option' value="ledcontrollers">LED Controllers</option>
-              <option className='select--option' value="dmxcontrollers">DMX Controllers</option>
-              <option className='select--option' value="signaldistributions">Signal Distribution</option>
-              <option className='select--option' value="powersupplies">Power Supplies</option>
-              <option className='select--option' value="decorderandamplifiers">Decorders And Amplifiers</option>
-              <option className='select--option' value="processors">Processors</option>
-              <option className='select--option' value="trusses">Trusses</option>
-              <option className='select--option' value="clamps">Clamps</option>
-              <option className='select--option' value="alluminiumprofiles">Alluminium Profile</option>
-              <option className='select--option' value="siliconprofiles">Silicon Profile</option>
-              <option className='select--option' value="stagelightinges">Stage Lighting</option>
-              <option className='select--option' value="studiolightinges">Studio Lighting</option>
-              <option className='select--option' value="connectors">Connectors</option>
+              {
+                items.map((item) => (
+                  <option key={item.productCategoryName} value={item.productCategoryName}>{item.productCategoryName}</option>
+                ))
+              }
             </select>
 
             <div className="feature-container">
@@ -300,6 +284,11 @@ const AddAdminProduct = () => {
                 <MdDelete
                   className="delete-field-icon"
                   onClick={() => {
+                    if (key === "description") {
+                      toast.error("The description field cannot be deleted."); // Show an error message
+                      return;
+                    }
+
                     const updatedDescription = { ...productData.des };
                     delete updatedDescription[key];
                     setProductData((prev) => ({
@@ -323,7 +312,7 @@ const AddAdminProduct = () => {
               </div>
             )}
             <button type="button" onClick={() => setOpenAddField(true)} className="add-field-button">Add Fields</button>
-            <button type="submit" className="submit-button">{isLoading ? <ActionLoading /> : "Add Product"}</button>
+            <button type="submit" className="submit-button">Add Product</button>
           </form>
         </div>
       </section>

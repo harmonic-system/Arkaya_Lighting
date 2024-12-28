@@ -8,28 +8,54 @@ const LEDPixels = () => {
     <>
       <Wrapper>
         <div className="products-image">
-          <div className="title">
-            <h1>Our <strong className="black">LED Pixel Lighting</strong> Products</h1>
-            <span>Advanced LED pixel solutions for dynamic and creative lighting designs</span>
+          <div className="container">
+            <div className="title">
+              <h1>Our <strong className="black">LED Pixel Lighting</strong> Products</h1>
+              <span>Advanced LED pixel solutions for dynamic and creative lighting designs</span>
+            </div>
           </div>
           <div className="container">
             <div className="grid grid-three-column">
-              <Link to="/products" onClick={() => setCategoryinlocalStorage("strips")}>
+              <Link to="/products" onClick={() => setCategoryinlocalStorage("Strips")}>
                 <div className="products-image-box">
                   <img src="images/products/LEDPixels/strip.avif" alt="stripcategory-image" />
                   <h3>Strips</h3>
                 </div>
               </Link>
-              <Link to="/products" onClick={() => setCategoryinlocalStorage("dotpixels")}>
+              <Link to="/products" onClick={() => setCategoryinlocalStorage("Dot Pixels")}>
                 <div className="products-image-box">
                   <img src="images/products/LEDPixels/dotpixel.jpeg" alt="dotpixelcategory-image" />
                   <h3>DOT Pixels</h3>
                 </div>
               </Link>
-              <Link to="/products" onClick={() => setCategoryinlocalStorage("ledmatrixes")}>
+              <Link to="/products" onClick={() => setCategoryinlocalStorage("Led Matrixes")}>
                 <div className="products-image-box">
                   <img src="images/products/LEDPixels/ledmatrix.jpg" alt="ledmatrixcategory-image" />
                   <h3>LED Matrix</h3>
+                </div>
+              </Link>
+              <Link to="/products" onClick={() => setCategoryinlocalStorage("Neon Flex")}>
+                <div className="products-image-box">
+                  <img src="images/products/LEDPixels/neonflex.jpg" alt="ledmatrixcategory-image" />
+                  <h3>Neon Flex</h3>
+                </div>
+              </Link>
+              <Link to="/products" onClick={() => setCategoryinlocalStorage("Media Pixel Bar")}>
+                <div className="products-image-box">
+                  <img src="images/products/LEDPixels/mediapixelbar.jpg" alt="ledmatrixcategory-image" />
+                  <h3>Media Pixel Bar</h3>
+                </div>
+              </Link>
+              <Link to="/products" onClick={() => setCategoryinlocalStorage("360 Media Bar")}>
+                <div className="products-image-box">
+                  <img src="images/products/LEDPixels/360mediatube.jpg" alt="ledmatrixcategory-image" />
+                  <h3>360 Media Bar</h3>
+                </div>
+              </Link>
+              <Link to="/products" onClick={() => setCategoryinlocalStorage("Led Rings")}>
+                <div className="products-image-box">
+                  <img src="images/products/LEDPixels/ledrings.png" alt="ledmatrixcategory-image" />
+                  <h3>Led Rings</h3>
                 </div>
               </Link>
             </div>
@@ -69,12 +95,14 @@ span{
   text-align: center;
   height: 300px;
   border-radius: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .products-image .products-image-box img {
   height: 80%;
   border-radius: 20px;
   width: 80%;
+  transition: transform 0.3s ease;
 }
 
 .products-image .products-image-box h3 {
@@ -85,11 +113,20 @@ span{
   padding: 20px 0px;
 }
 
-@media (max-width: 768px) {
-.products-image .products-image-box img {
-  height: 80%;
-  border-radius: 20px;
-  // width: auto;
+.products-image .products-image-box:hover {
+  transform: scale(1.05);
+  box-shadow: #00000070 0px 0px 19px 0px;
 }
+
+@media (max-width: 768px) {
+  .grid-three-column {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 525px) {
+  .grid-three-column {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 `

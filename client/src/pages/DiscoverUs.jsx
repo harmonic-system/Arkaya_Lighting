@@ -63,24 +63,89 @@ const DiscoverUs = () => {
 export default DiscoverUs;
 
 const Wrapper = styled.section`
+  padding: 5rem 2rem;
+  margin-bottom: 50px;
 
-  margin-bottom:50px;
-
-  h2{
-  margin-bottom:40px;
+  /* Headings */
+  h2 {
+    font-size: 2.8rem;
+    font-weight: 600;
+    color: ${({ theme }) => theme.colors.primary};
+    text-align: center;
+    margin-bottom: 3rem;
+    line-height: 1.3;
   }
 
-  p{
-    margin-bottom:10px;
+  h3 {
+    font-size: 2rem;
+    font-weight: 500;
+    color: ${({ theme }) => theme.colors.text};
+    margin-top: 3rem;
+    margin-bottom: 2rem;
   }
 
-  h3{
-  margin-top:40px;
-  margin-bottom:40px;
+  /* Paragraphs */
+  p {
+    font-size: 1.6rem;
+    line-height: 1.8;
+    color: ${({ theme }) => theme.colors.text};
+    margin-bottom: 1.5rem;
+    text-align: justify;
   }
 
-  ul li{
-  line-height:40px;
-  font-size:15px;
+  strong {
+    color: ${({ theme }) => theme.colors.primary};
   }
-`
+
+  /* Lists */
+  ul {
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+
+    li {
+      font-size: 1.5rem;
+      line-height: 2.5rem;
+      color: ${({ theme }) => theme.colors.text};
+      position: relative;
+      padding-left: 2rem;
+    }
+  }
+
+  /* Key Points Section */
+  .key-points {
+    margin-top: 5rem;
+
+    h2 {
+      margin-bottom: 3rem;
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+
+      strong {
+        color: ${({ theme }) => theme.colors.primary};
+      }
+    }
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    padding: 4rem 1.5rem;
+
+    h2 {
+      font-size: 2.4rem;
+    }
+
+    h3 {
+      font-size: 1.8rem;
+    }
+
+    p {
+      font-size: 1.5rem;
+    }
+
+    ul li {
+      font-size: 1.4rem;
+    }
+  }
+`;

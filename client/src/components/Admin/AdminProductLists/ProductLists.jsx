@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FiChevronDown, FiChevronRight } from 'react-icons/fi';
 import { AiOutlineClose } from 'react-icons/ai';
-import items from './ProductListData.json';
+import items from '../../../JSONData/ProductListData.json';
 import { useCategoryContext } from '../../../context/category-context';
 
 const ProductLists = ({ isOpen, onClose }) => {

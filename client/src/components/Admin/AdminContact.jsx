@@ -1,272 +1,234 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { MdDelete } from 'react-icons/md';
+import { MdDelete, MdVisibility } from 'react-icons/md';
 import { Button } from '../../styles/Button';
 import { useAuthContext } from '../../context/auth-context';
 import { useAdminContext } from '../../context/admin-context';
 
 const AdminContact = () => {
 
-  const { token } = useAuthContext()
+  const { token } = useAuthContext();
   const { getAllContacts, deleteContact, allContact } = useAdminContext();
 
   useEffect(() => {
     if (token) {
-      getAllContacts()
+      getAllContacts();
     }
-  }, [token])
+  }, [token]);
 
-  let count = 1
+  const [selectedContact, setSelectedContact] = useState(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [contactId, setContactId] = useState(null);
+  const openDeleteModal = (contact) => {
+    setSelectedContact(contact);
+    setIsDeleteModalOpen(true);
+  };
 
-  const openModal = (Id) => {
-    setContactId(Id);
-    setIsModalOpen(true);
+  const openDetailModal = (contact) => {
+    setSelectedContact(contact);
+    setIsDetailModalOpen(true);
   };
 
   const closeModal = () => {
-    setContactId(null);
-    setIsModalOpen(false);
+    setSelectedContact(null);
+    setIsDeleteModalOpen(false);
+    setIsDetailModalOpen(false);
   };
 
   return (
     <AdminContactWrapper>
-      <div className="admin-container">
-        <table className="admin-table">
-          <thead>
-            <tr>
-              <th>Sr. No</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th>Organization</th>
-              <th>Message</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {allContact?.map((contact) => (
-              <tr key={contact?._id}>
-                <td>{count++}</td>
-                <td>{contact.name}</td>
-                <td>{contact.email}</td>
-                <td>{contact.phone}</td>
-                <td>{contact.organization}</td>
-                <td className="description" >{contact.message}</td>
-                <td>
-                  <button
-                    type="button"
-                    className="delete-btn"
-                    onClick={() => openModal(contact?._id)}
-                  >
-                    <MdDelete />
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        {isModalOpen && (
-          <div className={`modal ${isModalOpen ? 'show' : ''}`}>
-            <div className="modal-content">
-              <h2>Confirm Deletion</h2>
-              <p>Are you sure you want to delete this Query?</p>
-              <div className="modal-actions">
-                <Button className="modal-close" onClick={closeModal}>
-                  Close
-                </Button>
-                <Button
-                  className="modal-delete"
-                  onClick={() => {
-                    deleteContact(contactId);
-                    closeModal();
-                  }}
-                >
-                  Delete
-                </Button>
-              </div>
+      <h1 className="admin-title">Contact Management</h1>
+      <div className="grid grid-tem-view">
+        {allContact?.map((contact) => (
+          <div key={contact?._id} className="card">
+            <h2>{contact.name}</h2>
+            <p><strong>Email:</strong> {contact.email}</p>
+            <p><strong>Phone:</strong> {contact.phone}</p>
+            <div className="card-actions">
+              <button onClick={() => openDetailModal(contact)} className="view-btn">
+                <MdVisibility /> View
+              </button>
+              <button onClick={() => openDeleteModal(contact)} className="delete-btn">
+                <MdDelete /> Delete
+              </button>
             </div>
           </div>
-        )}
+        ))}
       </div>
-    </AdminContactWrapper >
-  )
-}
 
-export default AdminContact
+      {/* Detail Modal */}
+      {isDetailModalOpen && selectedContact && (
+        <ModalWrapper>
+          <div className="modal-content">
+            <h2>Contact Details</h2>
+            <p><strong>Name:</strong> {selectedContact.name}</p>
+            <p><strong>Email:</strong> {selectedContact.email}</p>
+            <p><strong>Phone:</strong> {selectedContact.phone}</p>
+            <p><strong>Organization:</strong> {selectedContact.organization}</p>
+            <p><strong>Message:</strong> {selectedContact.message}</p>
+            <Button className="modal-close" onClick={closeModal}>Close</Button>
+          </div>
+        </ModalWrapper>
+      )}
 
+      {/* Delete Modal */}
+      {isDeleteModalOpen && selectedContact && (
+        <ModalWrapper>
+          <div className="modal-content">
+            <h2>Confirm Deletion</h2>
+            <p>Are you sure you want to delete this contact?</p>
+            <div className="modal-actions">
+              <Button className="modal-close" onClick={closeModal}>Cancel</Button>
+              <Button
+                className="modal-delete"
+                onClick={() => {
+                  deleteContact(selectedContact._id);
+                  closeModal();
+                }}
+              >
+                Delete
+              </Button>
+            </div>
+          </div>
+        </ModalWrapper>
+      )}
+    </AdminContactWrapper>
+  );
+};
+
+export default AdminContact;
+
+// Styled Components
 const AdminContactWrapper = styled.section`
-/* Container */
-.admin-container {
-  margin: 2rem 0;
-  width: 100%;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: 2px solid #ffc221;
-}
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
 
-/* Title */
-.admin-title {
-  font-weight: bold;
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
-
-/* Add Product Button */
-.add-product-container {
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-  margin: 1rem 2rem;
-}
-
-.add-product-btn {
-  margin: 1rem 2rem;
-}
-
-/* Table */
-.admin-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 2rem;
-}
-
-.admin-table tr{
-  margin-bottom: 1rem;
-}
-
-.admin-table tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-.admin-table tr:nth-child(odd) {
-  background-color: #f7f7f7;
-}
-
-.admin-table th, .admin-table td {
-  border: 1px solid #ccc;
-  padding: 0.75rem;
-  text-align: left;
-  font-size: 1.5rem;
-}
-
-.admin-table td svg{
-  font-size: 1.8rem;
-}
-
-.admin-table th {
-  background-color: #f4f4f4;
-  font-weight: bold;
-}
-
-.description {
-  color: #333;
-  font-size: 1.2rem;
-  word-break: break-all;
-}
-
-/* Nested Table */
-.nested-table {
-  border: none;
-  width: 100%;
-}
-
-.nested-row {
-  display: flex;
-  flex-direction: column;
-  border: none;
-}
-
-@media screen and (max-width: 992px) {
- .admin-table tr{
-   display: flex;
-   flex-direction: column;
+  .admin-title {
+    font-size: 2.5rem; /* Increased size */
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    background-color: #f6f8fa;
+    padding: 2rem;
   }
-}
 
-/* Edit and Delete Buttons */
-.edit-btn, .delete-btn {
-  padding: 0.5rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #ffc221;
-}
+  .card {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease;
+  }
 
-.edit-btn:hover, .delete-btn:hover {
-  color: #ffdd73;
-}
+  .card h2 {
+    font-size: 2rem; /* Increased size */
+    margin-bottom: 0.5rem;
+  }
 
-/* Modal */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
+  .card p {
+    font-size: 1.5rem; /* Increased size */
+    margin-bottom: 0.5rem;
+  }
 
-/* Display modal when 'show' class is added */
-.modal.show {
+  .card-actions {
+    margin-top: 1rem;
     display: flex;
-}
+    gap: 0.5rem;
+  }
 
-.modal-content {
+  .view-btn,
+  .delete-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.5rem 1rem;
+    font-size: 1.1rem; /* Increased button font size */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .view-btn {
+    background: #007bff;
+    color: #fff;
+  }
+
+  .delete-btn {
+    background: #dc3545;
+    color: #fff;
+  }
+
+  .view-btn:hover {
+    background: #0056b3;
+  }
+
+  .delete-btn:hover {
+    background: #c82333;
+  }
+`;
+
+// Modal Styles
+const ModalWrapper = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+
+  .modal-content {
     background: #fff;
     padding: 2rem;
     border-radius: 8px;
-    text-align: center;
-}
+    text-align: left;
+    width: 90%;
+    max-width: 500px;
+    word-wrap: break-word;
+    overflow-y: auto;
+    max-height: 80vh;
+  }
 
-.modal h2 {
-    font-size: 2rem;
-    font-weight: bold;
+  .modal-content p {
+    font-size: 1.5rem; /* Increased modal text size */
     margin-bottom: 1rem;
-}
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.6;
+    white-space: normal;
+  }
 
-.modal p {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.modal-actions {
+  .modal-actions {
+    margin-top: 1.5rem;
     display: flex;
-    justify-content: space-around;
-}
+    justify-content: center;
+    gap: 1rem;
+  }
 
-.modal-close, .modal-delete {
-    padding: 0.75rem 1.25rem;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-    border: none;
-}
-
-.modal-close {
-    background: #ccc;
-    color: #333;
-}
-
-.modal-delete {
-    background: #ffc221;
+  .modal-close {
+    background: #6c757d;
     color: #fff;
-}
+    font-size: 1.1rem; /* Button text size */
+  }
 
-.modal-close:hover {
-    background: #bbb;
-}
+  .modal-close:hover {
+    background: #5a6268;
+  }
 
-.modal-delete:hover {
-    background: #ffdd73;
-}
-`
+  .modal-delete {
+    background: #dc3545;
+    color: #fff;
+    font-size: 1.1rem; /* Button text size */
+  }
+
+  .modal-delete:hover {
+    background: #c82333;
+  }
+`;
+

@@ -98,6 +98,14 @@ export default SearchProductGridView
 const Wrapper = styled.section`
   padding: 9rem 0;
 
+  @media (max-width: 1024px) {
+    padding: 6rem 0;
+  }
+
+  @media (max-width: 420px) {
+    padding: 3rem 0;
+  }
+
   .container {
     max-width: 120rem;
   }
@@ -114,6 +122,7 @@ const Wrapper = styled.section`
     position: relative;
     overflow: hidden;
     transition: all 0.5s linear;
+
     &::after {
       content: "";
       position: absolute;
@@ -125,12 +134,15 @@ const Wrapper = styled.section`
       transition: all 0.2s linear;
       cursor: pointer;
     }
+
     &:hover::after {
       width: 100%;
     }
+
     &:hover img {
       transform: scale(1.2);
     }
+
     img {
       max-width: 90%;
       margin-top: 1.5rem;
@@ -143,6 +155,10 @@ const Wrapper = styled.section`
   .card {
     background-color: ${({ theme }) => theme.colors.bg};
     border-radius: 1rem;
+
+    figcaption {
+      z-index: 3;
+    }
 
     .card-data {
       padding: 0 1rem;
@@ -179,6 +195,7 @@ const Wrapper = styled.section`
       &:hover a {
         color: #fff;
       }
+
       a {
         color: rgb(98 84 243);
         font-size: 1.4rem;

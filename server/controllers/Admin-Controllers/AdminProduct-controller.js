@@ -1,4 +1,4 @@
-const ProductList = require("../../models/productList-model");
+const Product = require("../../models/products-model");
 const cloudinary = require("../../utils/cloudinary")
 
 const addSingleProduct = async (req, res) => {
@@ -58,7 +58,7 @@ const addSingleProduct = async (req, res) => {
         // console.log(productData);
 
 
-        const product = new ProductList(productData);
+        const product = new Product(productData);
         // console.log(product);
 
         await product.save();
@@ -77,7 +77,7 @@ const getSingleProduct = async (req, res) => {
         const { id } = req.params;
 
         // Retrieve the product by ID
-        const product = await ProductList.findById(id);
+        const product = await Product.findById(id);
 
         if (!product) {
             return res.status(404).json({ message: "Product not found" });
@@ -128,7 +128,7 @@ const updateSingalProduct = async (req, res) => {
         // Check if productfile URL is from Cloudinary
         if (productfile.startsWith("https://res.cloudinary.com/arkaya")) {
             // Update product if existing Cloudinary image URL is used
-            updatedProduct = await ProductList.findByIdAndUpdate(
+            updatedProduct = await Product.findByIdAndUpdate(
                 id,
                 {
                     productfile: { public_id: imgpublicid, url: productfile },
@@ -161,7 +161,7 @@ const updateSingalProduct = async (req, res) => {
             });
 
             // Update product with new image data
-            updatedProduct = await ProductList.findByIdAndUpdate(
+            updatedProduct = await Product.findByIdAndUpdate(
                 id,
                 {
                     productfile: { public_id: result.public_id, url: result.secure_url },
@@ -194,7 +194,7 @@ const deleteSingalProduct = async (req, res) => {
     const { id } = req.params;
     try {
 
-        const deletedProduct = await ProductList.findByIdAndDelete(id);
+        const deletedProduct = await Product.findByIdAndDelete(id);
         if (!deletedProduct) {
             return res.status(404).json({ message: "Product not found" })
         }

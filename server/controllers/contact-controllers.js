@@ -54,16 +54,17 @@ const newsLetter = async (req, res) => {
     await newNewsletter.save()
 
     const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 587,
+      host: 'smtp.hostinger.com',
+      port: 465,
+      secure: true,
       auth: {
-        user: "arkayalighting@gmail.com",
-        pass: "qztiixbfbwqrskja"
-      }
-    })
+          user: "no-reply@arkayalighting.com",
+          pass: "no-replyArkaya@1008", 
+      },
+  });
 
     let mailOption = {
-      from: "arkayalighting@gmail.com",
+      from: "no-reply@arkayalighting.com",
       to: email,
       subject: "Welcome to Arkaya Lighting Newsletter",
       html: `
@@ -93,6 +94,7 @@ const newsLetter = async (req, res) => {
     })
 
     mailOption = {
+      from: "no-reply@arkayalighting.com",
       to: "arkayalighting@gmail.com",
       subject: "New Subscriber",
       html: `

@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { Button } from '../../../styles/Button';
-import { useAdminContext } from '../../../context/admin-context';
-import { useNavigate } from 'react-router-dom';
-import ActionLoading from '../../Loading/ActionLoading';
+import React, { useState } from "react";
+import { FaCloudUploadAlt } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
+import styled from "styled-components";
+import { useAdminContext } from "../../../context/admin-context";
+import { useNavigate } from "react-router-dom";
+import LoadingPage from "../../Loading/Loading";
 
 const AddAdminCarousel = () => {
 
@@ -50,88 +51,171 @@ const AddAdminCarousel = () => {
       }));
     }
   }
+
+  const handleDeleteImage = () => {
+    setCarouselData((prevState) => ({ ...prevState, file: null }))
+  };
+
+  if (isLoading) {
+    return <LoadingPage />
+  }
+
   return (
-    <AdminFormWrapper>
-      <div className="container">
-        <div className="contact-form">
-          <form className="contact-inputs" onSubmit={handleSubmit}>
-            <input
-              type="file"
-              onChange={handleFileChange}
-              placeholder="Image"
-              name="file"
-              required
-              autoComplete="off"
-            />
+    <>
+      <AdminFormWrapper>
+        <section className="container upload-product-section">
+          <div className="header-bar">
+            <h2>Upload Carousel</h2>
+          </div>
+          <div className="contact-form">
+            <form className="contact-inputs" onSubmit={handleSubmit}>
+              {/* Image Upload */}
+              <div className="form-group">
+                <label htmlFor="productImage" className="upload-label">
+                  <div className="upload-content">
+                    <FaCloudUploadAlt size={35} />
+                    <p>Upload Image</p>
+                  </div>
+                  <input
+                    id="productImage"
+                    type="file"
+                    className="hidden"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                  />
+                </label>
+                <div className="uploaded-images">
+                  {carouselData.file && (
+                    <div className="image-thumbnail">
+                      <img
+                        src={carouselData.file}
+                        alt={`${carouselData.heading}-image`}
+                        className="thumbnail-image"
+                      />
+                      <MdDelete
+                        className="delete-icon"
+                        onClick={handleDeleteImage}
+                      />
+                    </div>
+                  )}
+                </div>
+              </div>
 
-            <input
-              type="text"
-              onChange={handleChange}
-              value={carouselData.heading}
-              name="heading"
-              placeholder="Heading"
-              autoComplete="off"
-              required
-            />
+              <input
+                type="text"
+                onChange={handleChange}
+                value={carouselData.heading}
+                name="heading"
+                placeholder="Heading"
+                autoComplete="off"
+                required
+              />
 
-            <input
-              type="text"
-              onChange={handleChange}
-              value={carouselData.description}
-              name="description"
-              placeholder="Short Description"
-              autoComplete="off"
-              required
-            />
-            <Button type="submit">{isLoading ? <ActionLoading /> : "Add Carousel"}</Button>
-          </form>
-        </div>
-      </div>
-    </AdminFormWrapper>
+              <input
+                type="text"
+                onChange={handleChange}
+                value={carouselData.description}
+                name="description"
+                placeholder="Short Description"
+                autoComplete="off"
+                required
+              />
+              <button type="submit" className="submit-button">Add Carousel</button>
+            </form>
+          </div>
+        </section>
+      </AdminFormWrapper>
+    </>
+
   )
 }
 
 export default AddAdminCarousel
 
-const AdminFormWrapper = styled.section`
-.contact-form {
-        width: 100%;
-        margin: auto;
+const AdminFormWrapper = styled.div`
+  .upload-product-section {
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+    
+  .header-bar {
+    padding: 10px;
+    margin-bottom: 30px;
+  }
 
-        .text-success{
-          text-align: center;
-          font-size: 1.5rem;
-          font-weight: bold;
-          color:#38c8a8;
-          margin-bottom: 3rem;
-        }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    position: relative;
 
-        .contact-inputs {
-          display: flex;
-          flex-direction: column;
-          gap: 3rem;
+    label {
+      font-size:1.2rem
+    }
+  }
 
-          input {
-            border-radius: 1rem
-          }
+  .upload-label {
+    padding: 20px;
+    border: 2px dashed #ccc;
+    text-align: center;
+    cursor: pointer;
+  }
 
-          textarea {
-            border-radius: 1rem;
-            resize: none;
-          }
+  .uploaded-images {
+    margin-top: 30px;
+    display: flex;
+    gap: 10px;
+  }
 
-          Button {
-            // max-width: 50rem;
-            cursor: pointer;
-            transition: all 0.2s;
+  .image-thumbnail {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border: 1px solid #ccc;
+  }
 
-            &:hover {
-              background-color: ${({ theme }) => theme.colors.white};
-              border: 1px solid ${({ theme }) => theme.colors.btn};
-              color: ${({ theme }) => theme.colors.btn};
-              transform: scale(0.9);
-            }
-          }
-        }
+  .thumbnail-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .delete-icon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: red;
+    cursor: pointer;
+  }
+
+  .submit-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+  }
+
+  .contact-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+
+    input {
+      border-radius: 1rem;
+    }
+
+    Button {
+      // max-width: 50rem;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover {
+        background-color: ${({ theme }) => theme.colors.white};
+        border: 1px solid ${({ theme }) => theme.colors.btn};
+        color: ${({ theme }) => theme.colors.btn};
+        transform: scale(0.9);
       }
-`
+    }
+  }
+`;

@@ -8,7 +8,7 @@ const NoProduct = () => {
         <NoProductsContainer>
             <Message>No Products Available</Message>
             <SubMessage>We couldn't find any products at the moment. Please check back later!</SubMessage>
-            <Link to="/"><Button>Go to Home</Button></Link>
+            <Link to="/home"><Button>Go to Home</Button></Link>
         </NoProductsContainer>
     );
 };

@@ -4,7 +4,7 @@ const adminMiddleware = require("../../middleware/admin-middleware")
 const { getAllUsers, makeAdmin, deleteUser, getAllContacts, deleteContact, getAllNewsLetter, deleteNewsLetter, getAllProductQuery, deleteProductQuery } = require("../../controllers/Admin-Controllers/Admin-controllers")
 const { addHomeCarousel, getSingalHomeCarousel, updateHomeCarousel, deleteHomeCarousel } = require("../../controllers/Admin-Controllers/AdminCarousel-controllers")
 const { addApplication, getSingleApplication, updateApplication, deleteApplication } = require("../../controllers/Admin-Controllers/AdminApplication-controllers")
-const { addSingleProduct, getSingleProduct, updateSingalProduct, deleteSingalProduct } = require("../../controllers/Admin-Controllers/AdminProductList-controller")
+const { addSingleProduct, getSingleProduct, updateSingalProduct, deleteSingalProduct } = require("../../controllers/Admin-Controllers/AdminProduct-controller")
 
 const router = express.Router()
 

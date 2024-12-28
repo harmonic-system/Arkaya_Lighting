@@ -30,7 +30,7 @@ const AdminButtonWrapper = styled.section`
   opacity: 1;
   left: 15px;
   bottom: 15px;
-  z-index: 99999;
+  z-index: 4;
   background-color: #ffc221;
   display:flex;
   align-items: center;

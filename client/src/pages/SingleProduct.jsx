@@ -23,70 +23,65 @@ import ProductSpecificationDownload from "../components/SingleProduct/ProductSpe
 
 const SingleProduct = () => {
   const { getSingleProduct, isSingleLoading, singleProduct } = useProductContext();
-  const { addToCart } = useCartContext()
-  const { user } = useAuthContext()
+  const { addToCart } = useCartContext();
+  const { user } = useAuthContext();
   const { id } = useParams();
-  const [productQuantity, setProductQuantity] = useState(1)
-  const navigate = useNavigate()
+  const [productQuantity, setProductQuantity] = useState(1);
+  const navigate = useNavigate();
 
   const increaseProductQuantity = () => {
-    setProductQuantity(productQuantity + 1)
-  }
+    setProductQuantity(productQuantity + 1);
+  };
 
   const decreaseProductQuantity = () => {
-    setProductQuantity(productQuantity - 1)
-  }
+    setProductQuantity(productQuantity - 1);
+  };
 
   const handleAddToCart = (userId, productId, quantity) => {
     if (user) {
-      addToCart(userId, productId, quantity)
+      addToCart(userId, productId, quantity);
     } else {
-      navigate("/login")
-      toast("Please Login")
+      navigate("/login");
+      toast("Please Login");
     }
-  }
+  };
 
   useEffect(() => {
     getSingleProduct(id);
-  }, []);
+  }, [id]);
 
   if (isSingleLoading) {
-    return <LoadingPage />
+    return <LoadingPage />;
   }
 
   return (
     <>
       <Helmet>
         <title>{singleProduct?.productname ? `${singleProduct.productname} - Arkaya Lighting || Category - ${singleProduct.productCategory}` : 'Arkaya Lighting'}</title>
-
         <meta
           name="description"
           content={`Discover ${singleProduct?.productname || 'our product'}, with detailed specifications and features to suit your needs.`}
         />
-
         <meta
           name="keywords"
           content={`${singleProduct?.productname || 'lighting product'}, ${singleProduct?.productCategory || 'lighting solutions'}, energy-efficient lighting, premium lighting, lighting features, specifications, smart lighting, LED lighting`}
         />
-
         <meta
           property="og:image"
           content={singleProduct?.productfile?.url || ''}
         />
-
         <meta
           property="og:title"
           content={singleProduct?.productname || 'Arkaya Lighting'}
         />
-
         <meta
           property="og:description"
           content={`Discover ${singleProduct?.productname || 'our product'}, with detailed specifications and features to suit your needs.`}
         />
       </Helmet>
 
+      <PageNavigation title={singleProduct?.productname} />
       <Wrapper>
-        <PageNavigation title={singleProduct?.productname} />
         <Container className="container">
           <div className="grid grid-two-column">
             {/* product Images  */}
@@ -98,24 +93,29 @@ const SingleProduct = () => {
             <div className="product-data">
               <h2>{singleProduct?.productname}</h2>
 
-              {singleProduct?.des &&
-                Object.keys(singleProduct.des).map((element, index) => {
-                  const value = singleProduct.des[element];
-                  return value ? (
-                    <div
-                      className={`description-box ${element === 'description' ? 'column-layout' : 'row-layout'}`}
-                      key={index}
-                    >
-                      <p className="description-box-element">{element}:</p>
-                      <p className="description-box-text">{value}</p>
-                    </div>
-                  ) : null; // Skip rendering if the value is empty, null, or undefined
-                })
-              }
+              {singleProduct?.des?.description && (
+                <p className="main-description">
+                  {singleProduct.des.description}
+                </p>
+              )}
+
+              <table className="description-table">
+                <tbody>
+                  {singleProduct?.des &&
+                    Object.entries(singleProduct.des)
+                      .filter(([key]) => key !== "description")
+                      .map(([key, value], index) => (
+                        <tr key={index}>
+                          <td>{key}</td>
+                          <td>{value}</td>
+                        </tr>
+                      ))}
+                </tbody>
+              </table>
 
               {
                 singleProduct?.price ?
-                  <p className="product-data-price">MRP:<FormatPrice price={singleProduct?.price} /></p>
+                  <p className="product-data-price">MRP: <FormatPrice price={singleProduct?.price} /></p>
                   :
                   <QueryBox productId={singleProduct?._id} productName={singleProduct?.productname} sku={singleProduct?.sku} />
               }
@@ -143,37 +143,19 @@ const SingleProduct = () => {
               </div>
 
               <div className="product-data-info">
-                <p>
-                  ID : <span> {singleProduct?._id} </span>
-                </p>
+                {/* <p>ID : <span> {singleProduct?._id} </span></p> */}
                 {singleProduct?.model ? <p>Model :<span> {singleProduct?.model} </span></p> : ""}
                 {singleProduct?.sku ? <p>SKU :<span> {singleProduct?.sku} </span></p> : ""}
               </div>
               <hr />
-              {/* {
-                singleProduct?.price ?
-                  <>
-                    <div className="quantity-buttons">
-                      <Button
-                        onClick={() => decreaseProductQuantity()}
-                        disabled={productQuantity <= 1}
-                        className={productQuantity <= 1 ? 'disabled-button' : ''}><FaMinus /></Button>
-                      <p>{productQuantity}</p>
-                      <Button onClick={() => increaseProductQuantity()}>
-                        <FiPlus />
-                      </Button>
-                    </div>
-                    <Button onClick={() => handleAddToCart(user?._id, singleProduct?._id, productQuantity)}>Add To Cart</Button>
-                  </>
-                  :
-                  ""
-              } */}
 
               <div className="quantity-buttons">
                 <Button
                   onClick={() => decreaseProductQuantity()}
                   disabled={productQuantity <= 1}
-                  className={productQuantity <= 1 ? 'disabled-button' : ''}><FaMinus /></Button>
+                  className={productQuantity <= 1 ? 'disabled-button' : ''}>
+                  <FaMinus />
+                </Button>
                 <p>{productQuantity}</p>
                 <Button onClick={() => increaseProductQuantity()}>
                   <FiPlus />
@@ -181,17 +163,14 @@ const SingleProduct = () => {
               </div>
               <Button onClick={() => handleAddToCart(user?._id, singleProduct?._id, productQuantity)}>Add To Cart</Button>
 
-
-              <WhatsappChat name={singleProduct?.productname} img={singleProduct?.productfile?.url} sku={singleProduct?.sku} />
-              {
-                user && user?.isAdmin && (
-                  <ProductSpecificationDownload singleProduct={singleProduct} />
-                )
-              }
+              <WhatsappChat name={singleProduct?.productname} img={singleProduct?.productfile?.url} sku={singleProduct?.sku} model={singleProduct?.model} />
+              {user && user?.isAdmin && (
+                <ProductSpecificationDownload singleProduct={singleProduct} />
+              )}
             </div>
           </div>
-        </Container >
-      </Wrapper >
+        </Container>
+      </Wrapper>
     </>
   );
 };
@@ -199,62 +178,84 @@ const SingleProduct = () => {
 export default SingleProduct;
 
 const Wrapper = styled.section`
+  /* General Styles */
   .container {
-    padding: 9rem 0;
+    padding: 8rem 2rem;
   }
 
+  font-family: 'Roboto', sans-serif;
+  color: #444; /* Dark Gray for text */
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  /* Product Images */
   .product_images {
     display: flex;
     justify-content: center;
     align-items: start;
-    // align-items: center;
   }
 
+  /* Product Data Section */
   .product-data {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: center;
     gap: 2rem;
 
-    h2 {
-      font-size: 2.4rem;
-      font-weight: bold;
+    .main-description {
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      line-height: 1.6;
     }
 
-    .description-box {
-      display: flex;
-      padding: 10px;
-      // margin-bottom: 10px;
-      border-radius: 5px;
+    /* Description Table */
+    .description-table {
+      width: 100%;
+      margin: 1rem 0;
+      font-size: 1.3rem;
+      border-collapse: collapse;
+
+      td {
+        padding: 12px;
+        border: 1px solid #eaeaea;
+        text-align: left;
+      }
+
+      tr:nth-child(even) {
+        background: #f5f5f5;
+      }
+
+      tr:hover {
+        background: #f0f0f0; /* Highlight row on hover */
+      }
     }
 
-    .description-box.column-layout {
-      flex-direction: column;
+    /* Price Styling */
+    .product-data-price {
+      font-weight: 700;
+      font-size: 2rem;
+      color: #ffc221;
     }
 
-    .description-box.row-layout {
-      flex-direction: row;
-      align-items: flex-start; /* Ensures alignment for row layout */
-    }
-
-    .description-box-element {
-      text-transform: uppercase;
-      font-weight: bold;
-      margin-right: 10px;
-    }
-
-    .description-box-text {
-      flex: 1; /* Ensures the text occupies remaining space in row layout */
-    }
-
+    /* Warranty Section */
     .product-data-warranty {
       width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 1rem;
       border-bottom: 1px solid #ccc;
-      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      margin-top: 1rem;
 
       .product-warranty-data {
         text-align: center;
@@ -262,87 +263,120 @@ const Wrapper = styled.section`
         .warranty-icon {
           background-color: rgba(220, 220, 220, 0.5);
           border-radius: 50%;
-          width: 4rem;
-          height: 4rem;
-          padding: 0.6rem;
+          width: 4.5rem;
+          height: 4.5rem;
+          padding: 1rem;
         }
+
         p {
-          font-size: 1.4rem;
-          padding-top: 0.4rem;
+          font-size: 1.2rem;
+          color: #444;
+          margin-top: 0.5rem;
         }
       }
     }
 
-    .product-data-price {
-      font-weight: bold;
-    }
-    .product-data-real-price {
-      color: ${({ theme }) => theme.colors.btn};
-    }
+    /* Product Info Section */
     .product-data-info {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      font-size: 1.8rem;
-
-      span {
-        font-weight: bold;
+      p {
+        font-size: 1.5rem;
+        font-weight: 600;
+        span {
+          font-weight: 500;
+        }
       }
     }
 
     hr {
-      max-width: 100%;
-      width: 90%;
-      /* height: 0.2rem; */
-      border: 0.1rem solid #000;
-      color: red;
+      width: 100%;
+      margin: 1.5rem 0;
+      border: 0.5px solid #ddd;
     }
-  }
 
-  .product-images {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .page_loading {
-    font-size: 3.2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  @media (max-width: ${({ theme }) => theme.media.tab}) {
-    padding: 0 2.4rem;
-  }
-
-  @media (max-width: ${({ theme }) => theme.media.mobile}) {
-    padding: 0 2.4rem;
-
-    .container {
-      padding: 2rem 0;
-    }
-  }
-
-  .quantity-buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-
-    Button {
-      padding: 0.8rem 1.6rem;
-      font-size: 1.6rem;
+    /* Quantity Buttons */
+    .quantity-buttons {
       display: flex;
       justify-content: center;
       align-items: center;
+      gap: 1rem;
+
+      Button {
+        padding: 0.8rem 1.6rem;
+        font-size: 1.6rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #ffc221;
+        // background-color: #ff8c00;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      Button:hover {
+        background-color: #ffdd73; 
+        // background-color: #e07b00;
+      }
+
+      .disabled-button {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+
+      p {
+        font-size: 1.6rem;
+        font-weight: 600;
+      }
     }
 
-    .disabled-button {
-    opacity: 0.5;
-    pointer-events: none;
+    /* Add to Cart Button */
+    Button {
+      background-color: #fcc221; /* Dark Orange */
+      color: white;
+      border: none;
+      padding: 0.8rem 1.6rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    Button:hover {
+      background-color: #ffdd73;
+      color:gray;
+    }
   }
-}
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .product-data {
+      gap: 1.5rem;
+      padding: 1rem;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+    }
+
+    .product-data-price {
+      font-size: 1.8rem;
+    }
+
+    .description-table td {
+      padding: 10px;
+      font-size: 1.2rem;
+    }
+
+    .product-warranty-data p {
+      font-size: 1rem;
+    }
+
+    .quantity-buttons {
+      gap: 1rem;
+    }
+  }
 `;
+
 
 

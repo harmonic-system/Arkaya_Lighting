@@ -8,12 +8,15 @@ const initialState = {
     allProducts: [],
     filterProducts: [],
     searchProducts: [],
+    themeProducts: [],
     isCategoryLoading: true,
     category: [],
     grid_view: true,
     filters: {
         text: "",
-        options :"",
+        options: "",
+        model: "",
+        sku: "",
     }
 };
 
@@ -44,7 +47,6 @@ const CategoryProvider = ({ children }) => {
         dispatch({ type: "GET_CATEGORY_PRODUCTS", payload: { category } });
     };
 
-
     const getCategoryFilteredProducts = useCallback(() => {
         const category = localStorage.getItem("selectedCategory");
         dispatch({ type: "GET_CATEGORY_PRODUCTS", payload: { category } });
@@ -64,7 +66,7 @@ const CategoryProvider = ({ children }) => {
     };
 
     const updateFilterValue = (e) => {
-        const { name, value } = e.target        
+        const { name, value } = e.target
         dispatch({ type: "UPDATE_FILTERS_VALUE", payload: { name, value } });
         getCategoryFilteredProducts()
     }
@@ -81,7 +83,22 @@ const CategoryProvider = ({ children }) => {
 
     useEffect(() => {
         getHeroSearchProducts();
-    }, [state.allProducts, getHeroSearchProducts]);        
+    }, [state.allProducts, getHeroSearchProducts]);
+
+    const setThemeCategoryProduct = (themeProducts) => {
+        localStorage.setItem("landingmenu", themeProducts)
+        dispatch({ type: "SET_LANDING_PAGE_FILTERED_PRODUCT", payload: { themeProducts } });
+    }
+
+    const getThemeSearchProducts = useCallback(() => {
+        const themeProducts = localStorage.getItem("landingmenu");
+        dispatch({ type: "SET_LANDING_PAGE_FILTERED_PRODUCT", payload: { themeProducts } });
+    }, [])
+
+    useEffect(() => {
+        getThemeSearchProducts();
+    }, [state.allProducts, getThemeSearchProducts]);
+
 
     return (
         <CategoryContext.Provider
@@ -97,6 +114,8 @@ const CategoryProvider = ({ children }) => {
                 updateFilterValue,
                 setHeroCategoryProduct,
                 getHeroSearchProducts,
+                setThemeCategoryProduct,
+                getThemeSearchProducts
             }}
         >
             {children}

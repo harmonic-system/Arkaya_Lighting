@@ -46,7 +46,9 @@ const productListSchema = new Schema({
     keywords: {
         type: [String]
     }
-}, { timestamps: true });
+}, {
+    timestamps: true
+});
 
 const ProductList = model('ProductList', productListSchema);
 

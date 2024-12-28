@@ -21,13 +21,24 @@ const categoryReducer = (state, action) => {
                 category: action.payload
             };
         case "GET_CATEGORY_PRODUCTS":
-            const { text, options } = state.filters;
+            const { text, options, model, sku } = state.filters;
             let tempProducts = [...allProducts]
             const { category } = action?.payload;
             let newtempProducts = tempProducts?.filter((item) => item?.productCategory === category)
+
             if (text) {
                 newtempProducts = newtempProducts.filter((item) => {
                     return item?.productname?.toLowerCase().includes(text?.toLowerCase())
+                })
+            }
+            if (model) {
+                newtempProducts = newtempProducts.filter((item) => {
+                    return item?.model?.toLowerCase().includes(model?.toLowerCase())
+                })
+            }
+            if (sku) {
+                newtempProducts = newtempProducts.filter((item) => {
+                    return item?.sku?.toLowerCase().includes(sku?.toLowerCase())
                 })
             }
             if (options) {
@@ -35,7 +46,7 @@ const categoryReducer = (state, action) => {
                     return item?.IndoorOutdoor === options
                 })
             }
-            
+
             return {
                 ...state,
                 filterProducts: newtempProducts,
@@ -71,6 +82,34 @@ const categoryReducer = (state, action) => {
                 ...state,
                 searchProducts: newAllProducts,
             };
+
+        case "SET_LANDING_PAGE_FILTERED_PRODUCT": {
+            let tempLandingProducts = [...allProducts];
+            const { themeProducts } = action?.payload;
+
+            if (themeProducts === "Architecture") {
+                tempLandingProducts = tempLandingProducts.filter((item) =>
+                    ["Flood Lights", "Under Water Lights", "Under Ground Lights", "Media Pixels", "Tree Hanging Lights", "Wall Washers"].includes(item.productCategory)
+                );
+            } else if (themeProducts === "Entertainment") {
+                tempLandingProducts = tempLandingProducts.filter((item) =>
+                    ["Moving Head Series Lamps", "Moving Head Series Leds", "Static Leds", "Effect Lights"].includes(item.productCategory)
+                );
+            } else if (themeProducts === "Theme Environment") {
+                tempLandingProducts = tempLandingProducts.filter((item) =>
+                    ["Strips", "Dot Pixels", "Led Matrixes"].includes(item.productCategory)
+                );
+            } else if (themeProducts === "Video Displays") {
+                tempLandingProducts = tempLandingProducts.filter((item) =>
+                    ["Indoor Video Displays", "Outdoor Video Displays"].includes(item.productCategory)
+                );
+            }
+
+            return {
+                ...state,
+                themeProducts: tempLandingProducts,
+            };
+        }
 
         default:
             return state

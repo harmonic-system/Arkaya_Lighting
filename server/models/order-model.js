@@ -28,62 +28,61 @@
 // module.exports = Order;
 
 
-const mongoose = require("mongoose");
+const { Schema, model } = require("mongoose")
 
-const orderSchema = new mongoose.Schema(
-    {
-        userId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Auth",
-            required: true
-        }, // Reference to Auth model
-        orderAddress: {
-            type: Object,
-            required: true
-        }, // Address of the order
-        items: [
-            {
-                productImage: {
-                    type: String,
-                    required: true
-                },
-                name: {
-                    type: String,
-                    required: true
-                },
-                price: {
-                    type: Number,
-                    required: true
-                },
-                quantity: {
-                    type: Number,
-                    required: true
-                },
+const orderSchema = new Schema({
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: "Auth",
+        required: true
+    }, // Reference to Auth model
+    orderAddress: {
+        type: Object,
+        required: true
+    }, // Address of the order
+    items: [
+        {
+            productImage: {
+                type: String,
+                required: true
             },
-        ],
-        totalAmount: {
-            type: Number,
-            required: true
-        }, // Total amount of the order
-        status: {
-            type: String,
-            default: "Processing"
-        }, // Order status
-        paymentStatus: {
-            type: String,
-            default: "Pending"
-        }, // Payment status
-        trackingId: {
-            type: String
+            name: {
+                type: String,
+                required: true
+            },
+            price: {
+                type: Number,
+                required: true
+            },
+            quantity: {
+                type: Number,
+                required: true
+            },
         },
-        deliveryDate: {
-            type: Date
-        },
+    ],
+    totalAmount: {
+        type: Number,
+        required: true
+    }, // Total amount of the order
+    status: {
+        type: String,
+        default: "Processing"
+    }, // Order status
+    paymentStatus: {
+        type: String,
+        default: "Pending"
+    }, // Payment status
+    trackingId: {
+        type: String
     },
-    { timestamps: true }
-);
+    deliveryDate: {
+        type: Date
+    },
+}, {
+    timestamps: true
+});
 
-const Order = mongoose.model("Order", orderSchema)
+const Order = model("Order", orderSchema)
 
 module.exports = Order;
 

@@ -4,10 +4,12 @@ import { Helmet } from 'react-helmet';
 import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./GlobalStyle";
+import { useAuthContext } from "./context/auth-context";
 import Header from "./pages/Header";
 import Footer from "./components/Footer/Footer";
 import BackToTop from "./components/BackToTop/BackToTop";
 import AdminButton from "./components/Admin/AdminButton/AdminButton";
+import Preloader from "./components/Loading/Preloader";
 
 // Pages
 import Home from "./pages/Home";
@@ -53,6 +55,7 @@ import OrderSuccess from "./pages/OrderSuccess";
 import OrderFailure from "./pages/OrderFailure";
 
 // Admin Components
+import AdminWrapper from "./Wrapper/AdminWrapper";
 import AdminLayout from "./layout/Admin/AdminLayout";
 import AdminUser from "./components/Admin/AdminUser";
 import AdminCarousel from "./components/Admin/AdminCarousel/AdminCarousel";
@@ -66,8 +69,9 @@ import EditAdminCarousel from "./components/Admin/AdminCarousel/EditAdminCarouse
 import AddAdminApplication from "./components/Admin/AdminApplication/AddAdminApplication";
 import EditAdminApplication from "./components/Admin/AdminApplication/EditAdminApplication";
 import AddAdminProduct from "./components/Admin/AdminProduct/AddAdminProduct";
-import AdminWrapper from "./Wrapper/AdminWrapper";
-import { useAuthContext } from "./context/auth-context";
+import EditAdminProduct from "./components/Admin/AdminProduct/EditAdminProduct";
+import LandingPage from "./pages/LandingPage";
+import ThemeProduct from "./pages/ThemeProduct";
 
 
 // Theme
@@ -152,10 +156,13 @@ function App() {
               content="Arkaya Lighting, custom lighting solutions, energy-efficient lighting, LED lights, smart home lighting, modern lighting designs, premium lighting, home lighting, office lighting, sustainable lighting"
             />
           </Helmet>
+          <Preloader />
+
           <Header />
           <Routes>
             {/* Public Routes */}
-            <Route path="/" element={
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/home" element={
               <>
                 <Helmet>
                   <title>Home - Arkaya Lighting: Transform Your Space with Custom Lighting</title>
@@ -171,13 +178,13 @@ function App() {
                 <Home />
               </>
             } />
-            <Route path="/brandsPatner" element={
+            <Route path="/technologyPatner" element={
               <>
                 <Helmet>
-                  <title>Brand Partners - Arkaya Lighting: Collaborations & Trusted Brands</title>
+                  <title>TECHNOLOGIES PARTNERS - Arkaya Lighting: Collaborations & Trusted Brands</title>
                   <meta
                     name="description"
-                    content="Discover Arkaya Lighting's trusted brand partners and collaborations, bringing innovative and premium lighting solutions to the market."
+                    content="Discover Arkaya Lighting's trusted technologies partners and collaborations, bringing innovative and premium lighting solutions to the market."
                   />
                   <meta
                     name="keywords"
@@ -395,6 +402,24 @@ function App() {
                 <SignalDistributionAndPowerSupply />
               </>
             } />
+            {/* Theme Product Routes */}
+            <Route path="/themeproducts" element={
+              <>
+                <Helmet>
+                  <title>Theme Products - Arkaya Lighting</title>
+                  <meta
+                    name="description"
+                    content="Explore our exclusive range of theme-based lighting products, crafted to enhance every ambiance. Discover premium decorative, functional, and custom lighting solutions tailored to your design needs."
+                  />
+                  <meta
+                    name="keywords"
+                    content="theme lighting products, decorative lights, functional lighting, custom lighting solutions, Arkaya Lighting, premium LED products, lighting themes, ambiance lighting, lighting collection"
+                  />
+                </Helmet>
+
+                <ThemeProduct />
+              </>
+            } />
             {/* Product Search and Details Routes */}
             <Route path="/searchProducts" element={
               <>
@@ -568,6 +593,7 @@ function App() {
               <Route path="editapplication/:id" element={<EditAdminApplication />} />
               <Route path="products" element={<AdminProducts />} />
               <Route path="addproducts" element={<AddAdminProduct />} />
+              <Route path="editproduct/:id" element={<EditAdminProduct />} />
             </Route>
 
             {/* Error Page */}

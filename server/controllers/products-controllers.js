@@ -1,6 +1,6 @@
 const Application = require("../models/application-models")
 const HomeCarousel = require("../models/homeCarousel-models")
-const ProductList = require("../models/productList-model")
+const Product = require("../models/products-model")
 
 const getapplication = async (_, res) => {
   try {
@@ -28,7 +28,7 @@ const gethomecarousel = async (_, res) => {
 
 const getproducts = async (_, res) => {
   try {
-    const products = await ProductList.find()
+    const products = await Product.find()
     if (!products) {
       return res.status(404).json({ message: 'Product not found', data: [] })
     }
@@ -42,7 +42,7 @@ const getsingleproducts = async (req, res) => {
   const { id } = req.params;  // Destructuring id from req.params
   try {
     // Fetch the product by its ID
-    const singleProduct = await ProductList.findById(id);
+    const singleProduct = await Product.findById(id);
 
     if (!singleProduct) {
       // If no product found, return a 404 status code with a message

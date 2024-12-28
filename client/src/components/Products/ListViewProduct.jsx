@@ -13,17 +13,17 @@ const ListViewProduct = ({ curElem }) => {
   const { _id, productname, productfile, des, price, sku } = curElem;
 
   const { addToWishList } = useWishListContext()
-    const { user } = useAuthContext()
-    const navigate = useNavigate()
+  const { user } = useAuthContext()
+  const navigate = useNavigate()
 
-    const handleAddToWishlist = (productId) => {
-        if (user) {
-            addToWishList(productId)
-        } else {
-            navigate("/login")
-            toast("Please Login")
-        }
+  const handleAddToWishlist = (productId) => {
+    if (user) {
+      addToWishList(productId)
+    } else {
+      navigate("/login")
+      toast("Please Login")
     }
+  }
 
   return (
     <>
@@ -44,7 +44,6 @@ const ListViewProduct = ({ curElem }) => {
                     className={`description-box ${key === "description" ? "column-layout" : "row-layout"}`}
                     key={key}
                   >
-                    <p className="description-box-element">{key}:</p>
                     <p className="description-box-text">{value.length > 90 ? `${value.slice(0, 90)}...` : value}</p>
                   </div>
                 ) : null;
@@ -52,7 +51,7 @@ const ListViewProduct = ({ curElem }) => {
             }
             {price ? <FormatPrice price={price} /> : <QueryBox productId={_id} productName={productname} sku={sku} />}
             <NavLink to={`/singleproduct/${_id}`} className="btn-main">
-              <Button className="btn">Read More</Button>
+              <button className="btn">Read More</button>
             </NavLink>
           </div>
         </div>
@@ -64,7 +63,9 @@ const ListViewProduct = ({ curElem }) => {
 export default ListViewProduct
 
 const ListViewProductWrapper = styled.section`
-figure {
+
+  /* Figure Styling */
+  figure {
     width: auto;
     display: flex;
     justify-content: center;
@@ -72,6 +73,7 @@ figure {
     position: relative;
     overflow: hidden;
     transition: all 0.5s linear;
+
     &::after {
       content: "";
       position: absolute;
@@ -79,33 +81,47 @@ figure {
       left: 0;
       width: 0%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
+      background-color: rgba(0, 0, 0, 0.3);
       transition: all 0.2s linear;
       cursor: pointer;
+      border-radius: 1rem;
     }
+
     &:hover::after {
       width: 100%;
     }
+
     &:hover img {
-      transform: scale(1.2);
+      transform: scale(1.4);
     }
+
     img {
       max-width: 90%;
       margin: 1.5rem 0;
-      // margin-top: 1.5rem;
       height: 20rem;
       transition: all 0.2s linear;
-      border-radius:1rem;
+      border-radius: 1rem;
     }
 
     figcaption {
-      z-index:3;
+      z-index: 3;
+
+      svg {
+        color: #ff4d4d; /* Heart color */
+        font-size: 1.5rem;
+      }
     }
   }
 
+  /* Card Styling */
   .card {
-    border: 0.1rem solid rgb(170 170 170 / 40%);
+    border: 0.1rem solid rgba(170, 170, 170, 0.4);
     border-radius: 1rem;
+    transition: all 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    }
 
     .card-data {
       padding: 0 2rem;
@@ -118,27 +134,24 @@ figure {
       text-transform: capitalize;
     }
 
+    /* Button Styling */
     .btn {
       margin: 2rem 0;
-      background-color: rgb(0 0 0 / 0%);
+      background-color: rgba(0, 0, 0, 0%);
       border: 0.1rem solid #ffc221;
-      // border: 0.1rem solid rgb(98 84 243);
       display: flex;
       justify-content: center;
       align-items: center;
       color: #ffc221;
-      // color: rgb(98 84 243);
+      transition: all 0.3s ease;
 
       &:hover {
         background-color: #ffc221;
-        // background-color: rgb(98 84 243);
-      }
-
-      &:hover a {
         color: #fff;
       }
+
       a {
-        color: rgb(98 84 243);
+        color: rgb(98, 84, 243);
         font-size: 1.4rem;
       }
     }
@@ -146,31 +159,45 @@ figure {
     .btn-main .btn:hover {
       color: #fff;
     }
+  }
 
-    .description-box {
-      display: flex;
-      padding: 10px;
-      // margin-bottom: 10px;
-      border-radius: 5px;
-    }
+  /* Description Box */
+  .description-box {
+    display: flex;
+    padding: 10px;
+    border-radius: 5px;
 
-    .description-box.column-layout {
+    &.column-layout {
       flex-direction: column;
     }
 
-    .description-box.row-layout {
+    &.row-layout {
       flex-direction: row;
-      align-items: flex-start; /* Ensures alignment for row layout */
-    }
-
-    .description-box-element {
-      text-transform: uppercase;
-      font-weight: bold;
-      margin-right: 10px;
+      align-items: flex-start;
     }
 
     .description-box-text {
-      flex: 1; /* Ensures the text occupies remaining space in row layout */
+      flex: 1;
     }
   }
-`
+
+  /* General Button Styling */
+  Button {
+    padding: 0.8rem 1.6rem;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffc221;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: #ffdd73;
+      color: gray;
+    }
+  }
+`;

@@ -8,31 +8,33 @@ const Entertainment = () => {
     <>
       <Wrapper>
         <div className="products-image">
-          <div className="title">
-            <h1>Our <strong className="black">Entertainment Lighting</strong> Products</h1>
-            <span>Dynamic lighting solutions to elevate your entertainment spaces</span>
+          <div className="container">
+            <div className="title">
+              <h1>Our <strong className="black">Entertainment Lighting</strong> Products</h1>
+              <span>Dynamic lighting solutions to elevate your entertainment spaces</span>
+            </div>
           </div>
           <div className="container">
             <div className="grid grid-three-column">
-              <Link to="/products" onClick={() => setCategoryinlocalStorage("mhslamps")}>
+              <Link to="/products" onClick={() => setCategoryinlocalStorage("Moving Head Series Lamps")}>
                 <div className="products-image-box">
                   <img src="images/products/Entertainment/mhslamp.png" alt="mhslampcategory-image" />
                   <h3>Moving Head Series - Lamp</h3>
                 </div>
               </Link>
-              <Link to="/products" onClick={() => setCategoryinlocalStorage("mhsleds")}>
+              <Link to="/products" onClick={() => setCategoryinlocalStorage("Moving Head Series Leds")}>
                 <div className="products-image-box">
                   <img src="images/products/Entertainment/mhsled.jpg" alt="mhsledcategory-image" />
                   <h3>Moving Head Series - LED</h3>
                 </div>
               </Link>
-              <Link to="/products" onClick={() => setCategoryinlocalStorage("staticleds")}>
+              <Link to="/products" onClick={() => setCategoryinlocalStorage("Static Leds")}>
                 <div className="products-image-box">
                   <img src="images/products/Entertainment/staticled.avif" alt="staticledcategory-image" />
                   <h3>Static LED</h3>
                 </div>
               </Link>
-              <Link to="/products" onClick={() => setCategoryinlocalStorage("effectlights")}>
+              <Link to="/products" onClick={() => setCategoryinlocalStorage("Effect Lights")}>
                 <div className="products-image-box">
                   <img src="images/products/Entertainment/effectslight.avif" alt="effectslightcategory-image" />
                   <h3>Effects Light</h3>
@@ -75,12 +77,14 @@ span{
   text-align: center;
   height: 300px;
   border-radius: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .products-image .products-image-box img {
   height: 80%;
   border-radius: 20px;
   width: 80%;
+  transition: transform 0.3s ease;
 }
 
 .products-image .products-image-box h3 {
@@ -91,11 +95,20 @@ span{
   padding: 20px 0px;
 }
 
-@media (max-width: 768px) {
-.products-image .products-image-box img {
-  height: 80%;
-  border-radius: 20px;
-  // width: auto;
+.products-image .products-image-box:hover {
+  transform: scale(1.05);
+  box-shadow: #00000070 0px 0px 19px 0px;
 }
+
+@media (max-width: 768px) {
+  .grid-three-column {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 525px) {
+  .grid-three-column {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 `

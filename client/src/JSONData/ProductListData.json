@@ -7,32 +7,32 @@
                 "childrens": [
                     {
                         "title": "Flood Lights",
-                        "category": "floodlights",
+                        "category": "Flood Lights",
                         "path": "/admin/products"
                     },
                     {
                         "title": "UnderWater Lights",
-                        "category": "underwaterlights",
+                        "category": "Under Water Lights",
                         "path": "/admin/products"
                     },
                     {
                         "title": "Underground Lights",
-                        "category": "undergroundlights",
+                        "category": "Under Ground Lights",
                         "path": "/admin/products"
                     },
                     {
                         "title": "Media Pixels",
-                        "category": "mediapixels",
+                        "category": "Media Pixels",
                         "path": "/admin/products"
                     },
                     {
                         "title": "Tree Hanging Lights",
-                        "category": "treehangings",
+                        "category": "Tree Hanging Lights",
                         "path": "/admin/products"
                     },
                     {
                         "title": "Wall Washers Lights",
-                        "category": "wallwashers",
+                        "category": "Wall Washers",
                         "path": "/admin/products"
                     }
                 ]
@@ -42,22 +42,22 @@
                 "childrens": [
                     {
                         "title": "Moving Head Series Lamp",
-                        "category": "mhslamps",
+                        "category": "Moving Head Series Lamps",
                         "path": "/admin/products"
                     },
                     {
                         "title": "Moving Head Series Led",
-                        "category": "mhsleds",
+                        "category": "Moving Head Series Leds",
                         "path": "/admin/products"
                     },
                     {
                         "title": "Static Lights",
-                        "category": "staticleds",
+                        "category": "Static Leds",
                         "path": "/admin/products"
                     },
                     {
                         "title": "Effects Lights",
-                        "category": "effectlights",
+                        "category": "Effect Lights",
                         "path": "/admin/products"
                     }
                 ]
@@ -67,17 +67,37 @@
                 "childrens": [
                     {
                         "title": "Led Strips",
-                        "category": "strips",
+                        "category": "Strips",
                         "path": "/admin/products"
                     },
                     {
                         "title": "Dot Pixels",
-                        "category": "dotpixels",
+                        "category": "Dot Pixels",
                         "path": "/admin/products"
                     },
                     {
                         "title": "Led Matrix",
-                        "category": "ledmatrixes",
+                        "category": "Led Matrixes",
+                        "path": "/admin/products"
+                    },
+                    {
+                        "title": "Neon Flex",
+                        "category": "Neon Flex",
+                        "path": "/admin/products"
+                    },
+                    {
+                        "title": "Media Pixel Bar",
+                        "category": "Media Pixel Bar",
+                        "path": "/admin/products"
+                    },
+                    {
+                        "title": "360 Media Bar",
+                        "category": "360 Media Bar",
+                        "path": "/admin/products"
+                    },
+                    {
+                        "title": "Led Rings",
+                        "category": "Led Rings",
                         "path": "/admin/products"
                     }
                 ]
@@ -87,7 +107,7 @@
                 "childrens": [
                     {
                         "title": "Chandeliers",
-                        "category": "chandeliers",
+                        "category": "Chandeliers",
                         "path": "/admin/products"
                     }
                 ]
@@ -97,17 +117,17 @@
                 "childrens": [
                     {
                         "title": "Theater Lights",
-                        "category": "theaters",
+                        "category": "Theater Lights",
                         "path": "/admin/products"
                     },
                     {
                         "title": "Studio Lights",
-                        "category": "studios",
+                        "category": "Studio Lights",
                         "path": "/admin/products"
                     },
                     {
                         "title": "Television Lights",
-                        "category": "televisions",
+                        "category": "Television Lights",
                         "path": "/admin/products"
                     }
                 ]
@@ -119,12 +139,12 @@
         "childrens": [
             {
                 "title": "Indoor Series",
-                "category": "indoors",
+                "category": "Indoor Video Displays",
                 "path": "/admin/products"
             },
             {
                 "title": "Outdoor Series",
-                "category": "outdoors",
+                "category": "Outdoor Video Displays",
                 "path": "/admin/products"
             }
         ]
@@ -134,12 +154,12 @@
         "childrens": [
             {
                 "title": "Led Controllers",
-                "category": "ledcontrollers",
+                "category": "Led Controllers",
                 "path": "/admin/products"
             },
             {
                 "title": "Dmx Controllers",
-                "category": "dmxcontrollers",
+                "category": "Dmx Controllers",
                 "path": "/admin/products"
             },
             {
@@ -147,24 +167,24 @@
                 "childrens": [
                     {
                         "title": "Signal Distribution",
-                        "category": "signaldistributions",
+                        "category": "Signal Distributions",
                         "path": "/admin/products"
                     },
                     {
                         "title": "Power Supplies",
-                        "category": "powersupplies",
+                        "category": "Power Supplies",
                         "path": "/admin/products"
                     }
                 ]
             },
             {
                 "title": "Decorders & Amplifiers",
-                "category": "decorderandamplifiers",
+                "category": "Decorder & Amplifiers",
                 "path": "/admin/products"
             },
             {
                 "title": "Processors",
-                "category": "processors",
+                "category": "Processors",
                 "path": "/admin/products"
             }
         ]
@@ -174,32 +194,32 @@
         "childrens": [
             {
                 "title": "Trusses",
-                "category": "trusses",
+                "category": "Truss",
                 "path": "/admin/products"
             },
             {
                 "title": "Clamps",
-                "category": "clamps",
+                "category": "Clamps",
                 "path": "/admin/products"
             },
             {
                 "title": "Alluminium Profile",
-                "category": "alluminiumprofiles",
+                "category": "Alluminium Profiles",
                 "path": "/admin/products"
             },
             {
                 "title": "Silicon Profile",
-                "category": "siliconprofiles",
+                "category": "Silicon Profiles",
                 "path": "/admin/products"
             },
             {
                 "title": "Stage Lighting",
-                "category": "stagelightinges",
+                "category": "Stage Lightings",
                 "path": "/admin/products"
             },
             {
                 "title": "Studio Lighting",
-                "category": "studiolightinges",
+                "category": "Studio Lightings",
                 "path": "/admin/products"
             }
         ]
@@ -209,7 +229,7 @@
         "childrens": [
             {
                 "title": "Connectors",
-                "category": "connectors",
+                "category": "Connectors",
                 "path": "/admin/products"
             }
         ]

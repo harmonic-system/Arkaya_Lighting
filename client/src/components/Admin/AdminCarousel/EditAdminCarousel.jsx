@@ -4,7 +4,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button } from '../../../styles/Button';
 import { useAuthContext } from '../../../context/auth-context';
-import ActionLoading from '../../Loading/ActionLoading';
+import { FaCloudUploadAlt } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
+import LoadingPage from '../../Loading/Loading';
 
 const EditAdminCarousel = () => {
   const { isLoading, singleCarousel, getSingalCarousel, updateCarousel } = useAdminContext();
@@ -66,6 +68,10 @@ const EditAdminCarousel = () => {
     });
   };
 
+  const handleDeleteImage = () => {
+    setCarouselData((prevState) => ({ ...prevState, file: null }))
+  };
+
   // Form submission handler
   const handleSubmit = async (e) => {
     try {
@@ -77,21 +83,48 @@ const EditAdminCarousel = () => {
     }
   };
 
+  if (isLoading) {
+    return <LoadingPage />
+  }
+
   return (
     <AdminFormWrapper>
-      <div className="container">
+      <section className="container upload-product-section">
+        <div className="header-bar">
+          <h2>Update Carousel</h2>
+        </div>
         <div className="contact-form">
           <form className="contact-inputs" onSubmit={handleSubmit}>
-            <input
-              type="file"
-              onChange={handleFileChange}
-              placeholder="Image"
-              name="file"
-              autoComplete="off"
-            />
-            
-            <div className="container img-container">
-              <img src={carouselData.file} alt={`${carouselData.heading}-image`} />
+            {/* Image Upload */}
+            <div className="form-group">
+              <label htmlFor="productImage" className="upload-label">
+                <div className="upload-content">
+                  <FaCloudUploadAlt size={35} />
+                  <p>Upload Image</p>
+                </div>
+                <input
+                  id="productImage"
+                  type="file"
+                  className="hidden"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                />
+              </label>
+              <div className="uploaded-images">
+                {carouselData.file && (
+                  <div className="image-thumbnail">
+                    <img
+                      src={carouselData.file}
+                      alt={`${carouselData.heading}-image`}
+                      className="thumbnail-image"
+                    />
+                    <MdDelete
+                      className="delete-icon"
+                      onClick={handleDeleteImage}
+                    />
+                  </div>
+                )}
+              </div>
             </div>
 
             <input
@@ -112,64 +145,100 @@ const EditAdminCarousel = () => {
               autoComplete="off"
               required
             />
-            <Button type="submit">{isLoading ? <ActionLoading /> : "Update Application"}</Button>
+            <Button type="submit">Update Carousel</Button>
           </form>
         </div>
-      </div>
+      </section>
     </AdminFormWrapper>
   );
 };
 
 export default EditAdminCarousel;
 
-const AdminFormWrapper = styled.section`
-.contact-form {
-        width: 100%;
-        margin: auto;
+const AdminFormWrapper = styled.div`
+  .upload-product-section {
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+    
+  .header-bar {
+    padding: 10px;
+    margin-bottom: 30px;
+  }
 
-        .text-success{
-          text-align: center;
-          font-size: 1.5rem;
-          font-weight: bold;
-          color:#38c8a8;
-          margin-bottom: 3rem;
-        }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    position: relative;
 
-        .contact-inputs {
-          display: flex;
-          flex-direction: column;
-          gap: 3rem;
+    label {
+      font-size:1.2rem
+    }
+  }
 
-          input {
-            border-radius: 1rem
-          }
+  .upload-label {
+    padding: 20px;
+    border: 2px dashed #ccc;
+    text-align: center;
+    cursor: pointer;
+  }
 
-          .img-container {
-            width: 200px;
+  .uploaded-images {
+    margin-top: 30px;
+    display: flex;
+    gap: 10px;
+  }
 
-            img {
-              width: 100%;
-              height: auto;
-            }
-          }
+  .image-thumbnail {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border: 1px solid #ccc;
+  }
 
-          textarea {
-            border-radius: 1rem;
-            resize: none;
-          }
+  .thumbnail-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
-          Button {
-            // max-width: 50rem;
-            cursor: pointer;
-            transition: all 0.2s;
+  .delete-icon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: red;
+    cursor: pointer;
+  }
 
-            &:hover {
-              background-color: ${({ theme }) => theme.colors.white};
-              border: 1px solid ${({ theme }) => theme.colors.btn};
-              color: ${({ theme }) => theme.colors.btn};
-              transform: scale(0.9);
-            }
-          }
-        }
+  .submit-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+  }
+
+  .contact-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+
+    input {
+      border-radius: 1rem;
+    }
+
+    Button {
+      // max-width: 50rem;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover {
+        background-color: ${({ theme }) => theme.colors.white};
+        border: 1px solid ${({ theme }) => theme.colors.btn};
+        color: ${({ theme }) => theme.colors.btn};
+        transform: scale(0.9);
       }
-`
+    }
+  }
+`;

@@ -19,6 +19,8 @@ const applicationSchema = new Schema({
         type: String,
         required: true
     },
+}, {
+    timestamps: true, // Automatically adds createdAt and updatedAt fields
 })
 
 const Application = new model("Application", applicationSchema)
