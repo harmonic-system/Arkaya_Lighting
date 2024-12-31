@@ -30,9 +30,11 @@ const CartProvider = ({ children }) => {
         try {
             const { data } = await axios.post(`${server}/api/v1/cart/add`, { userId, productId, quantity });
             dispatch({ type: 'SET_CART', payload: { items: data?.cart?.items, totalCartPrice: data?.cart?.totalCartPrice } });
+            toast.dismiss()
             toast.success(data?.message)
         } catch (error) {
             dispatch({ type: 'ERROR', payload: error?.message });
+            toast.dismiss()
             toast.error(error?.response?.data?.message)
         }
     };
@@ -42,9 +44,11 @@ const CartProvider = ({ children }) => {
             const { data } = await axios.post(`${server}/api/v1/cart/remove`, { userId, productId });
             dispatch({ type: 'SET_CART', payload: { items: data.cart.items, totalCartPrice: data.cart.totalCartPrice } });
             fetchCart()
+            toast.dismiss()
             toast.success(data.message)
         } catch (error) {
             dispatch({ type: 'SET_ERROR', payload: error.message });
+            toast.dismiss()
             toast.error(error.response?.data?.message)
         }
     };
@@ -62,10 +66,12 @@ const CartProvider = ({ children }) => {
     const resetCart = async () => {
         try {
             const { data } = await axios.delete(`${server}/api/v1/cart/reset/${user?._id}`);
+            toast.dismiss()
             dispatch({ type: 'RESET_CART' });
             toast.success(data?.message)
         } catch (error) {
             dispatch({ type: 'SET_ERROR', payload: error?.response?.data?.message || error.message });
+            toast.dismiss()
             toast.error(error.response?.data?.message)
         }
     };

@@ -45,6 +45,7 @@ import Cart from "./pages/Cart";
 import UserWrapper from "./Wrapper/UserWrapper";
 import UserLayout from "./layout/User/UserLayout";
 import UserProfile from "./components/User/UserProfile";
+import EditUserProfile from "./components/User/EditUserProfile";
 import ChangePassword from "./components/User/ChangePassword";
 import DeleteAccount from "./components/User/DeleteAccount";
 import Order from "./pages/Order";
@@ -602,6 +603,7 @@ function App() {
               </UserWrapper>
             }>
               <Route path="profile" element={<UserProfile />} />
+              <Route path="editprofile" element={<EditUserProfile />} />
               <Route path="orders" element={<Order />} />
               <Route path="change-password" element={<ChangePassword />} />
               <Route path="delete-account" element={<DeleteAccount />} />

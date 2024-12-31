@@ -22,12 +22,6 @@ const UserNavbar = () => {
             <Link to="/user/delete-account">
               <Button className='user-nav-buttons'>Delete Account</Button>
             </Link>
-            {/* <Link to="/user/query">
-              <Button className='user-nav-buttons'>Querry</Button>
-            </Link>
-            <Link to="/user/newsletter">
-              <Button className='user-nav-buttons'>NewsLetter</Button>
-            </Link> */}
           </div>
         </div>
       </Wrapper>

@@ -40,6 +40,14 @@ const authReducer = (state, action) => {
                 error: null,
             }
 
+        case "UPDATE_PROFILE":
+            return {
+                ...state,
+                // isAuthenticated: true,
+                loading: false,
+                error: null,
+            }
+
         case "LOGIN_ERROR":
             return {
                 ...state,

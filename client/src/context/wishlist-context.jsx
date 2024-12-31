@@ -41,9 +41,11 @@ const WishListProvider = ({ children }) => {
             });
             dispatch({ type: 'SET_WISHLIST' });
             fetchWishList()
+            toast.dismiss()
             toast.success(data?.message)
         } catch (error) {
             dispatch({ type: 'ERROR', payload: error?.message });
+            toast.dismiss()
             toast.error(error?.response?.data?.message)
         }
     };
@@ -57,9 +59,11 @@ const WishListProvider = ({ children }) => {
             });
             dispatch({ type: 'SET_WISHLIST' });
             fetchWishList()
+            toast.dismiss()
             toast.success(data.message)
         } catch (error) {
             dispatch({ type: 'SET_ERROR', payload: error.message });
+            toast.dismiss()
             toast.error(error.response?.data?.message)
         }
     };
@@ -73,9 +77,11 @@ const WishListProvider = ({ children }) => {
             });
             dispatch({ type: 'RESET_WISHLIST' });
             fetchWishList()
+            toast.dismiss()
             toast.success(data?.message)
         } catch (error) {
             dispatch({ type: 'SET_ERROR', payload: error?.response?.data?.message || error.message });
+            toast.dismiss()
             toast.error(error.response?.data?.message)
         }
     };

@@ -64,6 +64,7 @@ const AuthProvider = ({ children }) => {
 
             localStorage.setItem("token", token)
             dispatch({ type: "REGISTER", payload: { token, message } })
+            toast.dismiss()
             toast.success(message)
         } catch (error) {
             dispatch({
@@ -90,6 +91,7 @@ const AuthProvider = ({ children }) => {
 
             localStorage.setItem("token", token)
             dispatch({ type: "LOGIN", payload: { token, message } })
+            toast.dismiss()
             toast.success(message)
         } catch (error) {
             dispatch({
@@ -104,8 +106,30 @@ const AuthProvider = ({ children }) => {
     const logout = async () => {
         localStorage.removeItem("token")
         dispatch({ type: "LOGOUT", payload: "Logout Successfully" })
+        toast.dismiss()
         toast.success("Logout Successfully")
     }
+
+    const updateUser = async (newUserData) => {
+        try {
+            const { data } = await axios.patch(
+                `${server}/api/v1/auth/update`,
+                newUserData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${state.token}`
+                    }
+                }
+            );
+            const { message } = data;
+            fetchUserData(state.token);
+            toast.dismiss()
+            toast.success(message)
+        } catch (error) {
+            console.error("Error updating user:", error);
+        }
+    };
+
 
     const getAddress = async () => {
         dispatch({ type: "ADDRESS_LOADING" })
@@ -134,6 +158,7 @@ const AuthProvider = ({ children }) => {
                 })
             const { message } = response.data
             dispatch({ type: "ADDRESS_SUCCESS" })
+            toast.dismiss()
             toast.success(message)
             getAddress()
         } catch (error) {
@@ -174,6 +199,7 @@ const AuthProvider = ({ children }) => {
                 }
             )
             getAddress()
+            toast.dismiss()
             toast.success(data.message)
         } catch (error) {
             console.log(error);
@@ -188,6 +214,7 @@ const AuthProvider = ({ children }) => {
                 },
             })
             getAddress()
+            toast.dismiss()
             toast.success(data.message)
         } catch (error) {
             console.log(error);
@@ -204,6 +231,7 @@ const AuthProvider = ({ children }) => {
             const { data } = response.data
             dispatch({ type: "ORDER_LOADING", payload: { data } })
         } catch (error) {
+            toast.dismiss()
             toast.error(
                 error.response?.data?.message || "Failed to fetch orders. Please try again."
             );
@@ -218,9 +246,11 @@ const AuthProvider = ({ children }) => {
                     Authorization: `Bearer ${state.token}`
                 },
             });
+            toast.dismiss()
             toast.success(response.data.message);
             fetchOrders()
         } catch (error) {
+            toast.dismiss()
             toast.error(
                 error.response?.data?.message || "Failed to cancel the order. Please try again."
             );
@@ -244,6 +274,7 @@ const AuthProvider = ({ children }) => {
             addressLoading: state.addressLoading,
             address: state.address,
             singleAddress: state.singleAddress,
+            updateUser,
             addAddress,
             getSingleAddress,
             updateAddress,

@@ -107,10 +107,12 @@ const EditAdminProduct = () => {
 
   const handleAddKeyword = () => {
     if (!newKeyword.trim()) {
+      toast.dismiss()
       toast.error("Keyword cannot be empty");
       return;
     }
     if (productData.keywords.includes(newKeyword.trim())) {
+      toast.dismiss()
       toast.error("Keyword already exists");
       return;
     }
@@ -133,6 +135,7 @@ const EditAdminProduct = () => {
     e.preventDefault();
 
     if (!productData.des.description || productData.des.description.trim() === "") {
+      toast.dismiss()
       toast.error("Give Some Description of the Product");
       return;
     }

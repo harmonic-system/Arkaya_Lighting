@@ -36,9 +36,7 @@ const EditUserProfile = () => {
         e.preventDefault();
 
         try {
-            const response = await updateUser(profileDetails);
-            if (response.status === 200) {
-            }
+            await updateUser(profileDetails);
         } catch (err) {
             console.log('Error updating profile:', err);
         }

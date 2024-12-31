@@ -108,18 +108,21 @@ const userController = async (req, res) => {
     }
 }
 
-const updateprofile = async (req, res) => {
-    const { name, email, phone, organization } = req.body;
-
-    // console.log(name, email, phone, organization);
-
+const updateProfile = async (req, res) => {
     try {
-        // Find the user by their ID
+        // Extract new user data
+        const { name, email, phone, organization } = req.body;
+
+        // Find the user by their ID, excluding sensitive fields
         const user = await Auth.findById(req.user._id).select("-password -term_condition");
 
+        // Check if the user exists
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
+
+        // Check if the email is being changed
+        const emailChanged = email && email !== user.email;
 
         // Update the user's profile
         user.name = name || user.name;
@@ -130,17 +133,23 @@ const updateprofile = async (req, res) => {
         // Save the updated user
         await user.save();
 
-        // console.log("new-user", user);
-
+        // Fetch updated user data (excluding sensitive fields)
         const updated = await Auth.findById(req.user._id).select("-password -term_condition");
 
+        // Send different messages based on whether the email was changed
+        const message = emailChanged
+            ? "Profile updated successfully. Please log in again."
+            : "Profile updated successfully.";
 
-        res.status(200).json({ message: "Profile Updated Successfully", data: updated });
+        // Respond with success and updated user data
+        res.status(200).json({ message, data: updated });
+
     } catch (err) {
-        // console.error(err);
+        console.error(err);
         res.status(500).json({ message: 'Server error' });
     }
-}
+};
+
 
 const changePassword = async (req, res) => {
     const { oldPassword, newPassword } = req.body;
@@ -236,7 +245,7 @@ const resetPassword = async (req, res) => {
 };
 
 const deleteAccount = async (req, res) => {
-    const {password} = req.body;    
+    const { password } = req.body;
     try {
         // Get the user from the request (attached by authMiddleware)
         const user = await Auth.findById(req.user._id)
@@ -313,5 +322,5 @@ const deleteAccount = async (req, res) => {
 
 
 module.exports = {
-    registerController, loginController, userController, updateprofile, changePassword, forgotPassword, resetPassword, deleteAccount
+    registerController, loginController, userController, updateProfile, changePassword, forgotPassword, resetPassword, deleteAccount
 }

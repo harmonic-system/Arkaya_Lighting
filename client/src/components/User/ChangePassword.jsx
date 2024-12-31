@@ -39,11 +39,13 @@ const ChangePassword = () => {
     const handleChangePassword = async (e) => {
         e.preventDefault();
         if (newPassword !== confirmPassword) {
+            toast.dismiss()
             toast.error("New password and confirm password do not match.");
             return;
         }
 
         if (!newPassword || !oldPassword) {
+            toast.dismiss()
             toast.error("All fields are required.");
             return;
         }        
@@ -58,6 +60,7 @@ const ChangePassword = () => {
                     }
                 });
             const { message } = response.data
+            toast.dismiss()
             toast.success(message)
             setOldPassword("")
             setNewPassword("")

@@ -41,6 +41,7 @@ const AdminProvider = ({ children }) => {
             dispatch({ type: "GETALLUSERS", payload: { data } })
         } catch (error) {
             // console.log(error);
+            toast.dismiss()
             toast.error(error.response.data.message)
         }
     }
@@ -56,10 +57,12 @@ const AdminProvider = ({ children }) => {
                     }
                 });
             const { message } = response.data
+            toast.dismiss()
             toast.success(message)
             getAllUsers()
         } catch (error) {
             // console.log(error);
+            toast.dismiss()
             toast.error(error.response.data.message)
         }
     };
@@ -78,10 +81,12 @@ const AdminProvider = ({ children }) => {
             const { message } = response.data
             dispatch({ type: "SUCCESS" })
             // console.log(data);
+            toast.dismiss()
             toast.success(message)
             getAllUsers()
         } catch (error) {
             // console.log(error);
+            toast.dismiss()
             toast.error(error.response.data.message)
         }
     }
@@ -100,6 +105,7 @@ const AdminProvider = ({ children }) => {
             dispatch({ type: "GETALLNEWSLETTERS", payload: { data } })
         } catch (error) {
             // console.log(error);
+            toast.dismiss()
             toast.error(error.response.data.message)
         }
     }
@@ -117,10 +123,12 @@ const AdminProvider = ({ children }) => {
             const { message } = response.data
             dispatch({ type: "SUCCESS" })
             // console.log(data);
+            toast.dismiss()
             toast.success(message)
             getAllNewsLetters()
         } catch (error) {
             // console.log(error);
+            toast.dismiss()
             toast.error(error.response.data.message)
         }
     }
@@ -139,6 +147,7 @@ const AdminProvider = ({ children }) => {
             dispatch({ type: "GETALLCONTACTS", payload: { data } })
         } catch (error) {
             // console.log(error);
+            toast.dismiss()
             toast.error(error.response.data.message)
         }
     }
@@ -156,10 +165,12 @@ const AdminProvider = ({ children }) => {
             const { message } = response.data
             // console.log(data);
             dispatch({ type: "SUCCESS" })
+            toast.dismiss()
             toast.success(message)
             getAllContacts()
         } catch (error) {
             // console.log(error);
+            toast.dismiss()
             toast.error(error.response.data.message)
         }
     }
@@ -178,6 +189,7 @@ const AdminProvider = ({ children }) => {
             dispatch({ type: "GETALLPRODUCTQUERIES", payload: { data } })
         } catch (error) {
             // console.log(error);
+            toast.dismiss()
             toast.error(error.response.data.message)
         }
     }
@@ -195,10 +207,12 @@ const AdminProvider = ({ children }) => {
             const { message } = response.data
             // console.log(data);
             dispatch({ type: "SUCCESS" })
+            toast.dismiss()
             toast.success(message)
             getAllProductQuery()
         } catch (error) {
             // console.log(error);
+            toast.dismiss()
             toast.error(error.response.data.message)
         }
     }
@@ -217,10 +231,12 @@ const AdminProvider = ({ children }) => {
             const { message } = response.data
             // console.log(data);
             dispatch({ type: "SUCCESS" })
+            toast.dismiss()
             toast.success(message)
             getAllHomeCarousel()
         } catch (error) {
             // console.log(error);
+            toast.dismiss()
             toast.error(error.response.data.message)
         }
     }
@@ -240,6 +256,7 @@ const AdminProvider = ({ children }) => {
             dispatch({ type: "SINGALCAROUSEL", payload: { data } })
         } catch (error) {
             // console.log(error);
+            toast.dismiss()
             toast.error(error.response.data.message)
         }
     }
@@ -258,10 +275,12 @@ const AdminProvider = ({ children }) => {
             )
             const { message } = response.data
             dispatch({ type: "SUCCESS" })
+            toast.dismiss()
             toast.success(message)
             getAllHomeCarousel()
         } catch (error) {
             // console.log(error);
+            toast.dismiss()
             toast.error(error.response.data.message)
         }
     }
@@ -278,10 +297,12 @@ const AdminProvider = ({ children }) => {
             )
             const { message } = response.data
             dispatch({ type: "SUCCESS" })
+            toast.dismiss()
             toast.success(message)
             getAllHomeCarousel()
         } catch (error) {
             // console.log(error);
+            toast.dismiss()
             toast.error(error.response.data.message)
         }
     }
@@ -301,10 +322,12 @@ const AdminProvider = ({ children }) => {
             const { message } = response.data
             // console.log(data);
             dispatch({ type: "SUCCESS" })
+            toast.dismiss()
             toast.success(message)
             getAllApplications()
         } catch (error) {
             // console.log(error);
+            toast.dismiss()
             toast.error(error.response.data.message)
         }
     }
@@ -324,6 +347,7 @@ const AdminProvider = ({ children }) => {
             dispatch({ type: "SINGALAPPLICATION", payload: { data } })
         } catch (error) {
             // console.log(error);
+            toast.dismiss()
             toast.error(error.response.data.message)
         }
     }
@@ -342,10 +366,12 @@ const AdminProvider = ({ children }) => {
             )
             const { message } = response.data
             dispatch({ type: "SUCCESS" })
+            toast.dismiss()
             toast.success(message)
             getAllApplications()
         } catch (error) {
             // console.log(error);
+            toast.dismiss()
             toast.error(error.response.data.message)
         }
     }
@@ -362,10 +388,12 @@ const AdminProvider = ({ children }) => {
             )
             const { message } = response.data
             dispatch({ type: "SUCCESS" })
+            toast.dismiss()
             toast.success(message)
             getAllApplications()
         } catch (error) {
             // console.log(error);
+            toast.dismiss()
             toast.error(error.response.data.message)
         }
     }
@@ -387,10 +415,12 @@ const AdminProvider = ({ children }) => {
             const { message } = response.data
             // console.log(data);
             dispatch({ type: "SUCCESS" })
+            toast.dismiss()
             toast.success(message)
             getAllProduct()
         } catch (error) {
             // console.log(error);
+            toast.dismiss()
             toast.error(error.response.data.message)
         }
     }
@@ -410,6 +440,7 @@ const AdminProvider = ({ children }) => {
             dispatch({ type: "SINGALPRODUCT", payload: { data } })
         } catch (error) {
             // console.log(error);
+            toast.dismiss()
             toast.error(error.response.data.message)
         }
     }
@@ -428,10 +459,12 @@ const AdminProvider = ({ children }) => {
             )
             const { message } = response.data
             dispatch({ type: "SUCCESS" })
+            toast.dismiss()
             toast.success(message)
             getAllProduct()
         } catch (error) {
             // console.log(error);
+            toast.dismiss()
             toast.error(error.response.data.message)
         }
     }
@@ -448,10 +481,12 @@ const AdminProvider = ({ children }) => {
             )
             const { message } = response.data
             dispatch({ type: "SUCCESS" })
+            toast.dismiss()
             toast.success(message)
             getAllProduct()
         } catch (error) {
             // console.log(error);
+            toast.dismiss()
             toast.error(error.response.data.message)
         }
     }
@@ -472,10 +507,12 @@ const AdminProvider = ({ children }) => {
             const { message } = response.data
             // console.log(data);
             dispatch({ type: "SUCCESS" })
+            toast.dismiss()
             toast.success(message)
             getAllPatner()
         } catch (error) {
             // console.log(error);
+            toast.dismiss()
             toast.error(error.response.data.message)
         }
     }
@@ -495,6 +532,7 @@ const AdminProvider = ({ children }) => {
             dispatch({ type: "SINGALPATNER", payload: { data } })
         } catch (error) {
             // console.log(error);
+            toast.dismiss()
             toast.error(error.response.data.message)
         }
     }
@@ -513,10 +551,12 @@ const AdminProvider = ({ children }) => {
             )
             const { message } = response.data
             dispatch({ type: "SUCCESS" })
+            toast.dismiss()
             toast.success(message)
             getAllPatner()
         } catch (error) {
             // console.log(error);
+            toast.dismiss()
             toast.error(error.response.data.message)
         }
     }
@@ -533,10 +573,12 @@ const AdminProvider = ({ children }) => {
             )
             const { message } = response.data
             dispatch({ type: "SUCCESS" })
+            toast.dismiss()
             toast.success(message)
             getAllPatner()
         } catch (error) {
             // console.log(error);
+            toast.dismiss()
             toast.error(error.response.data.message)
         }
     }
@@ -557,10 +599,12 @@ const AdminProvider = ({ children }) => {
             const { message } = response.data
             // console.log(data);
             dispatch({ type: "SUCCESS" })
+            toast.dismiss()
             toast.success(message)
             getAllThemeCategory()
         } catch (error) {
             // console.log(error);
+            toast.dismiss()
             toast.error(error.response.data.message)
         }
     }
@@ -580,6 +624,7 @@ const AdminProvider = ({ children }) => {
             dispatch({ type: "SINGALTHEMECATEGORY", payload: { data } })
         } catch (error) {
             // console.log(error);
+            toast.dismiss()
             toast.error(error.response.data.message)
         }
     }
@@ -598,10 +643,12 @@ const AdminProvider = ({ children }) => {
             )
             const { message } = response.data
             dispatch({ type: "SUCCESS" })
+            toast.dismiss()
             toast.success(message)
             getAllThemeCategory()
         } catch (error) {
             // console.log(error);
+            toast.dismiss()
             toast.error(error.response.data.message)
         }
     }
@@ -618,10 +665,12 @@ const AdminProvider = ({ children }) => {
             )
             const { message } = response.data
             dispatch({ type: "SUCCESS" })
+            toast.dismiss()
             toast.success(message)
             getAllThemeCategory()
         } catch (error) {
             // console.log(error);
+            toast.dismiss()
             toast.error(error.response.data.message)
         }
     }

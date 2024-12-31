@@ -55,6 +55,7 @@ const AllSavedAddress = () => {
 
     const handleContinueToPayment = () => {
         if (!selectedAddress) {
+            toast.dismiss()
             return toast.error("Please select address")
         }
         navigate("/user/proceedtopayment")

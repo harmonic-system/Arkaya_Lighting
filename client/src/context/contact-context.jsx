@@ -32,10 +32,12 @@ const ContactProvider = ({ children }) => {
             )
             const { message } = response.data
             dispatch({ type: "SUCCESS", payload: { message } })
+            toast.dismiss()
             toast.success(message)
         } catch (error) {
             // console.log(error.response.data.message);
             dispatch({ type: "SET_ERROR", payload: error.response.data.message })
+            toast.dismiss()
             toast.error(error?.response?.data?.message)
         }
     }
@@ -53,10 +55,12 @@ const ContactProvider = ({ children }) => {
             )
             const { message } = response.data
             dispatch({ type: "SUCCESS", payload: { message } })
+            toast.dismiss()
             toast.success(message)
         } catch (error) {
             // console.log(error.response.data.message);
             dispatch({ type: "SET_ERROR", payload: error.response.data.message })
+            toast.dismiss()
             toast.error(error?.response?.data?.message)
         }
     }
@@ -75,10 +79,12 @@ const ContactProvider = ({ children }) => {
             )
             const { message } = response.data
             dispatch({ type: "SUCCESS", payload: { message } })
+            toast.dismiss()
             toast.success(message)
         } catch (error) {
             // console.log(error.response.data.message);
             dispatch({ type: "SET_ERROR", payload: error.response.data.message })
+            toast.dismiss()
             toast.error(error?.response?.data?.message)
         }
     }

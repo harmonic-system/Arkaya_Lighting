@@ -61,9 +61,9 @@ const UserProfile = () => {
                         />
                     </form>
                 </div>
-                {/* <Link to="/user/editprofile" className='profile-edit-button'>
+                <Link to="/user/editprofile" className='profile-edit-button'>
                     <Button>Edit Profile</Button>
-                </Link> */}
+                </Link>
             </div>
         </ProfileWrapper>
     );

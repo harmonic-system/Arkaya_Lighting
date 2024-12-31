@@ -8,7 +8,7 @@ const {
     forgotPassword,
     resetPassword,
     deleteAccount,
-    updateprofile
+    updateProfile
 } = require("../controllers/auth-controller")
 
 const router = express.Router()
@@ -20,11 +20,11 @@ router.post("/login", validate(loginSchema), loginController)
 router.get("/user", authMiddleware, userController)
 
 router.post("/change-password", validate(changePasswordSchema), authMiddleware, changePassword);
-router.post('/forgot-password',validate(forgetPasswordSchema), forgotPassword);
-router.post('/reset-password/:token',validate(resetPasswordSchema), resetPassword);
+router.post('/forgot-password', validate(forgetPasswordSchema), forgotPassword);
+router.post('/reset-password/:token', validate(resetPasswordSchema), resetPassword);
 router.delete('/delete-account', authMiddleware, deleteAccount);
 
-router.patch("/update",authMiddleware, updateprofile)
+router.patch("/update", authMiddleware, updateProfile)
 
 module.exports = router
 
