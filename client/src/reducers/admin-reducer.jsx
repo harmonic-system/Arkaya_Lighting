@@ -52,6 +52,18 @@ const adminReducer = (state, action) => {
                 isLoading: false,
                 singleProduct: action.payload.data
             }
+        case "SINGALPATNER":
+            return {
+                ...state,
+                isLoading: false,
+                singlePatner: action.payload.data
+            }
+        case "SINGALTHEMECATEGORY":
+            return {
+                ...state,
+                isLoading: false,
+                singleThemeCategory: action.payload.data
+            }
 
         default:
             return state

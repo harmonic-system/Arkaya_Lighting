@@ -21,7 +21,7 @@ const WishListSchema = new Schema({
     timestamps: true // Automatically adds createdAt and updatedAt fields
 });
 
-const WishList = new model("WishList", WishListSchema);
+const WishList = model("WishList", WishListSchema);
 
 module.exports = WishList;
 

@@ -10,9 +10,9 @@ const Footer = () => {
           <div className="container">
             <ul className="social">
               <li><a target="_blank" href="https://www.facebook.com/profile.php?id=61550851665100" ><FaFacebook /></a></li>
-              <li><a target="_blank" href="#"><FaTwitter /></a></li>
+              {/* <li><a target="_blank" href="#"><FaTwitter /></a></li> */}
               <li><a target="_blank" href="https://www.instagram.com/arkayalighting/"><FaInstagram /></a></li>
-              <li><a target="_blank" href="#"><FaLinkedin /></a></li>
+              {/* <li><a target="_blank" href="#"><FaLinkedin /></a></li> */}
             </ul>
             <div className="grid grid-four-column">
               <div className="contact">

@@ -7,38 +7,40 @@ import { useAuthContext } from '../../../context/auth-context';
 import { IoClose } from "react-icons/io5";
 import LoadingPage from '../../Loading/Loading';
 
-const AdminFullViewApplicationDetails = ({ applicationId, closeModal }) => {
+const AdminFullViewTechnologyPatnerDetails = ({ patnerId, closeModal }) => {
     const { token } = useAuthContext();
-    const { isLoading, singleApplication, getSingalApplication } = useAdminContext();
+    const { isLoading, singlePatner, getSingalPatner } = useAdminContext();
 
-    const [applicationData, setApplicationData] = useState({
-        applicationfile: "",
-        heading: "",
-        about: ""
+    const [technologyPatnerData, setTechnologyPatnerData] = useState({
+        technologypatnerfile: "",
+        name: "",
+        des: "",
+        link:""
     });
 
     useEffect(() => {
-        if (token && applicationId) {
-            getSingalApplication(applicationId);
+        if (token && patnerId) {
+            getSingalPatner(patnerId);
         }
-    }, [token, applicationId]);
+    }, [token, patnerId]);
 
     useEffect(() => {
-        if (singleApplication) {
-            setApplicationData({
-                applicationfile: singleApplication?.applicationfile?.url,
-                heading: singleApplication?.heading,
-                about: singleApplication?.about
+        if (singlePatner) {
+            setTechnologyPatnerData({
+                technologypatnerfile: singlePatner?.technologypatnerfile?.url,
+                name: singlePatner?.name,
+                des: singlePatner?.des,
+                link: singlePatner?.link
             });
         }
-    }, [singleApplication]);
+    }, [singlePatner]);
 
     if (isLoading) {
         return <LoadingPage />
     }
 
     return (
-        <AdminFullViewApplicationDetailsWrapper>
+        <AdminFullViewTechnologyPatnerDetailsWrapper>
             <div className="modal">
                 <div className="modal-content">
                     {/* Close Button */}
@@ -50,15 +52,15 @@ const AdminFullViewApplicationDetails = ({ applicationId, closeModal }) => {
                         {/* Product Image */}
                         <div className="product-gallery">
                             <img
-                                src={applicationData?.applicationfile}
-                                alt={applicationData.heading}
+                                src={technologyPatnerData?.technologypatnerfile}
+                                alt={technologyPatnerData.name}
                                 className="main-image"
                             />
                         </div>
 
                         {/* Product Details */}
                         <div className="product-info">
-                            <h1 className="product-name">{applicationData.heading}</h1>
+                            <h1 className="product-name">{technologyPatnerData.name}</h1>
                             {/* Description */}
                             <div className="product-description">
                                 <p>
@@ -68,13 +70,25 @@ const AdminFullViewApplicationDetails = ({ applicationId, closeModal }) => {
                                         display: "inline-block"
                                     }}>
                                         Description:
-                                    </strong> {applicationData.about}
+                                    </strong> {technologyPatnerData.des}
+                                </p>
+                            </div>
+                            {/* Link */}
+                            <div className="product-description">
+                                <p>
+                                    <strong style={{
+                                        textTransform: "capitalize",
+                                        marginBottom: "10px",
+                                        display: "inline-block"
+                                    }}>
+                                        Link:
+                                    </strong> {technologyPatnerData.link}
                                 </p>
                             </div>
 
                             {/* Actions */}
                             <div className="modal-actions">
-                                <Link className='edit-btn-link' to={`/admin/editapplication/${singleApplication?._id}`}>
+                                <Link className='edit-btn-link' to={`/admin/edittechnologyPatner/${singlePatner?._id}`}>
                                     <Button className='edit-btn'>
                                         Edit
                                     </Button>
@@ -85,13 +99,13 @@ const AdminFullViewApplicationDetails = ({ applicationId, closeModal }) => {
                     </div>
                 </div>
             </div>
-        </AdminFullViewApplicationDetailsWrapper>
+        </AdminFullViewTechnologyPatnerDetailsWrapper>
     );
 };
 
-export default AdminFullViewApplicationDetails;
+export default AdminFullViewTechnologyPatnerDetails;
 
-const AdminFullViewApplicationDetailsWrapper = styled.section`
+const AdminFullViewTechnologyPatnerDetailsWrapper = styled.section`
   .modal {
     display: flex;
     position: fixed;

@@ -238,7 +238,19 @@ select {
   padding: 2rem;
   border-radius: 8px;
   text-align: center;
-}
+  animation: fadeInFromCenter 0.5s ease-out;
+  }
+
+  @keyframes fadeInFromCenter {
+    0% {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
 
 .modal h2 {
   font-size: 2rem;

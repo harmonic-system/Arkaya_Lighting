@@ -43,6 +43,7 @@ const AdminFullViewProductDetails = ({ productId, closeModal }) => {
         featured: singleProduct?.featured,
         des: { description: "", ...singleProduct?.des },
         keywords: singleProduct?.keywords,
+        themeCategory: singleProduct?.themeCategory,
       });
     }
   }, [singleProduct]);
@@ -97,6 +98,11 @@ const AdminFullViewProductDetails = ({ productId, closeModal }) => {
                     }`}
                 >
                   Type: {productData.IndoorOutdoor || 'Not specified'}
+                </span>
+                <span
+                  className='badge themeCategory'
+                >
+                  ThemeCategory: {productData.themeCategory || 'Not specified'}
                 </span>
               </div>
 
@@ -176,7 +182,21 @@ const AdminFullViewProductDetailsWrapper = styled.section`
     padding: 2rem;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
     overflow-y: auto;
-    position: relative; /* Positioning for close button */
+    position: relative;
+
+    /* Animation */
+    animation: fadeInFromCenter 0.5s ease-out;
+  }
+
+  @keyframes fadeInFromCenter {
+    0% {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
   }
 
   /* Close Button */
@@ -269,6 +289,11 @@ const AdminFullViewProductDetailsWrapper = styled.section`
   .badge.outdoor {
     background: #fff1f0;
     color: #f5222d;
+  }
+
+  .badge.themeCategory {
+    background: #fff1f0;
+    color: green;
   }
 
   /* Keywords */

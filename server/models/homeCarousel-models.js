@@ -23,7 +23,7 @@ const homecarouselSchema = new Schema({
   timestamps: true, // Automatically adds createdAt and updatedAt fields
 })
 
-const HomeCarousel = new model("HomeCarousel", homecarouselSchema);
+const HomeCarousel = model("HomeCarousel", homecarouselSchema);
 
 module.exports = HomeCarousel;
 

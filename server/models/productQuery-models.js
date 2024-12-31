@@ -43,7 +43,7 @@ const productQuerySchema = new Schema({
   timestamps: true, // Automatically adds createdAt and updatedAt fields
 })
 
-const ProductQuery = new model("ProductQuery", productQuerySchema)
+const ProductQuery = model("ProductQuery", productQuerySchema)
 
 module.exports = ProductQuery
 

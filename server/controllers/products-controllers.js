@@ -1,6 +1,8 @@
 const Application = require("../models/application-models")
 const HomeCarousel = require("../models/homeCarousel-models")
+const Patner = require("../models/patners-model")
 const Product = require("../models/products-model")
+const ThemeCategory = require("../models/themeCategory-models")
 
 const getapplication = async (_, res) => {
   try {
@@ -59,4 +61,28 @@ const getsingleproducts = async (req, res) => {
   }
 }
 
-module.exports = { getapplication, gethomecarousel, getproducts, getsingleproducts }
+const getpatners = async (_, res) => {
+  try {
+    const patners = await Patner.find()
+    if (!patners) {
+      return res.status(404).json({ message: 'Patners not found', data: [] })
+    }
+    return res.status(200).json({ data: patners })
+  } catch (error) {
+    return res.status(500).json({ message: 'Error fetching patners', error: error.message })
+  }
+}
+
+const getthemeCategory = async (_, res) => {
+  try {
+    const themeCategory = await ThemeCategory.find()
+    if (!themeCategory) {
+      return res.status(404).json({ message: 'Theme Category not found', data: [] })
+    }
+    return res.status(200).json({ data: themeCategory })
+  } catch (error) {
+    return res.status(500).json({ message: 'Error fetching themeCategory', error: error.message })
+  }
+}
+
+module.exports = { getapplication, gethomecarousel, getproducts, getsingleproducts, getpatners, getthemeCategory }

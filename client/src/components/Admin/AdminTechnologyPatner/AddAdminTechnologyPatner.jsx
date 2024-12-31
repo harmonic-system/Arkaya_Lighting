@@ -6,19 +6,20 @@ import LoadingPage from "../../Loading/Loading";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 
-const AddAdminApplication = () => {
-    const [applicationData, setApplicationData] = useState({
-        applicationfile: null,
-        heading: "",
-        about: "",
+const AddAdminTechnologyPatner = () => {
+    const [technologyPatnerData, setTechnologyPatnerData] = useState({
+        technologypatnerfile: null,
+        name: "",
+        des: "",
+        link: ""
     });
 
-    const { isLoading, addApplication } = useAdminContext();
+    const { isLoading, addPatner } = useAdminContext();
     const navigate = useNavigate();
 
     const handleChange = (e) => {
-        setApplicationData({
-            ...applicationData,
+        setTechnologyPatnerData({
+            ...technologyPatnerData,
             [e.target.name]: e.target.value,
         });
     };
@@ -27,34 +28,34 @@ const AddAdminApplication = () => {
         e.preventDefault();
 
         try {
-            await addApplication(applicationData);
-            navigate("/admin/application");
+            await addPatner(technologyPatnerData);
+            navigate("/admin/technologyPatner");
         } catch (error) {
             console.error(error);
         }
     };
 
     const handleFileChange = (e) => {
-        const applicationfile = e.target.files[0];
-        transforFile(applicationfile);
+        const technologypatnerfile = e.target.files[0];
+        transforFile(technologypatnerfile);
     };
 
-    const transforFile = (applicationfile) => {
+    const transforFile = (technologypatnerfile) => {
         const reader = new FileReader();
 
-        reader.readAsDataURL(applicationfile);
+        reader.readAsDataURL(technologypatnerfile);
         reader.onloadend = () => {
-            setApplicationData((prevState) => ({
+            setTechnologyPatnerData((prevState) => ({
                 ...prevState,
-                applicationfile: reader.result,
+                technologypatnerfile: reader.result,
             }));
         };
     };
 
     const handleDeleteImage = () => {
-        setApplicationData((prevState) => ({
+        setTechnologyPatnerData((prevState) => ({
             ...prevState,
-            applicationfile: null,
+            technologypatnerfile: null,
         }));
     };
 
@@ -64,10 +65,10 @@ const AddAdminApplication = () => {
 
     return (
         <>
-            <AddAdminApplicationWrapper>
+            <AddAdminTechnologyPatnerWrapper>
                 <section className="container upload-product-section">
                     <div className="header-bar">
-                        <h2>Upload Application</h2>
+                        <h2>Add Technology Patner</h2>
                     </div>
                     <div className="contact-form">
                         <form className="contact-inputs" onSubmit={handleSubmit}>
@@ -87,11 +88,11 @@ const AddAdminApplication = () => {
                                     />
                                 </label>
                                 <div className="uploaded-images">
-                                    {applicationData.applicationfile && (
+                                    {technologyPatnerData.technologypatnerfile && (
                                         <div className="image-thumbnail">
                                             <img
-                                                src={applicationData.applicationfile}
-                                                alt={`${applicationData.heading}-image`}
+                                                src={technologyPatnerData.technologypatnerfile}
+                                                alt={`${technologyPatnerData.name}-image`}
                                                 className="thumbnail-image"
                                             />
                                             <MdDelete
@@ -106,9 +107,9 @@ const AddAdminApplication = () => {
                             <input
                                 type="text"
                                 onChange={handleChange}
-                                value={applicationData.heading}
-                                name="heading"
-                                placeholder="Heading"
+                                value={technologyPatnerData.name}
+                                name="name"
+                                placeholder="Name"
                                 autoComplete="off"
                                 required
                             />
@@ -116,24 +117,33 @@ const AddAdminApplication = () => {
                             <input
                                 type="text"
                                 onChange={handleChange}
-                                value={applicationData.about}
-                                name="about"
-                                placeholder="About"
+                                value={technologyPatnerData.des}
+                                name="des"
+                                placeholder="Give a Short Description"
+                                autoComplete="off"
+                            />
+
+                            <input
+                                type="text"
+                                onChange={handleChange}
+                                value={technologyPatnerData.link}
+                                name="link"
+                                placeholder="Link"
                                 autoComplete="off"
                                 required
                             />
-                            <button type="submit" className="submit-button">Add Application</button>
+                            <button type="submit" className="submit-button">Add Patner</button>
                         </form>
                     </div>
                 </section>
-            </AddAdminApplicationWrapper>
+            </AddAdminTechnologyPatnerWrapper>
         </>
     );
 };
 
-export default AddAdminApplication;
+export default AddAdminTechnologyPatner;
 
-const AddAdminApplicationWrapper = styled.div`
+const AddAdminTechnologyPatnerWrapper = styled.div`
   .upload-product-section {
     padding: 20px;
     background-color: #f9f9f9;

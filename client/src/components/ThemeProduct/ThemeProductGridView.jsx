@@ -7,7 +7,7 @@ import { Button } from '../../styles/Button';
 
 const ThemeProductGridView = () => {
 
-  const { themeProducts, getThemeSearchProducts } = useCategoryContext()
+  const { themeProducts, getThemeCategoryProducts } = useCategoryContext()
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 9;
   // console.log(themeProducts);
@@ -21,7 +21,7 @@ const ThemeProductGridView = () => {
       const newCategory = localStorage.getItem("landingmenu");
       if (newCategory !== selectedCategory) {
         setSelectedCategory(newCategory);
-        getThemeSearchProducts(); // Re-fetch the filtered products
+        getThemeCategoryProducts(); // Re-fetch the filtered products
       }
     };
 
@@ -31,12 +31,12 @@ const ThemeProductGridView = () => {
     return () => {
       window.removeEventListener("storage", handleStorageChange);
     };
-  }, [selectedCategory, getThemeSearchProducts]);
+  }, [selectedCategory, getThemeCategoryProducts]);
 
   // Re-fetch the category filtered products when selectedCategory changes
   useEffect(() => {
-    getThemeSearchProducts();
-  }, [selectedCategory, getThemeSearchProducts]);
+    getThemeCategoryProducts();
+  }, [selectedCategory, getThemeCategoryProducts]);
 
   const totalPages = Math.ceil(themeProducts?.length / itemsPerPage);
 

@@ -11,6 +11,6 @@ const newsLetterSchema = new Schema({
   timestamps: true, // Automatically adds createdAt and updatedAt fields
 })
 
-const NewsLetter = new model("NewsLetter", newsLetterSchema)
+const NewsLetter = model("NewsLetter", newsLetterSchema)
 
 module.exports = NewsLetter

@@ -68,6 +68,6 @@ const deletedAuthSchema = new Schema({
     timestamps: true,
 });
 
-const DeletedAuth = new model("DeletedAuth", deletedAuthSchema);
+const DeletedAuth = model("DeletedAuth", deletedAuthSchema);
 
 module.exports = DeletedAuth;

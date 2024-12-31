@@ -12,8 +12,10 @@ import AdminButton from "./components/Admin/AdminButton/AdminButton";
 import Preloader from "./components/Loading/Preloader";
 
 // Pages
+import LandingPage from "./pages/LandingPage";
+import ThemeProduct from "./pages/ThemeProduct";
 import Home from "./pages/Home";
-import Brandpatner from "./pages/Brandpatner";
+import TechnologyPatners from "./pages/TechnologyPatners";
 import Application from "./pages/Application";
 import DiscoverUs from "./pages/DiscoverUs";
 import Software from "./pages/Resources/Software";
@@ -70,8 +72,12 @@ import AddAdminApplication from "./components/Admin/AdminApplication/AddAdminApp
 import EditAdminApplication from "./components/Admin/AdminApplication/EditAdminApplication";
 import AddAdminProduct from "./components/Admin/AdminProduct/AddAdminProduct";
 import EditAdminProduct from "./components/Admin/AdminProduct/EditAdminProduct";
-import LandingPage from "./pages/LandingPage";
-import ThemeProduct from "./pages/ThemeProduct";
+import AdminTechnologyPatner from "./components/Admin/AdminTechnologyPatner/AdminTechnologyPatner";
+import AddAdminTechnologyPatner from "./components/Admin/AdminTechnologyPatner/AddAdminTechnologyPatner";
+import EditAdminTechnologyPatner from "./components/Admin/AdminTechnologyPatner/EditAdminTechnologyPatner";
+import AdminThemeCategory from "./components/Admin/AdminThemeCategory/AdminThemeCategory";
+import AddAdminThemeCategory from "./components/Admin/AdminThemeCategory/AddAdminThemeCategory";
+import EditAdminThemeCategory from "./components/Admin/AdminThemeCategory/EditAdminThemeCategory";
 
 
 // Theme
@@ -129,19 +135,51 @@ function App() {
         position="top-center"
         reverseOrder={false}
         gutter={8}
-        containerClassName=""
+        containerClassName="custom-toast-container"
         containerStyle={{
           zIndex: 99999999,
           width: '300px',
-          fontSize: '16px',
           margin: '0 auto',
           display: 'flex',
           justifyContent: 'center',
         }}
         toastOptions={{
-          duration: 3000,
+          duration: 4000,
+          style: {
+            background: '#333',
+            color: '#fff',
+            fontSize: '14px',
+            padding: '10px 20px',
+            borderRadius: '8px',
+            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+            fontFamily: "'Poppins', sans-serif",
+            fontWeight: 400,
+            letterSpacing: '0.3px',
+          },
+          success: {
+            style: {
+              background: '#4CAF50',
+              color: '#fff',
+            },
+            icon: '✅',
+          },
+          error: {
+            style: {
+              background: '#F44336',
+              color: '#fff',
+            },
+            icon: '❌',
+          },
+          info: {
+            style: {
+              background: '#2196F3',
+              color: '#fff',
+            },
+            icon: 'ℹ️',
+          },
         }}
       />
+
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <GlobalStyle isAdmin={user?.isAdmin} />
@@ -191,7 +229,7 @@ function App() {
                     content="Arkaya Lighting partners, trusted lighting brands, lighting collaborations, innovative lighting solutions, lighting industry partnerships, sustainable lighting, leading lighting brands, lighting business collaborations"
                   />
                 </Helmet>
-                <Brandpatner />
+                <TechnologyPatners />
               </>
             } />
             <Route path="/application" element={
@@ -594,6 +632,12 @@ function App() {
               <Route path="products" element={<AdminProducts />} />
               <Route path="addproducts" element={<AddAdminProduct />} />
               <Route path="editproduct/:id" element={<EditAdminProduct />} />
+              <Route path="technologyPatner" element={<AdminTechnologyPatner />} />
+              <Route path="addtechnologyPatner" element={<AddAdminTechnologyPatner />} />
+              <Route path="edittechnologyPatner/:id" element={<EditAdminTechnologyPatner />} />
+              <Route path="themeCategory" element={<AdminThemeCategory />} />
+              <Route path="addthemeCategory" element={<AddAdminThemeCategory />} />
+              <Route path="editthemeCategory/:id" element={<EditAdminThemeCategory />} />
             </Route>
 
             {/* Error Page */}

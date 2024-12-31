@@ -45,6 +45,9 @@ const productSchema = new Schema({
     },
     keywords: {
         type: [String]
+    },
+    themeCategory: {
+        type: String,
     }
 }, {
     timestamps: true

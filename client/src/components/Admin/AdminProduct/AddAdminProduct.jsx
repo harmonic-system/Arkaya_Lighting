@@ -8,6 +8,7 @@ import { useAdminContext } from "../../../context/admin-context";
 import items from "../../../JSONData/ProductCategory.json"
 import { useNavigate } from "react-router-dom";
 import LoadingPage from "../../Loading/Loading";
+import { useProductContext } from "../../../context/product-context";
 
 const AddAdminProduct = () => {
   const [productData, setProductData] = useState({
@@ -23,9 +24,11 @@ const AddAdminProduct = () => {
       description: "",
     },
     keywords: [], // Add keywords state
+    themeCategory: "",
   });
 
   const { isLoading, addProduct } = useAdminContext()
+  const { themeCategory } = useProductContext()
   const navigate = useNavigate()
 
   const [openAddField, setOpenAddField] = useState(false);
@@ -213,6 +216,19 @@ const AddAdminProduct = () => {
               {
                 items.map((item) => (
                   <option key={item.productCategoryName} value={item.productCategoryName}>{item.productCategoryName}</option>
+                ))
+              }
+            </select>
+
+            <select
+              onChange={handleChange}
+              value={productData.themeCategory}
+              name="themeCategory"
+            >
+              <option value="" disabled>Click Here To Select Theme Category</option>
+              {
+                themeCategory.map((item) => (
+                  <option key={item.title} value={item.title}>{item.title}</option>
                 ))
               }
             </select>

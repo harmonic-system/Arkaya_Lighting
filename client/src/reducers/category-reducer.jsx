@@ -76,40 +76,36 @@ const categoryReducer = (state, action) => {
             let newAllProducts = [...allProducts]
 
             newAllProducts = newAllProducts.filter((item) => {
-                return item?.productname?.toLowerCase().includes(searchText?.toLowerCase())
-            })
+                const searchString = searchText?.toLowerCase() || '';
+
+                const desFields = item?.des
+                    ? Object.entries(item.des)
+                        .filter(([key]) => key)
+                        .map(([key, value]) => `${key} ${value}`)
+                        .join(' ')
+                    : '';
+
+                const combinedFields = `${item?.productname || ''} ${item?.productCategory || ''} ${item?.model || ''} ${item?.sku || ''} ${desFields}`.toLowerCase();
+
+                return combinedFields.includes(searchString);
+            });
+
+
             return {
                 ...state,
                 searchProducts: newAllProducts,
             };
 
-        case "SET_LANDING_PAGE_FILTERED_PRODUCT": {
+        case "SET_LANDING_PAGE_FILTERED_PRODUCT":
             let tempLandingProducts = [...allProducts];
-            const { themeProducts } = action?.payload;
+            const { themeProductsCategory } = action?.payload;
 
-            if (themeProducts === "Architecture") {
-                tempLandingProducts = tempLandingProducts.filter((item) =>
-                    ["Flood Lights", "Under Water Lights", "Under Ground Lights", "Media Pixels", "Tree Hanging Lights", "Wall Washers"].includes(item.productCategory)
-                );
-            } else if (themeProducts === "Entertainment") {
-                tempLandingProducts = tempLandingProducts.filter((item) =>
-                    ["Moving Head Series Lamps", "Moving Head Series Leds", "Static Leds", "Effect Lights"].includes(item.productCategory)
-                );
-            } else if (themeProducts === "Theme Environment") {
-                tempLandingProducts = tempLandingProducts.filter((item) =>
-                    ["Strips", "Dot Pixels", "Led Matrixes"].includes(item.productCategory)
-                );
-            } else if (themeProducts === "Video Displays") {
-                tempLandingProducts = tempLandingProducts.filter((item) =>
-                    ["Indoor Video Displays", "Outdoor Video Displays"].includes(item.productCategory)
-                );
-            }
+            let newtempLandingProducts = tempLandingProducts?.filter((item) => item?.themeCategory === themeProductsCategory)
 
             return {
                 ...state,
-                themeProducts: tempLandingProducts,
+                themeProducts: newtempLandingProducts,
             };
-        }
 
         default:
             return state

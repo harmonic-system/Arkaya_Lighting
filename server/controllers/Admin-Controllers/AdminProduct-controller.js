@@ -12,7 +12,8 @@ const addSingleProduct = async (req, res) => {
         productCategory,
         featured,
         des,
-        keywords
+        keywords,
+        themeCategory
     } = req.body;
 
     // console.log(productfile,
@@ -24,7 +25,8 @@ const addSingleProduct = async (req, res) => {
     //     productCategory,
     //     featured,
     //     des,
-    //     keywords );
+    //     keywords,
+    // themeCategory );
 
     try {
         // Upload product image to Cloudinary
@@ -52,7 +54,8 @@ const addSingleProduct = async (req, res) => {
             productCategory,
             featured,
             des,
-            keywords
+            keywords,
+            themeCategory
         };
 
         // console.log(productData);
@@ -105,7 +108,8 @@ const updateSingalProduct = async (req, res) => {
         productCategory,
         featured,
         des,
-        keywords
+        keywords,
+        themeCategory
     } = req.body;
 
     // console.log(
@@ -119,7 +123,8 @@ const updateSingalProduct = async (req, res) => {
     //     productCategory,
     //     featured,
     //     des,
-    //     keywords
+    //     keywords,
+    // themeCategory
     // );
 
     try {
@@ -140,7 +145,8 @@ const updateSingalProduct = async (req, res) => {
                     productCategory,
                     featured,
                     des,
-                    keywords
+                    keywords,
+                    themeCategory
                 },
                 { new: true } // Return the updated document
             );
@@ -172,7 +178,8 @@ const updateSingalProduct = async (req, res) => {
                     productCategory,
                     featured,
                     des,
-                    keywords
+                    keywords,
+                    themeCategory
                 },
                 { new: true } // Return the updated document
             );

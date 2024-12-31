@@ -5,10 +5,11 @@ import TopCarousel from './TopCarousel';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '../../styles/Button';
 import { useCategoryContext } from '../../context/category-context';
+import toast from 'react-hot-toast';
 
 const Hero = () => {
     const [showCategories, setShowCategories] = useState(true);
-    const { category, setCategoryinlocalStorage, getHeroSearchProducts, setHeroCategoryProduct } = useCategoryContext()
+    const { category, setCategoryinlocalStorage, setHeroCategoryProduct } = useCategoryContext()
     const navigate = useNavigate()
 
     const [searchText, setSearchText] = useState("")
@@ -41,6 +42,10 @@ const Hero = () => {
 
     const handleSearch = (e) => {
         e.preventDefault()
+        if (searchText.length === 0 || searchText.length === 1 || searchText.length === 2) {
+            toast.error("Please enter at least 3 characters to perform a search.");
+            return;
+        }
         setHeroCategoryProduct(searchText)
         navigate(`/searchProducts`)
     }

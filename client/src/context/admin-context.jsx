@@ -17,13 +17,15 @@ const initialState = {
     singleCarousel: {},
     singleApplication: {},
     singleProduct: {},
+    singlePatner: {},
+    singleThemeCategory: {},
 }
 
 const AdminProvider = ({ children }) => {
 
     const [state, dispatch] = useReducer(adminReducer, initialState)
     const { server, token } = useAuthContext()
-    const { getAllApplications, getAllHomeCarousel, getAllProduct } = useProductContext()
+    const { getAllApplications, getAllHomeCarousel, getAllProduct, getAllPatner, getAllThemeCategory } = useProductContext()
 
     const getAllUsers = async () => {
         dispatch({ type: "LOADING" })
@@ -454,6 +456,176 @@ const AdminProvider = ({ children }) => {
         }
     }
 
+    const addPatner = async (patnerData) => {
+        // console.log(patnerData);
+        dispatch({ type: "LOADING" })
+        try {
+            const response = await axios.post(`${server}/api/v1/admin/addpatner`,
+                patnerData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        "Content-Type": "application/json"
+                    }
+                }
+            )
+            const { message } = response.data
+            // console.log(data);
+            dispatch({ type: "SUCCESS" })
+            toast.success(message)
+            getAllPatner()
+        } catch (error) {
+            // console.log(error);
+            toast.error(error.response.data.message)
+        }
+    }
+
+    const getSingalPatner = async (id) => {
+        dispatch({ type: "LOADING" })
+        try {
+            const response = await axios.get(`${server}/api/v1/admin/getsingalPatner/${id}`,
+                {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                }
+            )
+            const { data } = response.data
+            dispatch({ type: "SINGALPATNER", payload: { data } })
+        } catch (error) {
+            // console.log(error);
+            toast.error(error.response.data.message)
+        }
+    }
+
+    const updatePatner = async (id, patnerData) => {
+
+        dispatch({ type: "LOADING" })
+        try {
+            const response = await axios.put(`${server}/api/v1/admin/updatesingalPatner/${id}`,
+                patnerData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            )
+            const { message } = response.data
+            dispatch({ type: "SUCCESS" })
+            toast.success(message)
+            getAllPatner()
+        } catch (error) {
+            // console.log(error);
+            toast.error(error.response.data.message)
+        }
+    }
+
+    const deletePatner = async (id) => {
+        dispatch({ type: "LOADING" })
+        try {
+            const response = await axios.delete(`${server}/api/v1/admin/deletesingalPatner/${id}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            )
+            const { message } = response.data
+            dispatch({ type: "SUCCESS" })
+            toast.success(message)
+            getAllPatner()
+        } catch (error) {
+            // console.log(error);
+            toast.error(error.response.data.message)
+        }
+    }
+
+    const addThemeCategory = async (themeCategoryData) => {
+        // console.log(themeCategoryData);
+        dispatch({ type: "LOADING" })
+        try {
+            const response = await axios.post(`${server}/api/v1/admin/addthemecategory`,
+                themeCategoryData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        "Content-Type": "application/json"
+                    }
+                }
+            )
+            const { message } = response.data
+            // console.log(data);
+            dispatch({ type: "SUCCESS" })
+            toast.success(message)
+            getAllThemeCategory()
+        } catch (error) {
+            // console.log(error);
+            toast.error(error.response.data.message)
+        }
+    }
+
+    const getSingalThemeCategory = async (id) => {
+        dispatch({ type: "LOADING" })
+        try {
+            const response = await axios.get(`${server}/api/v1/admin/getsingalThemeCategory/${id}`,
+                {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                }
+            )
+            const { data } = response.data
+            dispatch({ type: "SINGALTHEMECATEGORY", payload: { data } })
+        } catch (error) {
+            // console.log(error);
+            toast.error(error.response.data.message)
+        }
+    }
+
+    const updateThemeCategory = async (id, themeCategoryData) => {
+
+        dispatch({ type: "LOADING" })
+        try {
+            const response = await axios.put(`${server}/api/v1/admin/updatesingalThemeCategory/${id}`,
+                themeCategoryData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            )
+            const { message } = response.data
+            dispatch({ type: "SUCCESS" })
+            toast.success(message)
+            getAllThemeCategory()
+        } catch (error) {
+            // console.log(error);
+            toast.error(error.response.data.message)
+        }
+    }
+
+    const deleteThemeCategory = async (id) => {
+        dispatch({ type: "LOADING" })
+        try {
+            const response = await axios.delete(`${server}/api/v1/admin/deletesingalThemeCategory/${id}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            )
+            const { message } = response.data
+            dispatch({ type: "SUCCESS" })
+            toast.success(message)
+            getAllThemeCategory()
+        } catch (error) {
+            // console.log(error);
+            toast.error(error.response.data.message)
+        }
+    }
+
     return (
         <AdminContext.Provider value={{
             ...state,
@@ -477,7 +649,15 @@ const AdminProvider = ({ children }) => {
             addProduct,
             getSingalProduct,
             updateProduct,
-            deleteProduct
+            deleteProduct,
+            addPatner,
+            getSingalPatner,
+            updatePatner,
+            deletePatner,
+            addThemeCategory,
+            getSingalThemeCategory,
+            updateThemeCategory,
+            deleteThemeCategory
         }}>
             {children}
         </AdminContext.Provider>

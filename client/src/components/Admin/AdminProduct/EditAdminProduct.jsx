@@ -10,11 +10,13 @@ import LoadingPage from '../../Loading/Loading';
 import { useNavigate, useParams } from 'react-router-dom';
 import items from "../../../JSONData/ProductCategory.json"
 import { Button } from '../../../styles/Button';
+import { useProductContext } from '../../../context/product-context';
 
 const EditAdminProduct = () => {
 
   const { token } = useAuthContext();
   const { isLoading, singleProduct, getSingalProduct, updateProduct } = useAdminContext();
+  const { themeCategory } = useProductContext()
   const { id } = useParams()
   const navigate = useNavigate()
 
@@ -34,6 +36,7 @@ const EditAdminProduct = () => {
     featured: false,
     des: {},
     keywords: [],
+    themeCategory: "",
   });
 
   useEffect(() => {
@@ -56,6 +59,7 @@ const EditAdminProduct = () => {
         featured: singleProduct?.featured,
         des: { description: "", ...singleProduct?.des },
         keywords: singleProduct?.keywords,
+        themeCategory: singleProduct?.themeCategory,
       });
     }
   }, [singleProduct]);
@@ -245,6 +249,19 @@ const EditAdminProduct = () => {
                 {
                   items.map((item) => (
                     <option key={item.productCategoryName} value={item.productCategoryName}>{item.productCategoryName}</option>
+                  ))
+                }
+              </select>
+
+              <select
+                onChange={handleChange}
+                value={productData.themeCategory}
+                name="themeCategory"
+              >
+                <option value="" disabled>Click Here To Select Product Category</option>
+                {
+                  themeCategory.map((item) => (
+                    <option key={item.title} value={item.title}>{item.title}</option>
                   ))
                 }
               </select>

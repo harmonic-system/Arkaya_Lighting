@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 
-const applicationSchema = new Schema({
-    applicationfile: {
+const themeCategorySchema = new Schema({
+    themeCategoryFile: {
         public_id: {
             type: String,
             required: true
@@ -11,18 +11,17 @@ const applicationSchema = new Schema({
             required: true
         },
     },
-    heading: {
+    title: {
         type: String,
         required: true
     },
-    about: {
+    des: {
         type: String,
-        required: true
-    },
+    }
 }, {
     timestamps: true, // Automatically adds createdAt and updatedAt fields
 })
 
-const Application = model("Application", applicationSchema)
+const ThemeCategory = model("ThemeCategory", themeCategorySchema)
 
-module.exports = Application
+module.exports = ThemeCategory

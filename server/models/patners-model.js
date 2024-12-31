@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 
-const applicationSchema = new Schema({
-    applicationfile: {
+const patnersSchema = new Schema({
+    technologypatnerfile: {
         public_id: {
             type: String,
             required: true
@@ -11,11 +11,14 @@ const applicationSchema = new Schema({
             required: true
         },
     },
-    heading: {
+    name: {
         type: String,
         required: true
     },
-    about: {
+    des: {
+        type: String,
+    },
+    link: {
         type: String,
         required: true
     },
@@ -23,6 +26,6 @@ const applicationSchema = new Schema({
     timestamps: true, // Automatically adds createdAt and updatedAt fields
 })
 
-const Application = model("Application", applicationSchema)
+const Patner = model("Patner", patnersSchema)
 
-module.exports = Application
+module.exports = Patner

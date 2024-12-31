@@ -17,7 +17,13 @@ const initialState = {
     productError: null,
     singleProduct: {},
     isSingleLoading: false,
-    singleProductError: null
+    singleProductError: null,
+    patner: [],
+    patnerLoading: false,
+    patnerError: null,
+    themeCategory: [],
+    themeCategoryLoading: false,
+    themeCategoryError: null,
 }
 
 const ProductProvider = ({ children }) => {
@@ -69,30 +75,45 @@ const ProductProvider = ({ children }) => {
         }
     }
 
+    const getAllPatner = async () => {
+        dispatch({ type: "PATNER_LOADING" })
+        try {
+            const response = await axios.get(`${server}/api/v1/products/getpatners`)
+            const { data } = response.data
+            dispatch({ type: "GET_PATNERS", payload: { data } })
+        } catch (error) {
+            dispatch({ type: "GET_PATNERS_ERROR", payload: error?.response?.data?.message })
+        }
+    }
+
+    const getAllThemeCategory = async () => {
+        dispatch({ type: "THEMECATEGORY_LOADING" })
+        try {
+            const response = await axios.get(`${server}/api/v1/products/getthemeCategory`)
+            const { data } = response.data
+            dispatch({ type: "GET_THEMECATEGORY", payload: { data } })
+        } catch (error) {
+            dispatch({ type: "GET_THEMECATEGORY_ERROR", payload: error?.response?.data?.message })
+        }
+    }
+
     useEffect(() => {
         getAllApplications()
         getAllHomeCarousel()
         getAllProduct()
+        getAllPatner()
+        getAllThemeCategory()
     }, [])
 
     return (
         <ProductContext.Provider value={{
-            application: state.application,
-            applicationLoading: state.applicationLoading,
-            applicationError: state.applicationError,
-            caraousel: state.caraousel,
-            caraouselLoading: state.caraouselLoading,
-            caraouselError: state.caraouselError,
-            products: state.products,
-            productLoading: state.productLoading,
-            productError: state.productError,
-            singleProduct: state.singleProduct,
-            isSingleLoading: state.isSingleLoading,
-            singleProductError: state.singleProductError,
+            ...state,
             getAllApplications,
             getAllHomeCarousel,
             getAllProduct,
-            getSingleProduct
+            getSingleProduct,
+            getAllPatner,
+            getAllThemeCategory
         }}>
             {children}
         </ProductContext.Provider>

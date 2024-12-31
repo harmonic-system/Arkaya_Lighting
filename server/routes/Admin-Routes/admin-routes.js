@@ -1,10 +1,17 @@
 const express = require("express")
 const authMiddleware = require("../../middleware/auth-middleware")
 const adminMiddleware = require("../../middleware/admin-middleware")
+
 const { getAllUsers, makeAdmin, deleteUser, getAllContacts, deleteContact, getAllNewsLetter, deleteNewsLetter, getAllProductQuery, deleteProductQuery } = require("../../controllers/Admin-Controllers/Admin-controllers")
+
 const { addHomeCarousel, getSingalHomeCarousel, updateHomeCarousel, deleteHomeCarousel } = require("../../controllers/Admin-Controllers/AdminCarousel-controllers")
+
 const { addApplication, getSingleApplication, updateApplication, deleteApplication } = require("../../controllers/Admin-Controllers/AdminApplication-controllers")
 const { addSingleProduct, getSingleProduct, updateSingalProduct, deleteSingalProduct } = require("../../controllers/Admin-Controllers/AdminProduct-controller")
+
+const { addPatner, getSingalPatner, updateSingalPatner, deleteSingalPatner } = require("../../controllers/Admin-Controllers/AdminPatner-controllers")
+
+const { addThemeCategory, getSingalThemeCategory, updateSingalThemeCategory, deleteSingalThemeCategory } = require("../../controllers/Admin-Controllers/AdminThemeCategory-controllers")
 
 const router = express.Router()
 
@@ -40,6 +47,16 @@ router.route("/addsingalProduct").post(authMiddleware, adminMiddleware, addSingl
 router.route("/getsingalProduct/:id").get(authMiddleware, adminMiddleware, getSingleProduct)
 router.route("/updatesingalProduct/:id").put(authMiddleware, adminMiddleware, updateSingalProduct)
 router.route("/deletesingalProduct/:id").delete(authMiddleware, adminMiddleware, deleteSingalProduct)
+
+router.route("/addpatner").post(authMiddleware, adminMiddleware, addPatner)
+router.route("/getsingalPatner/:id").get(authMiddleware, adminMiddleware, getSingalPatner)
+router.route("/updatesingalPatner/:id").put(authMiddleware, adminMiddleware, updateSingalPatner)
+router.route("/deletesingalPatner/:id").delete(authMiddleware, adminMiddleware, deleteSingalPatner)
+
+router.route("/addthemecategory").post(authMiddleware, adminMiddleware, addThemeCategory)
+router.route("/getsingalThemeCategory/:id").get(authMiddleware, adminMiddleware, getSingalThemeCategory)
+router.route("/updatesingalThemeCategory/:id").put(authMiddleware, adminMiddleware, updateSingalThemeCategory)
+router.route("/deletesingalThemeCategory/:id").delete(authMiddleware, adminMiddleware, deleteSingalThemeCategory)
 
 
 module.exports = router

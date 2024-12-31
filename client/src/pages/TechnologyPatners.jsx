@@ -1,32 +1,34 @@
 import styled from "styled-components";
+import { useProductContext } from "../context/product-context";
 
-const Brandpatner = () => {
-  const technologyPatner = [
-    {
-      name: "Led Stip Studio",
-      des: "",
-      image: "./images/patner/lss.png",
-      link: "https://www.ledstripstudio.com/"
-    },
-    {
-      name: "Black Trax",
-      des: "",
-      image: "./images/patner/blacktrax.png",
-      link: "https://cast-soft.com/blacktrax/"
-    },
-    {
-      name: "Digi Dot",
-      des: "",
-      image: "./images/patner/digidot.png",
-      link: "https://digidot.eu/"
-    },
-    {
-      name: "Wygarrow",
-      des: "",
-      image: "./images/patner/wygarrow.png",
-      link: "https://cast-soft.com/wysiwyg/"
-    },
-  ]
+const TechnologyPatners = () => {
+  const { patner } = useProductContext()
+  // const technologyPatner = [
+  //   {
+  //     name: "Led Stip Studio",
+  //     des: "",
+  //     image: "./images/patner/lss.png",
+  //     link: "https://www.ledstripstudio.com/"
+  //   },
+  //   {
+  //     name: "Black Trax",
+  //     des: "",
+  //     image: "./images/patner/blacktrax.png",
+  //     link: "https://cast-soft.com/blacktrax/"
+  //   },
+  //   {
+  //     name: "Digi Dot",
+  //     des: "",
+  //     image: "./images/patner/digidot.png",
+  //     link: "https://digidot.eu/"
+  //   },
+  //   {
+  //     name: "Wygarrow",
+  //     des: "",
+  //     image: "./images/patner/wygarrow.png",
+  //     link: "https://cast-soft.com/wysiwyg/"
+  //   },
+  // ]
   return (
     <>
       <Wrapper>
@@ -36,11 +38,11 @@ const Brandpatner = () => {
             <span>Collaborating with leading brands to brighten your spaces</span>
           </div>
           <div className="grid grid-tem-view">
-            {technologyPatner.map((patner, index) => (
-              <a href={patner.link} target="_blank" key={index} className="contact-box">
-                <img src={patner.image} alt="Brand Partner" />
-                <h3>{patner.name}</h3>
-                <p>{patner.des}</p>
+            {patner.map((patner, index) => (
+              <a href={patner?.link} target="_blank" key={index} className="contact-box">
+                <img src={patner?.technologypatnerfile?.url} alt={`${patner?.name}-image`} />
+                <h3>{patner?.name}</h3>
+                <p>{patner?.des}</p>
               </a>
             ))}
           </div>
@@ -51,7 +53,7 @@ const Brandpatner = () => {
   );
 };
 
-export default Brandpatner;
+export default TechnologyPatners;
 
 // Styled Components
 const Wrapper = styled.section`

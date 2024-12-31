@@ -29,6 +29,12 @@ const AdminNavbar = () => {
           <Link to="/admin/newsletter">
             <Button>NewsLetter</Button>
           </Link>
+          <Link to="/admin/technologyPatner">
+            <Button>Tech - Patn</Button>
+          </Link>
+          <Link to="/admin/themeCategory">
+            <Button>Theme Category</Button>
+          </Link>
 
           <ProductLists isOpen={isOpen} onClose={() => setIsOpen(false)} />
         </div>

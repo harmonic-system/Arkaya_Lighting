@@ -85,19 +85,19 @@ const CategoryProvider = ({ children }) => {
         getHeroSearchProducts();
     }, [state.allProducts, getHeroSearchProducts]);
 
-    const setThemeCategoryProduct = (themeProducts) => {
-        localStorage.setItem("landingmenu", themeProducts)
-        dispatch({ type: "SET_LANDING_PAGE_FILTERED_PRODUCT", payload: { themeProducts } });
+    const setThemeCategoryProduct = (themeProductsCategory) => {
+        localStorage.setItem("landingmenu", themeProductsCategory)
+        dispatch({ type: "SET_LANDING_PAGE_FILTERED_PRODUCT", payload: { themeProductsCategory } });
     }
 
-    const getThemeSearchProducts = useCallback(() => {
-        const themeProducts = localStorage.getItem("landingmenu");
-        dispatch({ type: "SET_LANDING_PAGE_FILTERED_PRODUCT", payload: { themeProducts } });
+    const getThemeCategoryProducts = useCallback(() => {
+        const themeProductsCategory = localStorage.getItem("landingmenu");
+        dispatch({ type: "SET_LANDING_PAGE_FILTERED_PRODUCT", payload: { themeProductsCategory } });
     }, [])
 
     useEffect(() => {
-        getThemeSearchProducts();
-    }, [state.allProducts, getThemeSearchProducts]);
+        getThemeCategoryProducts(); 
+    }, [state.allProducts, getThemeCategoryProducts]);
 
 
     return (
@@ -115,7 +115,7 @@ const CategoryProvider = ({ children }) => {
                 setHeroCategoryProduct,
                 getHeroSearchProducts,
                 setThemeCategoryProduct,
-                getThemeSearchProducts
+                getThemeCategoryProducts,
             }}
         >
             {children}

@@ -93,6 +93,54 @@ const productReducer = (state, action) => {
                 singleProductError: action.payload,
                 singleProduct: {},
             }
+
+        case "PATNER_LOADING":
+            return {
+                ...state,
+                patnerLoading: true,
+                patnerError: null,
+            }
+
+        case "GET_PATNERS":
+            return {
+                ...state,
+                patnerLoading: false,
+                patner: action.payload.data,
+                patnerError: null,
+            }
+
+        case "GET_PATNERS_ERROR":
+            return {
+                ...state,
+                patnerLoading: false,
+                patnerError: action.payload,
+                patner: [],
+            }
+
+        case "THEMECATEGORY_LOADING":
+            return {
+                ...state,
+                themeCategoryLoading: true,
+                themeCategoryError: null,
+            }
+
+        case "GET_THEMECATEGORY":
+            return {
+                ...state,
+                themeCategoryLoading: false,
+                themeCategory: action.payload.data,
+                themeCategoryError: null,
+            }
+
+        case "GET_THEMECATEGORY_ERROR":
+            return {
+                ...state,
+                themeCategoryLoading: false,
+                themeCategoryError: action.payload,
+                themeCategory: [],
+            }
+        default:
+            return state;
     }
 
 }

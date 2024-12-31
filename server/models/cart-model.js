@@ -26,7 +26,7 @@ const CartSchema = new Schema({
     timestamps: true // Automatically adds createdAt and updatedAt fields
 });
 
-const Cart = new model("Cart", CartSchema);
+const Cart = model("Cart", CartSchema);
 
 module.exports = Cart;
 

@@ -63,6 +63,6 @@ authSchema.methods.generateToken = function () {
     }
 };
 
-const Auth = new model("Auth", authSchema);
+const Auth = model("Auth", authSchema);
 
 module.exports = Auth;

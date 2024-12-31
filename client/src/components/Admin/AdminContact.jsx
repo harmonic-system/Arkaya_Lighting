@@ -42,7 +42,7 @@ const AdminContact = () => {
       <div className="grid grid-tem-view">
         {allContact?.map((contact) => (
           <div key={contact?._id} className="card">
-            <h2>{contact.name}</h2>
+            <h2>{contact?.name.toUpperCase()}</h2>
             <p><strong>Email:</strong> {contact.email}</p>
             <p><strong>Phone:</strong> {contact.phone}</p>
             <div className="card-actions">
@@ -193,6 +193,18 @@ const ModalWrapper = styled.div`
     word-wrap: break-word;
     overflow-y: auto;
     max-height: 80vh;
+    animation: fadeInFromCenter 0.5s ease-out;
+  }
+
+  @keyframes fadeInFromCenter {
+    0% {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
   }
 
   .modal-content p {

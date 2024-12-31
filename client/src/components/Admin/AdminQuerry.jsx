@@ -42,7 +42,7 @@ const AdminQuery = () => {
       <div className="grid grid-tem-view">
         {allQuerry?.map((query) => (
           <div key={query?._id} className="card">
-            <h2>{query?.name}</h2>
+            <h2>{query?.name?.toUpperCase()}</h2>
             <p><strong>Product:</strong> {query?.productName} ({query?.productCode})</p>
             <p><strong>Email:</strong> {query?.email}</p>
             <p><strong>Phone:</strong> {query?.phone}</p>
@@ -63,7 +63,7 @@ const AdminQuery = () => {
         <ModalWrapper>
           <div className="modal-content">
             <h2>Query Details</h2>
-            <p><strong>Name:</strong> {selectedQuery.name}</p>
+            <p><strong>Name:</strong> {selectedQuery?.name?.toUpperCase()}</p>
             <p><strong>Product Code:</strong> {selectedQuery.productCode}</p>
             <p><strong>Product Name:</strong> {selectedQuery.productName}</p>
             <p><strong>Product SKU:</strong> {selectedQuery.productSKU}</p>
@@ -196,6 +196,18 @@ const ModalWrapper = styled.div`
     word-wrap: break-word;
     overflow-y: auto;
     max-height: 80vh;
+    animation: fadeInFromCenter 0.5s ease-out;
+  }
+
+  @keyframes fadeInFromCenter {
+    0% {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
   }
 
   .modal-content p {

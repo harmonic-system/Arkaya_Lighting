@@ -115,7 +115,21 @@ const AdminFullViewCarouselDetailsWrapper = styled.section`
     padding: 2rem;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
     overflow-y: auto;
-    position: relative; /* Positioning for close button */
+    position: relative;
+
+    /* Animation */
+    animation: fadeInFromCenter 0.5s ease-out;
+  }
+
+  @keyframes fadeInFromCenter {
+    0% {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
   }
 
   /* Close Button */

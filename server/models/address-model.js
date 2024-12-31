@@ -48,6 +48,6 @@ const addressSchema = new Schema({
     timestamps: true // Automatically adds createdAt and updatedAt fields
 });
 
-const Address = new model("Address", addressSchema);
+const Address = model("Address", addressSchema);
 
 module.exports = Address;
