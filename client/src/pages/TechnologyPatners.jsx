@@ -3,32 +3,7 @@ import { useProductContext } from "../context/product-context";
 
 const TechnologyPatners = () => {
   const { patner } = useProductContext()
-  // const technologyPatner = [
-  //   {
-  //     name: "Led Stip Studio",
-  //     des: "",
-  //     image: "./images/patner/lss.png",
-  //     link: "https://www.ledstripstudio.com/"
-  //   },
-  //   {
-  //     name: "Black Trax",
-  //     des: "",
-  //     image: "./images/patner/blacktrax.png",
-  //     link: "https://cast-soft.com/blacktrax/"
-  //   },
-  //   {
-  //     name: "Digi Dot",
-  //     des: "",
-  //     image: "./images/patner/digidot.png",
-  //     link: "https://digidot.eu/"
-  //   },
-  //   {
-  //     name: "Wygarrow",
-  //     des: "",
-  //     image: "./images/patner/wygarrow.png",
-  //     link: "https://cast-soft.com/wysiwyg/"
-  //   },
-  // ]
+  
   return (
     <>
       <Wrapper>

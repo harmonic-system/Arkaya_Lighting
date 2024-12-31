@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Button } from '../../styles/Button'
 import { useContactContext } from '../../context/contact-context'
+import Spinner from '../Loading/Spinner '
 
 const NewsLestter = () => {
 
@@ -42,7 +43,9 @@ const NewsLestter = () => {
                             <form onSubmit={handleNewsletter}>
                                 <input className="" placeholder="Enter Your Email To Subscribe" type="email" name="newsletteremail" required
                                     onChange={handleNewsletterInput} value={newsubscriber.newsletteremail} />
-                                <Button type="submit">{loading ? "Subscribing...." : "Subcribe"}</Button>
+                                <Button type="submit">
+                                    {loading ? <Spinner /> : "Subscribe"}
+                                </Button>
                             </form>
                         </div>
                     </div>

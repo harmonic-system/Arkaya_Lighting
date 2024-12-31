@@ -8,8 +8,7 @@ const contactPageController = async (req, res) => {
     const { name, email, phone, organization, message } = req.body
     // console.log(name, email, phone, organization, message);
 
-
-    const contactSend = await new Contact({ name: name.toLowerCase(), email: email.toLowerCase(), phone, organization, message })
+    const contactSend = new Contact({ name: name.toLowerCase(), email: email.toLowerCase(), phone, organization, message })
 
     const newContact = await contactSend.save()
 
@@ -26,7 +25,7 @@ const productQuery = async (req, res) => {
   // console.log(name, email, phone, organization, query, productCode, productName, productSku);
 
   try {
-    const QueryRaise = await new ProductQuery({ productCode, productName, productSku, name, email, phone, organization, query })
+    const QueryRaise = new ProductQuery({ productCode, productName, productSku, name, email, phone, organization, query })
 
     const QuerySend = await QueryRaise.save()
 
@@ -49,7 +48,7 @@ const newsLetter = async (req, res) => {
       return res.status(409).json({ message: "Already Subscribed" })
     }
 
-    const newNewsletter = await new NewsLetter({ newsletteremail: email.toLowerCase().trim() })
+    const newNewsletter = new NewsLetter({ newsletteremail: email.toLowerCase().trim() })
 
     await newNewsletter.save()
 
@@ -58,10 +57,10 @@ const newsLetter = async (req, res) => {
       port: 465,
       secure: true,
       auth: {
-          user: "no-reply@arkayalighting.com",
-          pass: "no-replyArkaya@1008", 
+        user: "no-reply@arkayalighting.com",
+        pass: "no-replyArkaya@1008",
       },
-  });
+    });
 
     let mailOption = {
       from: "no-reply@arkayalighting.com",
