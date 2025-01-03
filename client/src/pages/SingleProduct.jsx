@@ -190,6 +190,7 @@ const Wrapper = styled.section`
     font-size: 2rem;
     font-weight: 600;
     margin-bottom: 1rem;
+    word-break: break-all;
   }
 
   p {

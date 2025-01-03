@@ -35,9 +35,18 @@ const GridViewProduct = (curElem) => {
 
           </NavLink>
           <div className="card-data">
+            <div className="card-data-name">
+              {/* <h3>{productname}</h3> */}
+              <h3>{productname?.length < 100 ? productname : productname?.slice(0, 100) + "..."}</h3>
+            </div>
             <div className="card-data-flex">
-              <h3>{productname?.length < 20 ? productname : productname?.slice(0, 15) + "..."}</h3>
-              {price ? <p className="card-data--price">{<FormatPrice price={price} />}</p> : <QueryBox productId={_id} productName={productname} sku={sku} />}
+              {
+                price ? <p className="card-data--price">{<FormatPrice price={price} />}</p>
+                  :
+                  <section className="card-data--query">
+                    <QueryBox productId={_id} productName={productname} sku={sku} />
+                  </section>
+              }
             </div>
           </div>
         </div>
@@ -111,23 +120,41 @@ const GridViewProductWrapper = styled.section`
   .card-data {
     padding: 1.5rem;
 
+    .card-data-name h3 {
+      font-size: 1.4rem;
+      color: ${({ theme }) => theme.colors.text};
+      font-weight: 600;
+      text-transform: capitalize;
+      height: 50px;
+      word-break: break-all;
+      overflow: hidden; 
+      text-overflow: ellipsis; 
+      width: 100%;
+    }
+
     .card-data-flex {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-top: 1rem;
-
-      h3 {
-        font-size: 1.4rem;
-        color: ${({ theme }) => theme.colors.text};
-        font-weight: 600;
-        text-transform: capitalize;
-      }
+      flex-wrap: wrap; /* Allows wrapping for smaller screens */
+      gap: 0.8rem;
+      height: 50px;
 
       .card-data--price {
         font-size: 1.4rem;
         color: ${({ theme }) => theme.colors.helper};
         font-weight: bold;
+        text-align:left;
+        width: 100%; 
+      }
+
+      .card-data--query {
+        width: 100%; 
+        display: flex;
+        justify-content:flex-end;
+        padding: 0.5rem;
+        background-color: ${({ theme }) => theme.colors.lightBg}; 
       }
     }
   }
@@ -153,19 +180,29 @@ const GridViewProductWrapper = styled.section`
 
   @media (max-width: 768px) {
     .card-data-flex {
-      flex-direction: column;
+      flex-direction: column; /* Stacks items vertically */
+      align-items: flex-start; /* Aligns content to the left */
       gap: 0.5rem;
-      text-align: center;
     }
 
     figure {
-      height: 15rem;
+      height: 15rem; /* Adjust image height for smaller screens */
+    }
+
+    .card-data-name h3 {
+      font-size: 0.9rem; /* Slightly smaller font size for mobile screens */
     }
   }
 
   @media (max-width: 549px) {
     .card-data-flex {
       flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .card-data--query {
+      text-align: right;
     }
   }
 `;

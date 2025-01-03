@@ -9,6 +9,8 @@ const initialState = {
     filterProducts: [],
     searchProducts: [],
     themeProducts: [],
+    themeCategory: "",
+    themeProductsSubCategory: [],
     isCategoryLoading: true,
     category: [],
     grid_view: true,
@@ -96,9 +98,12 @@ const CategoryProvider = ({ children }) => {
     }, [])
 
     useEffect(() => {
-        getThemeCategoryProducts(); 
+        getThemeCategoryProducts();
     }, [state.allProducts, getThemeCategoryProducts]);
 
+    const setThemeSubCategoryProducts = (themeProductsSubCategory) => {
+        dispatch({ type: "SET_LANDING_PAGE_SUB_CATEGORY_PRODUCT", payload: { themeProductsSubCategory } });
+    }
 
     return (
         <CategoryContext.Provider
@@ -116,6 +121,7 @@ const CategoryProvider = ({ children }) => {
                 getHeroSearchProducts,
                 setThemeCategoryProduct,
                 getThemeCategoryProducts,
+                setThemeSubCategoryProducts
             }}
         >
             {children}

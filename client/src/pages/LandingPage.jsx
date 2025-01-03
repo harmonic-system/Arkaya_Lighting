@@ -35,13 +35,13 @@ const LandingPage = () => {
         {/* Card Container */}
         <div className="grid grid-two-column">
           {themeCategory.map((themeCategory, index) => (
-            <div key={index} className="card">
+            <div key={index} className="card" onClick={() => handleChange(themeCategory.title)}>
               <div className="image-container">
                 <img src={themeCategory?.themeCategoryFile?.url} alt={themeCategory.title} />
               </div>
               <h3>{themeCategory.title}</h3>
               <p>{themeCategory.des}</p>
-              <button className="card-button" onClick={() => handleChange(themeCategory.title)}>
+              <button className="card-button">
                 Check Products
               </button>
             </div>
@@ -151,6 +151,7 @@ const LandingPageWrapper = styled.section`
     text-align: center;
     position: relative;
     overflow: hidden;
+    cursor: pointer;
   }
 
   .card:hover {

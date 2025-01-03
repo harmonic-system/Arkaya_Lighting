@@ -5,19 +5,16 @@ import toast from 'react-hot-toast';
 import { useWishListContext } from '../context/wishlist-context';
 import { useAuthContext } from '../context/auth-context';
 import FormatPrice from '../Helper/FormatPrice';
-import QueryBox from '../components/Products/QueryBox';
 
 const Wishlist = () => {
   const { addToCart } = useCartContext(); // Cart functionality from context
   const { fetchWishList, items, removeFromWishList, resetWishList } = useWishListContext(); // Wishlist functionality from context
   const { user } = useAuthContext();
 
-  // Add item to cart and remove it from wishlist
   const handleAddToCart = (item) => {
-    addToCart(user?._id, item.productId, 1); // Assuming quantity = 1
+    addToCart(user?._id, item.productId, 1);
     removeFromWishList(item.productId);
     toast.dismiss()
-    // toast.success(`${item.name} added to cart`);
   };
 
   useEffect(() => {
@@ -42,7 +39,7 @@ const Wishlist = () => {
                     className="wishlist-item-image"
                   />
                   <div className="wishlist-item-details">
-                    <h2>{item.name}</h2>
+                    <h2>{item.name?.length < 50 ? item.name : item.name?.slice(0, 50) + "..."}</h2>
                     {item.price ? <p>Price : <FormatPrice price={item.price} /> </p> : <p>Contact Us To Get Best Price</p>}
                     <div className="wishlist-item-actions">
                       <button
@@ -133,7 +130,7 @@ const WishListWrapper = styled.section`
 .wishlist-item-image {
   width: 100%;
   height: 200px;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 10px;
 }
 
@@ -146,6 +143,11 @@ const WishListWrapper = styled.section`
 .wishlist-item-details h2 {
   font-size: 1.5rem;
   color: #444;
+  height: 50px;
+  word-break: break-all;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  width: 100%;
 }
 
 .wishlist-item-details p {

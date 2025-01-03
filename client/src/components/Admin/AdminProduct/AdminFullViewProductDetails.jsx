@@ -250,6 +250,7 @@ const AdminFullViewProductDetailsWrapper = styled.section`
     font-weight: bold;
     margin-bottom: 1rem;
     color: #333;
+    word-break: break-all;
   }
 
   .product-category,
@@ -314,6 +315,7 @@ const AdminFullViewProductDetailsWrapper = styled.section`
   .product-description {
     margin-top: 1.5rem;
     line-height: 1.6;
+    word-break: break-all;
   }
 
   /* Buttons */

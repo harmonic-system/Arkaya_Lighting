@@ -90,7 +90,6 @@ const categoryReducer = (state, action) => {
                 return combinedFields.includes(searchString);
             });
 
-
             return {
                 ...state,
                 searchProducts: newAllProducts,
@@ -101,10 +100,29 @@ const categoryReducer = (state, action) => {
             const { themeProductsCategory } = action?.payload;
 
             let newtempLandingProducts = tempLandingProducts?.filter((item) => item?.themeCategory === themeProductsCategory)
+            const subcategory = [...new Set(newtempLandingProducts.map((item) => item.productCategory))]
 
             return {
                 ...state,
+                themeProductsSubCategory: subcategory,
                 themeProducts: newtempLandingProducts,
+                themeCategory: themeProductsCategory
+            };
+
+        case "SET_LANDING_PAGE_SUB_CATEGORY_PRODUCT":
+            let themePro = [...allProducts]
+            const { themeProductsSubCategory } = action?.payload;
+            const {themeCategory} = state
+
+            let newthemePro = themePro?.filter((item) => item?.productCategory === themeProductsSubCategory)
+
+            if (themeProductsSubCategory === "All") {
+                newthemePro = themePro?.filter((item) => item?.themeCategory === themeCategory)
+            }
+
+            return {
+                ...state,
+                themeProducts: newthemePro,
             };
 
         default:

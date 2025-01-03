@@ -9,7 +9,7 @@ import Header from "./pages/Header";
 import Footer from "./components/Footer/Footer";
 import BackToTop from "./components/BackToTop/BackToTop";
 import AdminButton from "./components/Admin/AdminButton/AdminButton";
-import Preloader from "./components/Loading/Preloader";
+// import Preloader from "./components/Loading/Preloader";
 
 // Pages
 import LandingPage from "./pages/LandingPage";
@@ -195,7 +195,7 @@ function App() {
               content="Arkaya Lighting, custom lighting solutions, energy-efficient lighting, LED lights, smart home lighting, modern lighting designs, premium lighting, home lighting, office lighting, sustainable lighting"
             />
           </Helmet>
-          <Preloader />
+          {/* <Preloader /> */}
 
           <Header />
           <Routes>

@@ -187,6 +187,16 @@ export const GlobalStyle = createGlobalStyle`
     box-shadow: none; 
   }
 
+  input[type="radio"] {
+    box-shadow: none; 
+    outline: none;   
+  }
+
+  input[type="radio"]:focus {
+    outline: none;  
+    box-shadow: none; 
+  }
+
   /* For Webkit browsers (Chrome, Safari, Edge) */
   input[type="number"]::-webkit-outer-spin-button,
   input[type="number"]::-webkit-inner-spin-button {

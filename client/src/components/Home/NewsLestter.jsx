@@ -91,6 +91,12 @@ padding: 3rem 0;
                 border: 2px solid ${({ theme }) => theme.colors.border};
             }
         }
+
+        Button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     }
 }
 

@@ -96,6 +96,7 @@ const Navbar = () => {
                 <div className="mega-box">
                   <div className="content">
                     {/* LIGHTING FIXTURE */}
+                    <hr/>
                     <div className="pro">
                       <header onClick={() => toggleDropdown(0)}>
                         LIGHTING FIXTURE

@@ -68,6 +68,7 @@ const BackToTopWrapper = styled.section`
   justify-content: center;
   border-radius: 10px;
   transition: all 0.4s;
+  cursor: pointer;
 }
   
 .scroll-top svg {

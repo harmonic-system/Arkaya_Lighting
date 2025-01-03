@@ -369,7 +369,7 @@ const Cart = () => {
                 <div className="cart-card" key={item.productId}>
                   <img src={item.productImage} alt={item.name} className="cart-card-image" />
                   <div className="cart-card-details">
-                    <h3>{item?.name}</h3>
+                    <h3>{item.name?.length < 50 ? item.name : item.name?.slice(0, 50) + "..."}</h3>
                     <button
                       className="remove-btn"
                       onClick={() => removeFromCart(user?._id, item?.productId)}
@@ -449,7 +449,7 @@ const CartWrapper = styled.section`
 .cart-card-image {
   width: 100%;
   height: 200px;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .cart-card-details {
@@ -463,6 +463,11 @@ const CartWrapper = styled.section`
 .cart-card-details h3 {
   margin: 0;
   color: #333;
+  height: 50px;
+  word-break: break-all;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  width: 100%;
 }
 
 .cart-card-details p {
